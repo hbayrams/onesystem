@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData light = ThemeData(
+    dataTableTheme: DataTableThemeData(),
+    iconTheme: IconThemeData(color: Colors.black),
     brightness: Brightness.light,
-    primarySwatch: Colors.indigo,
+    primarySwatch: Colors.teal,
     accentColor: Colors.pink,
     scaffoldBackgroundColor: Color(0xfff1f1f1));
 
 ThemeData dark = ThemeData(
+  iconTheme: IconThemeData(color: Colors.white),
   brightness: Brightness.dark,
   primarySwatch: Colors.indigo,
   accentColor: Colors.pink,
