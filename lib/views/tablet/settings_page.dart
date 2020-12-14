@@ -74,24 +74,14 @@ class _SettingsPageState extends State<SettingsPage> {
                               onSortColum(columnIndex, ascending);
                             }),
                         DataColumn(
-                            label:
-                                Text("Weapons", style: TextStyle(fontSize: 16)),
-                            numeric: false,
-                            onSort: (columnIndex, ascending) {
-                              setState(() {
-                                sort = !sort;
-                              });
-                              onSortColum(columnIndex, ascending);
-                            }),
+                          label:
+                              Text("Weapons", style: TextStyle(fontSize: 16)),
+                          numeric: false,
+                        ),
                         DataColumn(
-                            label: Text("Year", style: TextStyle(fontSize: 16)),
-                            numeric: true,
-                            onSort: (columnIndex, ascending) {
-                              setState(() {
-                                sort = !sort;
-                              });
-                              onSortColum(columnIndex, ascending);
-                            }),
+                          label: Text("Year", style: TextStyle(fontSize: 16)),
+                          numeric: true,
+                        ),
                       ],
                       rows: avengers
                           .map(
