@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'screen/pages/tablet/login_help_page.dart';
-import 'package:provider/provider.dart';
-import 'screen/pages/tablet/home_page.dart';
+import 'package:get_storage/get_storage.dart';
 import 'models/login_model.dart';
 import 'models/theme_model.dart';
-import 'screen/pages/tablet/about_page.dart';
-import 'screen/pages/tablet/login_page.dart';
-import 'screen/pages/tablet/settings_page.dart';
 
 var routes = <String, WidgetBuilder>{
   "pages/home": (BuildContext context) => HomePage(),
@@ -16,7 +11,10 @@ var routes = <String, WidgetBuilder>{
   "pages/login_help": (BuildContext context) => LoginHelpPage(),
   "pages/login": (BuildContext context) => LoginPage(),
 };
-Future<void> main() async => runApp(MyApp());
+Future<void> main() async {
+  await GetStorage.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
