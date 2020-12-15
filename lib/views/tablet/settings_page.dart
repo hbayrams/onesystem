@@ -40,15 +40,16 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Consumer<ThemeNotifier>(
-                  builder: (context, notifier, child) => SwitchListTile(
-                    title: Text("Dark Mode"),
-                    onChanged: (value) {
-                      notifier.toggleTheme();
-                    },
-                    value: notifier.darkTheme,
-                  ),
+                // Consumer<ThemeNotifier>(
+                // builder: (context, notifier, child) =>
+                SwitchListTile(
+                  title: Text("Dark Mode"),
+                  onChanged: (value) {
+                    //notifier.toggleTheme();
+                  },
+                  //value: notifier.darkTheme,
                 ),
+                //),
                 Card(
                   child: ListTile(
                     leading: Icon(Icons.access_alarm),

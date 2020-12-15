@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'login_model.dart';
+import 'login_controller.dart';
 
 class SharedPrefModel extends GetxController {
   final box = GetStorage();
@@ -9,7 +9,7 @@ class SharedPrefModel extends GetxController {
   final _password = ''.obs;
   final _isLogin = true.obs;
   bool get isRemember => _isRemember.value;
-  LoginModel _controller = Get.put(LoginModel());
+  LoginController _controller = Get.put(LoginController());
 
   @override
   void onInit() {

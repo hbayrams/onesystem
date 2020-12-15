@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 ThemeData light = ThemeData(
     dataTableTheme: DataTableThemeData(),
     iconTheme: IconThemeData(color: Colors.black),
@@ -18,7 +17,7 @@ ThemeData dark = ThemeData(
 
 class ThemeNotifier extends ChangeNotifier {
   final String key = "theme";
-  SharedPreferences _pref;
+  //SharedPreferences _pref;
   bool _darkTheme;
 
   bool get darkTheme => _darkTheme;
@@ -35,17 +34,17 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   _initPrefs() async {
-    if (_pref == null) _pref = await SharedPreferences.getInstance();
+    //if (_pref == null) _pref = await SharedPreferences.getInstance();
   }
 
   _loadFromPrefs() async {
     await _initPrefs();
-    _darkTheme = _pref.getBool(key) ?? true;
+    //_darkTheme = _pref.getBool(key) ?? true;
     notifyListeners();
   }
 
   _saveToPrefs() async {
     await _initPrefs();
-    _pref.setBool(key, _darkTheme);
+    // _pref.setBool(key, _darkTheme);
   }
 }

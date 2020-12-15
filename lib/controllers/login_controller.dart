@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class LoginModel extends GetxController {
+class LoginController extends GetxController {
   final _uname = ''.obs;
   final _password = ''.obs;
   final formKey = GlobalKey<FormState>().obs;
   final _autoValidate = false.obs;
   final _isVisible = false.obs;
 
-
   String get uname => _uname.value;
   String get password => _password.value;
   bool get autoValidate => _autoValidate.value;
   bool get isVisible => _isVisible.value;
-  
 
   set autoValidate(bool value) => _autoValidate.value = value;
 
