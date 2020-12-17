@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     ThemeController tc = Get.put(ThemeController());
-    bool _deger = false;
+    GetStorage box = GetStorage();
     return Scaffold(
         appBar: AppBar(
           title: Text("Theme Switcher"),
@@ -45,23 +46,21 @@ class _SettingsPageState extends State<SettingsPage> {
               children: <Widget>[
                 // Consumer<ThemeNotifier>(
                 // builder: (context, notifier, child) =>
-                SwitchListTile(
+               GetX<ThemeController>(builder: (_) => SwitchListTile(
                   title: Text("Dark Mode"),
                   onChanged: (value) {
-                    if (Get.isDarkMode) {
-                      Get.changeTheme(ThemeData.light());
-                      setState(() {
-                        _deger = true;
-                      });
-                    } else {
-                      Get.changeTheme(ThemeData.dark());
-                      setState(() {
-                        _deger = false;
-                      });
-                    }
-                  },
-                  value: _deger,
-                ),
+                          if (Get.isDarkMode) {
+                            Get.changeTheme(ThemeData.light());
+                            print('Theme : ' + box.read("darkTheme").toString());
+                          } else {
+                            Get.changeTheme(ThemeData.dark());
+                            print('Theme : ' + box.read("darkTheme").toString());
+                          }
+                          tc.darkTheme =!tc.darkTheme;
+                          tc.strwrite(tc.darkTheme);
+                        },
+                  value: tc.darkTheme,
+                ),),
                 Card(
                   child: ListTile(
                     leading: Icon(Icons.access_alarm),
@@ -73,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(_deger.toString()),
+                      Text(tc.darkTheme.toString()),
                       Text(Get.isDarkMode.toString()),
                       Text("Screen Height: " + Get.height.toString()),
                       Text("Screen Width: " + Get.width.toString()),

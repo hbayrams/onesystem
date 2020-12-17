@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     // ]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DenemePage(),
+      home: LoginPage(),
       theme:box.read("darkTheme")?dark:light,
       //routes: routes,
     );
