@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:onesystem/models/theme_model.dart';
+import 'package:get/get.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -31,6 +32,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeController tc = Get.put(ThemeController());
+    bool _deger = false;
     return Scaffold(
         appBar: AppBar(
           title: Text("Theme Switcher"),
@@ -45,16 +48,39 @@ class _SettingsPageState extends State<SettingsPage> {
                 SwitchListTile(
                   title: Text("Dark Mode"),
                   onChanged: (value) {
-                    //notifier.toggleTheme();
+                    if (Get.isDarkMode) {
+                      Get.changeTheme(ThemeData.light());
+                      setState(() {
+                        _deger = true;
+                      });
+                    } else {
+                      Get.changeTheme(ThemeData.dark());
+                      setState(() {
+                        _deger = false;
+                      });
+                    }
                   },
-                  //value: notifier.darkTheme,
+                  value: _deger,
                 ),
-                //),
                 Card(
                   child: ListTile(
                     leading: Icon(Icons.access_alarm),
                     title: Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
+                  ),
+                ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(_deger.toString()),
+                      Text(Get.isDarkMode.toString()),
+                      Text("Screen Height: " + Get.height.toString()),
+                      Text("Screen Width: " + Get.width.toString()),
+                      Text("Is Device IOS?: " + GetPlatform.isIOS.toString()),
+                      Text("Is Device Android?: " +
+                          GetPlatform.isAndroid.toString()),
+                    ],
                   ),
                 ),
                 Center(

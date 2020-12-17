@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 ThemeData light = ThemeData(
     dataTableTheme: DataTableThemeData(),
@@ -14,37 +16,3 @@ ThemeData dark = ThemeData(
   primarySwatch: Colors.indigo,
   accentColor: Colors.pink,
 );
-
-class ThemeNotifier extends ChangeNotifier {
-  final String key = "theme";
-  //SharedPreferences _pref;
-  bool _darkTheme;
-
-  bool get darkTheme => _darkTheme;
-
-  ThemeNotifier() {
-    _darkTheme = true;
-    _loadFromPrefs();
-  }
-
-  toggleTheme() {
-    _darkTheme = !_darkTheme;
-    _saveToPrefs();
-    notifyListeners();
-  }
-
-  _initPrefs() async {
-    //if (_pref == null) _pref = await SharedPreferences.getInstance();
-  }
-
-  _loadFromPrefs() async {
-    await _initPrefs();
-    //_darkTheme = _pref.getBool(key) ?? true;
-    notifyListeners();
-  }
-
-  _saveToPrefs() async {
-    await _initPrefs();
-    // _pref.setBool(key, _darkTheme);
-  }
-}

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
+import 'package:onesystem/views/tablet/settings_page.dart';
+import 'package:onesystem/views/tablet/widgets/deneme.dart';
+import 'models/theme_model.dart';
 import 'views/tablet/login_page.dart';
 
 // var routes = <String, WidgetBuilder>{
@@ -24,8 +28,7 @@ class MyApp extends StatelessWidget {
     // ]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      //theme: notifier.darkTheme ? dark : light,
-      home: LoginPage(),
+      home: DenemePage(),
       //routes: routes,
     );
   }
