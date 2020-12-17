@@ -18,16 +18,18 @@ class DenemePage extends StatelessWidget {
                       Switch(
                         value: tc.darkTheme,
                         onChanged: (value) {
-                          if (box.read("darkTheme")) {
+                          if (Get.isDarkMode) {
                             Get.changeTheme(ThemeData.light());
+                            print('Theme : ' + box.read("darkTheme").toString());
                           } else {
                             Get.changeTheme(ThemeData.dark());
+                            print('Theme : ' + box.read("darkTheme").toString());
                           }
-                          tc.darkTheme = !tc.darkTheme;
+                          tc.darkTheme =!tc.darkTheme;
                           tc.strwrite(tc.darkTheme);
                         },
                       ),
-                      Text('Theme : ' + box.read("darkTheme").toString()),
+                      Text(tc.darkTheme?'Dark Theme Enabled':'Light Theme Enabled'),
                     ],
                   )),
         ],

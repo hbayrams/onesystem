@@ -22,6 +22,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     // SystemChrome.setPreferredOrientations([
     //   DeviceOrientation.landscapeLeft,
     //   DeviceOrientation.landscapeRight,
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: DenemePage(),
+      theme:box.read("darkTheme")?dark:light,
       //routes: routes,
     );
   }
