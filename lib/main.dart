@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
-import 'package:onesystem/views/tablet/settings_page.dart';
-import 'package:onesystem/views/tablet/widgets/deneme.dart';
-import 'models/theme_model.dart';
-import 'views/tablet/login_page.dart';
+import 'package:onesystem/models/navigator.dart';
+import 'package:onesystem/models/theme_model.dart';
 
 // var routes = <String, WidgetBuilder>{
 //   "pages/home": (BuildContext context) => HomePage(),
@@ -22,16 +20,18 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    GetStorage box = GetStorage();
     // SystemChrome.setPreferredOrientations([
     //   DeviceOrientation.landscapeLeft,
     //   DeviceOrientation.landscapeRight,
     // ]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-      theme:box.read("darkTheme")?dark:light,
-      //routes: routes,
+      defaultTransition: Transition.native,
+      getPages: MyNavigator.route,
+      initialRoute: 't/loginPage',
+      theme: Themes().lightTheme,
+      darkTheme: Themes().darkTheme, 
+      themeMode: ThemeController().getThemeMode(),
     );
   }
 }

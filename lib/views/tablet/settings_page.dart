@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: <Widget>[
                 // Consumer<ThemeNotifier>(
                 // builder: (context, notifier, child) =>
-               GetX<ThemeController>(builder: (_) => SwitchListTile(
+                SwitchListTile(
                   title: Text("Dark Mode"),
                   onChanged: (value) {
                           if (Get.isDarkMode) {
@@ -56,11 +56,11 @@ class _SettingsPageState extends State<SettingsPage> {
                             Get.changeTheme(ThemeData.dark());
                             print('Theme : ' + box.read("darkTheme").toString());
                           }
-                          tc.darkTheme =!tc.darkTheme;
-                          tc.strwrite(tc.darkTheme);
+                          // tc.darkTheme =!tc.darkTheme;
+                          // tc.strwrite(tc.darkTheme);
                         },
-                  value: tc.darkTheme,
-                ),),
+                  value: true,
+                ),
                 Card(
                   child: ListTile(
                     leading: Icon(Icons.access_alarm),
@@ -72,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(tc.darkTheme.toString()),
+                      //Text(tc.darkTheme.toString()),
                       Text(Get.isDarkMode.toString()),
                       Text("Screen Height: " + Get.height.toString()),
                       Text("Screen Width: " + Get.width.toString()),

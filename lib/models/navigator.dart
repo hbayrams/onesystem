@@ -1,28 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:onesystem/views/tablet/about_page.dart';
+import 'package:onesystem/views/tablet/home_page.dart';
+import 'package:onesystem/views/tablet/login_help_page.dart';
+import 'package:onesystem/views/tablet/login_page.dart';
+import 'package:onesystem/views/tablet/settings_page.dart';
 
 class MyNavigator {
-  //With arguments
-  // static void goToHome(BuildContext context,username) {
-  //   Navigator.pushReplacementNamed(context, "pages/home",arguments: username);
-  // }
-
-  static void goToHome(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "pages/home");
-  }
-
-  static void goToAbout(BuildContext context) {
-    Navigator.pushNamed(context, "pages/about");
-  }
-
-  static void goToSettings(BuildContext context) {
-    Navigator.pushNamed(context, "pages/settings");
-  }
-
-  static void gotoLoginHelp(BuildContext context) {
-    Navigator.pushNamed(context, "pages/login_help");
-  }
-
-  static void gotoLogin(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "pages/login");
-  }
+  static final route = [
+    GetPage(name: 't/loginPage', page: () => LoginPage()),
+    GetPage(name: 't/homePage', page: () => HomePage()),
+    GetPage(name: 't/aboutPage', page: () => AboutPage()),
+    GetPage(name: 't/loginHelpPage', page: () => LoginHelpPage()),
+    GetPage(name: 't/settingsPage', page: () => SettingsPage()),
+  ];
 }

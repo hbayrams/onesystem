@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-class LoginHelpPage extends StatefulWidget {
-  @override
-  _LoginHelpPageState createState() => _LoginHelpPageState();
-}
-
-class _LoginHelpPageState extends State<LoginHelpPage> {
+class LoginHelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      
+    );
   }
 }
