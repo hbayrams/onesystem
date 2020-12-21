@@ -17,7 +17,7 @@ class DenemePage extends StatelessWidget {
                 Switch(
                     value: tc.darkTheme,
                     onChanged: (x) {
-                      ThemeController().changeThemeMode();
+                      tc.changeThemeMode();
                       print('theme son durumu: ' + x.toString());
                       tc.darkTheme = !tc.darkTheme;
                     }),
