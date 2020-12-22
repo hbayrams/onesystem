@@ -4,6 +4,7 @@ import 'package:onesystem/views/tablet/home_page.dart';
 import 'package:onesystem/views/tablet/login_help_page.dart';
 import 'package:onesystem/views/tablet/login_page.dart';
 import 'package:onesystem/views/tablet/settings_page.dart';
+import 'package:onesystem/views/tablet/release_page.dart';
 import 'package:onesystem/views/tablet/widgets/deneme.dart';
 
 class MyNavigator {
@@ -13,6 +14,7 @@ class MyNavigator {
     GetPage(name: 't/aboutPage', page: () => AboutPage()),
     GetPage(name: 't/loginHelpPage', page: () => LoginHelpPage()),
     GetPage(name: 't/settingsPage', page: () => SettingsPage()),
-    GetPage(name: 'w/deneme',page: ()=>DenemePage()),
+    GetPage(name: 't/releasePage', page: () => ReleasePage()),
+    GetPage(name: 'w/deneme', page: () => DenemePage()),
   ];
 }

@@ -27,8 +27,9 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Center(
                         child: Image.asset(
-                            'assets/images/logo_full_low_height.png',
-                            height: keyboardOpen ? 0 : 50),
+                          'assets/images/logo_full_low_height.png',
+                          height: keyboardOpen ? 0 : 50,
+                        ),
                       ),
                       SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
                       buildFormLogin2(lc, context),
@@ -59,7 +60,6 @@ class LoginPage extends StatelessWidget {
 }
 
 Form buildFormLogin2(LoginController lc, BuildContext context) {
-  bool checkVal = false;
   return Form(
     key: lc.formKey.value,
     // ignore: deprecated_member_use
@@ -85,27 +85,29 @@ Form buildFormLogin2(LoginController lc, BuildContext context) {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Theme(
-                        data: ThemeData(unselectedWidgetColor: Global.dark),
-                        child: Checkbox(
-                          activeColor: Global.dark,
-                          value: checkVal,
-                          onChanged: (bool value) {
-                            checkVal = value;
-                            //model.isRemember = checkVal;
-                          },
+                  GetX<LoginController>(
+                    builder: (_) => Row(
+                      children: [
+                        Theme(
+                          data: ThemeData(unselectedWidgetColor: Global.dark),
+                          child: Checkbox(
+                            activeColor: Global.dark,
+                            value: lc.checkVal,
+                            onChanged: (bool value) {
+                              lc.checkVal = !lc.checkVal;
+                              //model.isRemember = checkVal;
+                            },
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Keep me logged in?',
-                        style: TextStyle(
-                            color: Global.dark,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                        Text(
+                          'Remember Me?',
+                          style: TextStyle(
+                              color: Global.dark,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                   FlatButton(
                     onPressed: () {},
@@ -114,7 +116,7 @@ Form buildFormLogin2(LoginController lc, BuildContext context) {
                       'Forgot password?',
                       style: TextStyle(
                           color: Global.dark,
-                          fontSize: 15,
+                          fontSize: 12,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -133,7 +135,7 @@ Form buildFormLogin2(LoginController lc, BuildContext context) {
                 onClick: () {
                   if (lc.formKey.value.currentState.validate()) {
                     lc.formKey.value.currentState.save();
-                    Get.toNamed('t/homePage'); //with arguments
+                    Get.toNamed('t/releasePage'); //with arguments
                     print('Sign in successfully' + lc.uname);
                     //setLogin(model.uname);
                   } else {

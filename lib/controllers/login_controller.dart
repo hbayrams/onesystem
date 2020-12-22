@@ -8,15 +8,18 @@ class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>().obs;
   final _autoValidate = false.obs;
   final _isVisible = false.obs;
+  final _checkVal = false.obs;
 
   String get uname => _uname.value;
   String get password => _password.value;
   bool get autoValidate => _autoValidate.value;
   bool get isVisible => _isVisible.value;
+  bool get checkVal => _checkVal.value;
 
   set autoValidate(bool value) => _autoValidate.value = value;
 
   set isVisible(bool value) => _isVisible.value = value;
+  set checkVal(bool value) => _checkVal.value = value;
 
   void onSavedUname(String unameStr) => _uname.value = unameStr;
 
