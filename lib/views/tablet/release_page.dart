@@ -18,48 +18,70 @@ class ReleasePage extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          DropdownButton(
-                            elevation: 8,
-                            hint: Text(
-                              'Select...',
-                              style: TextStyle(fontSize: 12),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            DropdownButton(
+                              elevation: 8,
+                              hint: Text(
+                                'Select...',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              onChanged: (value) {
+                                print("value: $value");
+                              },
+                              items: [
+                                DropdownMenuItem<String>(
+                                  value: "1",
+                                  child: Text(
+                                    "First",
+                                  ),
+                                ),
+                                DropdownMenuItem<String>(
+                                  value: "2",
+                                  child: Text(
+                                    "Second",
+                                  ),
+                                ),
+                              ],
                             ),
-                            onChanged: (value) {
-                              print("value: $value");
-                            },
-                            items: [
-                              DropdownMenuItem<String>(
-                                value: "1",
-                                child: Text(
-                                  "First",
-                                ),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: "2",
-                                child: Text(
-                                  "Second",
-                                ),
-                              ),
-                            ],
-                          ),
-                          RaisedButton(
-                            onPressed: null,
-                            child: Text('Select'),
-                          ),
-                          RaisedButton(
-                            onPressed: null,
-                            child: Text('Cancel'),
-                          ),
-                        ],
+                            RaisedButton(
+                              onPressed: null,
+                              child: Text('Select'),
+                            ),
+                            RaisedButton(
+                              onPressed: null,
+                              child: Text('Cancel'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(
-                      flex: 9,
-                      child: Text('Sol 1-2'),
-                    ),
+                        flex: 9,
+                        child: DataTable(
+                          //sortAscending: sort,
+                          sortColumnIndex: 1,
+                          columns: [
+                            DataColumn(
+                              label: Text("Release Spool",
+                                  style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                          ],
+                          rows: [
+                            for (var i = 0; i < 20; i++)
+                              DataRow(
+                                  //selected: selectedAvengers.contains(avenger),
+                                  cells: [
+                                    DataCell(
+                                      Text(i.toString()),
+                                    ),
+                                  ]),
+                          ],
+                        )),
                   ],
                 ),
               ),
