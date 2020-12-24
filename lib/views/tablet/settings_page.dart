@@ -131,6 +131,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
+              RaisedButton(
+                child: Text('Test'),
+                onPressed: (){
+                  Get.toNamed('t/releasePage');
+                },
+              ),
               ]),
         ));
   }

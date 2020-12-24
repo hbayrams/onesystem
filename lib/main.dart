@@ -10,7 +10,7 @@ Future<void> main() async {
   await GetStorage.init();
   runApp(MyApp());
 }
-
+//GetStorage Path:/data/data/com.example.onesystem/app_flutter/GetStorage.gs
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

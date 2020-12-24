@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onesystem/models/globals.dart';
 
 class ReleasePage extends StatelessWidget {
   @override
@@ -10,16 +9,16 @@ class ReleasePage extends StatelessWidget {
         body: Row(
           children: <Widget>[
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
                 height: double.infinity,
-                color: Global.white,
+                // color: Global.white,
                 child: Column(
                   children: [
                     Expanded(
                       flex: 1,
                       child: Padding(
-                        padding: EdgeInsets.all(8),
+                        padding: EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -51,19 +50,20 @@ class ReleasePage extends StatelessWidget {
                               onPressed: null,
                               child: Text('Select'),
                             ),
-                            RaisedButton(
-                              onPressed: null,
-                              child: Text('Cancel'),
-                            ),
+                            // RaisedButton(
+                            //   onPressed: null,
+                            //   child: Text('Cancel'),
+                            // ),
                           ],
                         ),
                       ),
                     ),
                     Expanded(
-                        flex: 9,
+                      flex: 9,
+                      child: SingleChildScrollView(
                         child: DataTable(
                           //sortAscending: sort,
-
+                          columnSpacing: 100,
                           dividerThickness: 2,
                           sortColumnIndex: 1,
                           dataRowHeight: 20,
@@ -80,7 +80,7 @@ class ReleasePage extends StatelessWidget {
                             ),
                           ],
                           rows: [
-                            for (var i = 0; i < 20; i++)
+                            for (var i = 0; i < 50; i++)
                               DataRow(
                                   //selected: selectedAvengers.contains(avenger),
                                   cells: [
@@ -92,16 +92,18 @@ class ReleasePage extends StatelessWidget {
                                     ),
                                   ]),
                           ],
-                        )),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 5,
               child: Container(
                 height: double.infinity,
-                color: Colors.amber,
+                //color: Colors.amber,
                 child: Column(
                   children: [
                     Expanded(
@@ -110,26 +112,163 @@ class ReleasePage extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 7,
-                      child: Text('Orta 1-2'),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        // scrollDirection: Axis.vertical,
+                        child: DataTable(
+                          //sortAscending: sort,
+                          dividerThickness: 2,
+                          sortColumnIndex: 1,
+                          dataRowHeight: 20,
+                          columns: [
+                            DataColumn(
+                              label:
+                                  Text("Spool", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label:
+                                  Text("Joint", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label:
+                                  Text("Spool", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label:
+                                  Text("Joint", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label: Text("Item-1",
+                                  style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label: Text("Heat-1",
+                                  style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label: Text("Item-2",
+                                  style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label: Text("Heat-2",
+                                  style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label: Text("FitUpDate",
+                                  style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                          ],
+                          rows: [
+                            for (var i = 0; i < 20; i++)
+                              DataRow(
+                                  //selected: selectedAvengers.contains(avenger),
+                                  cells: [
+                                    DataCell(
+                                      Text('S1'),
+                                    ),
+                                    DataCell(
+                                      Text(i.toString()),
+                                    ),
+                                    DataCell(
+                                      Text('S1'),
+                                    ),
+                                    DataCell(
+                                      Text(i.toString()),
+                                    ),
+                                    DataCell(
+                                      Text('S1'),
+                                    ),
+                                    DataCell(
+                                      Text(i.toString()),
+                                    ),
+                                    DataCell(
+                                      Text('S1'),
+                                    ),
+                                    DataCell(
+                                      Text(i.toString()),
+                                    ),
+                                    DataCell(
+                                      Text(i.toString()),
+                                    ),
+                                  ]),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
                 height: double.infinity,
-                color: Colors.grey,
+                //color: Colors.grey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       flex: 9,
-                      child: Text('Sağ 1-1'),
+                      child: SingleChildScrollView(
+                        child: DataTable(
+                          //sortAscending: sort,
+                          columnSpacing: 100,
+                          dividerThickness: 2,
+                          sortColumnIndex: 1,
+                          dataRowHeight: 20,
+                          columns: [
+                            DataColumn(
+                              label:
+                                  Text("Spool", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label:
+                                  Text("State", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                          ],
+                          rows: [
+                            for (var i = 0; i < 50; i++)
+                              DataRow(
+                                  //selected: selectedAvengers.contains(avenger),
+                                  cells: [
+                                    DataCell(
+                                      Text('V' + i.toString()),
+                                    ),
+                                    DataCell(
+                                      Text('-'),
+                                    ),
+                                  ]),
+                          ],
+                        ),
+                      ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: Text('Sağ 1-2'),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RaisedButton(
+                            onPressed: null,
+                            child: Text('Release'),
+                          ),
+                          SizedBox(width: 20,),
+                          RaisedButton(
+                            onPressed: null,
+                            child: Text('Cancel'),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

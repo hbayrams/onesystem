@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesystem/models/globals.dart';
 
 class Themes {
   final lightTheme = ThemeData.light().copyWith(
@@ -16,6 +17,10 @@ class Themes {
     appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
       color: Colors.grey[900],
+    ),
+    dataTableTheme: DataTableThemeData(
+      // dataRowColor: MaterialStateColor.resolveWith((states) => Global.dark),
+      // headingRowColor: MaterialStateColor.resolveWith((states) => Global.dark),
     ),
     iconTheme: IconThemeData(color: Colors.white),
     brightness: Brightness.dark,

@@ -135,7 +135,7 @@ Form buildFormLogin2(LoginController lc, BuildContext context) {
                 onClick: () {
                   if (lc.formKey.value.currentState.validate()) {
                     lc.formKey.value.currentState.save();
-                    Get.toNamed('t/releasePage'); //with arguments
+                    Get.toNamed('t/settingsPage'); //with arguments
                     print('Sign in successfully' + lc.uname);
                     //setLogin(model.uname);
                   } else {
