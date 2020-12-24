@@ -26,7 +26,7 @@ class ReleasePage extends StatelessWidget {
                             DropdownButton(
                               elevation: 8,
                               hint: Text(
-                                'Select...',
+                                'Select spool...',
                                 style: TextStyle(fontSize: 12),
                               ),
                               onChanged: (value) {
@@ -63,11 +63,19 @@ class ReleasePage extends StatelessWidget {
                         flex: 9,
                         child: DataTable(
                           //sortAscending: sort,
+
+                          dividerThickness: 2,
                           sortColumnIndex: 1,
+                          dataRowHeight: 20,
                           columns: [
                             DataColumn(
-                              label: Text("Release Spool",
-                                  style: TextStyle(fontSize: 12)),
+                              label:
+                                  Text("Spool", style: TextStyle(fontSize: 12)),
+                              numeric: false,
+                            ),
+                            DataColumn(
+                              label:
+                                  Text("State", style: TextStyle(fontSize: 12)),
                               numeric: false,
                             ),
                           ],
@@ -77,7 +85,10 @@ class ReleasePage extends StatelessWidget {
                                   //selected: selectedAvengers.contains(avenger),
                                   cells: [
                                     DataCell(
-                                      Text(i.toString()),
+                                      Text('V' + i.toString()),
+                                    ),
+                                    DataCell(
+                                      Text('-'),
                                     ),
                                   ]),
                           ],
