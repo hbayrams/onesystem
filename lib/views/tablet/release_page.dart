@@ -1,54 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
+import 'package:onesystem/models/globals.dart';
+//import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ReleasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ThemeController tc =Get.put(ThemeController());
     return SafeArea(
       child: Scaffold(
-        //backgroundColor: Global.white,
         body: Row(
           children: <Widget>[
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Container(
                 height: double.infinity,
-                // color: Global.white,
                 child: Column(
                   children: [
                     Expanded(
                       flex: 1,
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            DropdownButton(
-                              elevation: 8,
-                              hint: Text(
-                                'Select spool...',
-                                style: TextStyle(fontSize: 12),
+                            Expanded(
+                              flex: 3,
+                              child: DropdownButton(
+                                hint: Text(
+                                  'Select List... ',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                onChanged: (value) {
+                                  print("value: $value");
+                                },
+                                items: [
+                                  for (var i = 1; i < 10; i++)
+                                    DropdownMenuItem<String>(
+                                      value: i.toString(),
+                                      child: Text(
+                                        "RL-0000" + i.toString(),
+                                      ),
+                                    ),
+                                ],
                               ),
-                              onChanged: (value) {
-                                print("value: $value");
-                              },
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: "1",
-                                  child: Text(
-                                    "First",
-                                  ),
-                                ),
-                                DropdownMenuItem<String>(
-                                  value: "2",
-                                  child: Text(
-                                    "Second",
-                                  ),
-                                ),
-                              ],
                             ),
-                            RaisedButton(
-                              onPressed: null,
-                              child: Text('Select'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: RaisedButton(
+                                onPressed: null,
+                                child: Text('Select'),
+                              ),
                             ),
                             // RaisedButton(
                             //   onPressed: null,
@@ -60,39 +66,42 @@ class ReleasePage extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 9,
-                      child: SingleChildScrollView(
-                        child: DataTable(
-                          //sortAscending: sort,
-                          columnSpacing: 100,
-                          dividerThickness: 2,
-                          sortColumnIndex: 1,
-                          dataRowHeight: 20,
-                          columns: [
-                            DataColumn(
-                              label:
-                                  Text("Spool", style: TextStyle(fontSize: 12)),
-                              numeric: false,
+                      child: ListView(
+                        children: <Widget>[
+                          Card(
+                            child: DataTable(
+                              //sortAscending: sort,
+                              dividerThickness: 2,
+                              sortColumnIndex: 1,
+                              dataRowHeight: 30,
+                              columns: [
+                                DataColumn(
+                                  label: Text("Spool",
+                                      style: TextStyle(fontSize: 15)),
+                                  numeric: false,
+                                ),
+                                DataColumn(
+                                  label: Text("State",
+                                      style: TextStyle(fontSize: 15)),
+                                  numeric: false,
+                                ),
+                              ],
+                              rows: [
+                                for (var i = 0; i < 50; i++)
+                                  DataRow(
+                                      //selected: selectedAvengers.contains(avenger),
+                                      cells: [
+                                        DataCell(
+                                          Text('V' + i.toString()),
+                                        ),
+                                        DataCell(
+                                          Text('-'),
+                                        ),
+                                      ]),
+                              ],
                             ),
-                            DataColumn(
-                              label:
-                                  Text("State", style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                          ],
-                          rows: [
-                            for (var i = 0; i < 50; i++)
-                              DataRow(
-                                  //selected: selectedAvengers.contains(avenger),
-                                  cells: [
-                                    DataCell(
-                                      Text('V' + i.toString()),
-                                    ),
-                                    DataCell(
-                                      Text('-'),
-                                    ),
-                                  ]),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -100,7 +109,7 @@ class ReleasePage extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 5,
+              flex: 4,
               child: Container(
                 height: double.infinity,
                 //color: Colors.amber,
@@ -112,96 +121,115 @@ class ReleasePage extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 7,
-                      child: SingleChildScrollView(
+                      child: ListView(
                         scrollDirection: Axis.horizontal,
-                        // scrollDirection: Axis.vertical,
-                        child: DataTable(
-                          //sortAscending: sort,
-                          dividerThickness: 2,
-                          sortColumnIndex: 1,
-                          dataRowHeight: 20,
-                          columns: [
-                            DataColumn(
-                              label:
-                                  Text("Spool", style: TextStyle(fontSize: 12)),
-                              numeric: false,
+                        children: <Widget>[
+                          Card(
+                            child: SingleChildScrollView(
+                              child: DataTable(
+                                dataTextStyle: (TextStyle(
+                                  fontSize: 16,
+                                  color: tc.isSavedDarkMode()
+                                      ? Global.white
+                                      : Global.dark,
+                                )),
+                                //sortAscending: sort,
+                                dividerThickness: 2,
+                                sortColumnIndex: 1,
+                                dataRowHeight: 30,
+                                columns: [
+                                  DataColumn(
+                                    label: Text("Spool",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Joint",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Spool",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Joint",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Item-1",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Heat-1",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Item-2",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Heat-2",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("FitUpDate",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                  DataColumn(
+                                    label: Text("Test",
+                                        style: TextStyle(fontSize: 12)),
+                                    numeric: false,
+                                  ),
+                                ],
+                                rows: [
+                                  for (var i = 0; i < 20; i++)
+                                    DataRow(
+                                        //selected: selectedAvengers.contains(avenger),
+                                        cells: [
+                                          DataCell(
+                                            Text('S1'),
+                                          ),
+                                          DataCell(
+                                            Text(i.toString()),
+                                          ),
+                                          DataCell(
+                                            Text('S1'),
+                                          ),
+                                          DataCell(
+                                            Text(i.toString()),
+                                          ),
+                                          DataCell(
+                                            Text('S1'),
+                                          ),
+                                          DataCell(
+                                            Text(i.toString()),
+                                          ),
+                                          DataCell(
+                                            Text('S1'),
+                                          ),
+                                          DataCell(
+                                            Text(i.toString()),
+                                          ),
+                                          DataCell(
+                                            Text(i.toString()),
+                                          ),
+                                          DataCell(
+                                            Text(i.toString()),
+                                          ),
+                                        ]),
+                                ],
+                              ),
                             ),
-                            DataColumn(
-                              label:
-                                  Text("Joint", style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label:
-                                  Text("Spool", style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label:
-                                  Text("Joint", style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label: Text("Item-1",
-                                  style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label: Text("Heat-1",
-                                  style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label: Text("Item-2",
-                                  style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label: Text("Heat-2",
-                                  style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                            DataColumn(
-                              label: Text("FitUpDate",
-                                  style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                          ],
-                          rows: [
-                            for (var i = 0; i < 20; i++)
-                              DataRow(
-                                  //selected: selectedAvengers.contains(avenger),
-                                  cells: [
-                                    DataCell(
-                                      Text('S1'),
-                                    ),
-                                    DataCell(
-                                      Text(i.toString()),
-                                    ),
-                                    DataCell(
-                                      Text('S1'),
-                                    ),
-                                    DataCell(
-                                      Text(i.toString()),
-                                    ),
-                                    DataCell(
-                                      Text('S1'),
-                                    ),
-                                    DataCell(
-                                      Text(i.toString()),
-                                    ),
-                                    DataCell(
-                                      Text('S1'),
-                                    ),
-                                    DataCell(
-                                      Text(i.toString()),
-                                    ),
-                                    DataCell(
-                                      Text(i.toString()),
-                                    ),
-                                  ]),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -209,7 +237,7 @@ class ReleasePage extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Container(
                 height: double.infinity,
                 //color: Colors.grey,
@@ -218,39 +246,42 @@ class ReleasePage extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 9,
-                      child: SingleChildScrollView(
-                        child: DataTable(
-                          //sortAscending: sort,
-                          columnSpacing: 100,
-                          dividerThickness: 2,
-                          sortColumnIndex: 1,
-                          dataRowHeight: 20,
-                          columns: [
-                            DataColumn(
-                              label:
-                                  Text("Spool", style: TextStyle(fontSize: 12)),
-                              numeric: false,
+                      child: ListView(
+                        children: <Widget>[
+                          Card(
+                            child: DataTable(
+                              //sortAscending: sort,
+                              dividerThickness: 2,
+                              sortColumnIndex: 1,
+                              dataRowHeight: 30,
+                              columns: [
+                                DataColumn(
+                                  label: Text("Spool",
+                                      style: TextStyle(fontSize: 15)),
+                                  numeric: false,
+                                ),
+                                DataColumn(
+                                  label: Text("State",
+                                      style: TextStyle(fontSize: 15)),
+                                  numeric: false,
+                                ),
+                              ],
+                              rows: [
+                                for (var i = 0; i < 50; i++)
+                                  DataRow(
+                                      //selected: selectedAvengers.contains(avenger),
+                                      cells: [
+                                        DataCell(
+                                          Text('V' + i.toString()),
+                                        ),
+                                        DataCell(
+                                          Text('-'),
+                                        ),
+                                      ]),
+                              ],
                             ),
-                            DataColumn(
-                              label:
-                                  Text("State", style: TextStyle(fontSize: 12)),
-                              numeric: false,
-                            ),
-                          ],
-                          rows: [
-                            for (var i = 0; i < 50; i++)
-                              DataRow(
-                                  //selected: selectedAvengers.contains(avenger),
-                                  cells: [
-                                    DataCell(
-                                      Text('V' + i.toString()),
-                                    ),
-                                    DataCell(
-                                      Text('-'),
-                                    ),
-                                  ]),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(
@@ -262,7 +293,9 @@ class ReleasePage extends StatelessWidget {
                             onPressed: null,
                             child: Text('Release'),
                           ),
-                          SizedBox(width: 20,),
+                          SizedBox(
+                            width: 20,
+                          ),
                           RaisedButton(
                             onPressed: null,
                             child: Text('Cancel'),

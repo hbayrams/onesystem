@@ -7,11 +7,12 @@ class Themes {
         brightness: Brightness.light,
         color: Colors.white,
       ),
-      dataTableTheme: DataTableThemeData(),
+      dataTableTheme: DataTableThemeData(dataTextStyle:TextStyle(fontSize: 20,color: Global.dark)),
       iconTheme: IconThemeData(color: Colors.black),
       brightness: Brightness.light,
       accentColor: Colors.pink,
       scaffoldBackgroundColor: Color(0xfff1f1f1));
+
 
   final darkTheme = ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(
@@ -19,6 +20,7 @@ class Themes {
       color: Colors.grey[900],
     ),
     dataTableTheme: DataTableThemeData(
+      dataTextStyle:TextStyle(fontSize: 20,color: Global.white,),
       // dataRowColor: MaterialStateColor.resolveWith((states) => Global.dark),
       // headingRowColor: MaterialStateColor.resolveWith((states) => Global.dark),
     ),
