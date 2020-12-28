@@ -15,6 +15,7 @@ class SharedPrefController extends GetxController {
     GetStorage box = GetStorage();
     if (box.read('login') != null) {
       _isLogin.value = box.read('login');
+      print('İlk Gelen Remember:isLogin=>' + isLogin.toString());
     }
   }
 
@@ -23,7 +24,11 @@ class SharedPrefController extends GetxController {
   String get password => _password.value;
 
   String getShared() {
-    return isLogin ? 't/releasePage' : 't/loginPage';
+    return remember() ? 't/homePage' : 't/loginPage';
+  }
+
+  bool remember() {
+    return box.read('login') ?? false;
   }
 
   //Login remember shared pref begin-----
@@ -34,9 +39,12 @@ class SharedPrefController extends GetxController {
 
   _saveToPrefs() async {
     await _initPrefs();
-    box.write('name', _controller.uname);
-    box.write('pass', _controller.password);
-    box.write('login', _isLogin.value);
+    if (_controller.uname != null || _controller.password != null) {
+      box.write('name', _controller.uname);
+      box.write('pass', _controller.password);
+      box.write('login', _isLogin.value);
+    }
+
     //print(_isLogin.value);
   }
 
@@ -45,7 +53,7 @@ class SharedPrefController extends GetxController {
     _uname.value = box.read('name');
     _password.value = box.read('pass');
     _isLogin.value = box.read('login');
-    print(_isLogin.value);
+    // print(_isLogin.value);
   }
 
   _deleteFromPrefs() async {
@@ -59,12 +67,14 @@ class SharedPrefController extends GetxController {
     _isLogin.value = value;
     if (_isLogin.value) {
       _saveToPrefs();
+      print('Remember: isLogin=>' + _isLogin.toString());
     } else {
       _deleteFromPrefs();
     }
-    print('Remember: isLogin' + _isLogin.toString());
-    print('Remember: Username' + box.read('name'));
-    print('Remember: Password' + box.read('pass'));
+    if (_controller.uname != null || _controller.password != null) {
+      print('Remember: Username=>' + box.read('name'));
+      print('Remember: Password=>' + box.read('pass'));
+    }
   }
 
 //Login remember shared pref end-----
