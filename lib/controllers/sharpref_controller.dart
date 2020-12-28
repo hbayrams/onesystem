@@ -2,36 +2,31 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'login_controller.dart';
 
-class SharedPrefModel extends GetxController {
+class SharedPrefController extends GetxController {
   final box = GetStorage();
-  final _isRemember = false.obs;
   final _uname = ''.obs;
   final _password = ''.obs;
-  final _isLogin = true.obs;
-  bool get isRemember => _isRemember.value;
+  final _isLogin = false.obs;
   LoginController _controller = Get.put(LoginController());
 
   @override
   void onInit() {
     super.onInit();
-    _initPrefs();
+    GetStorage box = GetStorage();
+    if (box.read('login') != null) {
+      _isLogin.value = box.read('login');
+    }
   }
 
   bool get isLogin => _isLogin.value;
   String get uname => _uname.value;
   String get password => _password.value;
 
-  //Login remember shared pref begin-----
-  set isRemember(bool value) {
-    _isRemember.value = value;
-    if (_isRemember.value) {
-      _saveToPrefs();
-    } else {
-      _deleteFromPrefs();
-    }
-    print('Model: isRemember: ' + _isRemember.value.toString());
-    print(box.read('pass'));
+  String getShared() {
+    return isLogin ? 't/releasePage' : 't/loginPage';
   }
+
+  //Login remember shared pref begin-----
 
   _initPrefs() async {
     await GetStorage.init();
@@ -50,7 +45,7 @@ class SharedPrefModel extends GetxController {
     _uname.value = box.read('name');
     _password.value = box.read('pass');
     _isLogin.value = box.read('login');
-    //print(_isLogin.value);
+    print(_isLogin.value);
   }
 
   _deleteFromPrefs() async {
@@ -61,14 +56,15 @@ class SharedPrefModel extends GetxController {
   }
 
   set isLogin(bool value) {
-    isLogin = value;
+    _isLogin.value = value;
     if (_isLogin.value) {
       _saveToPrefs();
     } else {
       _deleteFromPrefs();
     }
-    print('Model: isLogin' + _isLogin.toString());
-    //print(_pref.getString('name'));
+    print('Remember: isLogin' + _isLogin.toString());
+    print('Remember: Username' + box.read('name'));
+    print('Remember: Password' + box.read('pass'));
   }
 
 //Login remember shared pref end-----

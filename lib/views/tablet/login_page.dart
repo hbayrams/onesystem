@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/login_controller.dart';
+import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/rbutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/textformfield_widget.dart';
 
 class LoginPage extends StatelessWidget {
   LoginController lc = Get.put(LoginController());
+  SharedPrefController sc = Get.put(SharedPrefController());
   @override
   Widget build(BuildContext context) {
     final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
@@ -32,7 +34,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
-                      buildFormLogin2(lc, context),
+                      buildFormLogin2(sc, lc, context),
                     ],
                   ),
                 ),
@@ -59,7 +61,8 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-Form buildFormLogin2(LoginController lc, BuildContext context) {
+Form buildFormLogin2(
+    SharedPrefController sc, LoginController lc, BuildContext context) {
   return Form(
     key: lc.formKey.value,
     // ignore: deprecated_member_use
@@ -95,7 +98,9 @@ Form buildFormLogin2(LoginController lc, BuildContext context) {
                             value: lc.checkVal,
                             onChanged: (bool value) {
                               lc.checkVal = !lc.checkVal;
-                              //model.isRemember = checkVal;
+                              sc.isLogin = lc.checkVal;
+                              print('Remember: Check Value: ' +
+                                  lc.checkVal.toString());
                             },
                           ),
                         ),
