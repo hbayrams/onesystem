@@ -7,6 +7,8 @@ class SharedPrefController extends GetxController {
   final _uname = ''.obs;
   final _password = ''.obs;
   final _isLogin = false.obs;
+
+
   LoginController _controller = Get.put(LoginController());
 
   @override
@@ -14,8 +16,8 @@ class SharedPrefController extends GetxController {
     super.onInit();
     GetStorage box = GetStorage();
     if (box.read('login') != null) {
-      _isLogin.value = box.read('login');
-      print('İlk Gelen Remember:isLogin=>' + isLogin.toString());
+      _loadFromPrefs();
+      print('İlk Gelen Remember:isLogin=>' + isLogin.toString()+'Remember:uname=>' + uname);
     }
   }
 
@@ -49,7 +51,6 @@ class SharedPrefController extends GetxController {
   }
 
   _loadFromPrefs() async {
-    await _initPrefs();
     _uname.value = box.read('name');
     _password.value = box.read('pass');
     _isLogin.value = box.read('login');
@@ -67,7 +68,8 @@ class SharedPrefController extends GetxController {
     _isLogin.value = value;
     if (_isLogin.value) {
       _saveToPrefs();
-      print('Remember: isLogin=>' + _isLogin.toString());
+      _loadFromPrefs();
+      //print('Remember: isLogin=>' + _isLogin.toString());
     } else {
       _deleteFromPrefs();
     }

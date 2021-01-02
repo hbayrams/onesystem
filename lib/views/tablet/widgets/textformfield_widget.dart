@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/login_controller.dart';
-
+import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
@@ -25,6 +25,7 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LoginController lc = Get.put(LoginController());
+    ThemeController tc = Get.put(ThemeController());
     return TextFormField(
       //autofocus: focus,
       textInputAction: action,
@@ -33,11 +34,13 @@ class TextFormFieldWidget extends StatelessWidget {
       obscureText: obscureText,
       cursorColor: Global.focusedBlue,
       style: TextStyle(
-        color: Global.dark,
+        color: tc.isSavedDarkMode() ? Global.white : Global.dark,
         fontSize: 16.0,
       ),
       decoration: InputDecoration(
-        labelStyle: TextStyle(color: Global.dark, fontSize: 18.0),
+        labelStyle: TextStyle(
+            color: tc.isSavedDarkMode() ? Global.white : Global.dark,
+            fontSize: 18.0),
         focusColor: Global.focusedBlue,
         filled: true,
         enabledBorder: OutlineInputBorder(
@@ -52,7 +55,7 @@ class TextFormFieldWidget extends StatelessWidget {
         prefixIcon: Icon(
           prefixIconData,
           size: 25,
-          color: Global.dark,
+          color: tc.isSavedDarkMode() ? Global.white : Global.dark,
         ),
         suffixIcon: GestureDetector(
           onTap: () {

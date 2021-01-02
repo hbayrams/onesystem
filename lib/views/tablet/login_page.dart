@@ -1,20 +1,26 @@
+import 'dart:io';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/login_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 import 'package:onesystem/views/tablet/widgets/rbutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/textformfield_widget.dart';
 
 class LoginPage extends StatelessWidget {
   LoginController lc = Get.put(LoginController());
   SharedPrefController sc = Get.put(SharedPrefController());
+  ThemeController tc = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Global.white,
+        backgroundColor: tc.isColorChangeDW(),
         body: Row(
           children: <Widget>[
             Expanded(
@@ -22,19 +28,21 @@ class LoginPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Container(
                   //padding: EdgeInsets.only(left: sizeWidth * .05),
-                  color: Global.white,
+                  color: tc.isColorChangeDW(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
                         child: Image.asset(
-                          'assets/images/logo_full_low_height.png',
+                          tc.isSavedDarkMode()
+                              ? 'assets/images/dark1_lowheight.png'
+                              : 'assets/images/light1_lowheight.png',
                           height: keyboardOpen ? 0 : 50,
                         ),
                       ),
                       SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
-                      buildFormLogin2(sc, lc, context),
+                      buildFormLogin2(sc, lc, tc, context),
                     ],
                   ),
                 ),
@@ -44,11 +52,11 @@ class LoginPage extends StatelessWidget {
               flex: 6,
               child: SingleChildScrollView(
                 child: Container(
-                  color: Global.dark,
+                  color: tc.isColorChangeWD(),
                   child: Column(children: [
                     Image.asset(
                       'assets/images/home_right.png',
-                      height: Get.height * .96,
+                      height: Get.height,
                     )
                   ]),
                 ),
@@ -61,8 +69,8 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-Form buildFormLogin2(
-    SharedPrefController sc, LoginController lc, BuildContext context) {
+Form buildFormLogin2(SharedPrefController sc, LoginController lc,
+    ThemeController tc, BuildContext context) {
   return Form(
     key: lc.formKey.value,
     // ignore: deprecated_member_use
@@ -92,22 +100,25 @@ Form buildFormLogin2(
                     builder: (_) => Row(
                       children: [
                         Theme(
-                          data: ThemeData(unselectedWidgetColor: Global.dark),
+                          data: ThemeData(
+                            unselectedWidgetColor: tc.isColorChangeWD(),
+                          ),
                           child: Checkbox(
-                            activeColor: Global.dark,
+                            activeColor: tc.isColorChangeWD(),
+                            checkColor: tc.isColorChangeDW(),
                             value: lc.checkVal,
                             onChanged: (bool value) {
                               lc.checkVal = !lc.checkVal;
                               sc.isLogin = lc.checkVal;
-                              print('Remember: Check Value: ' +
-                                  lc.checkVal.toString());
+                              print('Remember: Login Value: ' +
+                                  sc.isLogin.toString());
                             },
                           ),
                         ),
                         Text(
                           'Remember Me?',
                           style: TextStyle(
-                              color: Global.dark,
+                              color: tc.isColorChangeWD(),
                               fontSize: 12,
                               fontWeight: FontWeight.bold),
                         ),
@@ -120,7 +131,7 @@ Form buildFormLogin2(
                     child: Text(
                       'Forgot password?',
                       style: TextStyle(
-                          color: Global.dark,
+                          color: tc.isColorChangeWD(),
                           fontSize: 12,
                           fontWeight: FontWeight.bold),
                     ),
@@ -142,7 +153,7 @@ Form buildFormLogin2(
                     lc.formKey.value.currentState.save();
                     Get.toNamed('t/settingsPage'); //with arguments
                     print('Sign in successfully' + lc.uname);
-                    //setLogin(model.uname);
+                    //sc.isLogin = lc.checkVal;                               //*buraya alınacak
                   } else {
                     lc.autoValidate = true;
                     print('Failed to sign in');
@@ -175,6 +186,17 @@ Form buildFormLogin2(
                 //     exit(0);
                 //   },
                 // ),
+                onClick: () => Get.dialog(
+                  ShowDialogWidget(
+                    title: 'Exit',
+                    tbtn1: 'OK',
+                    tbtn2: 'CANCEL',
+                    text1: 'Close the application.',
+                    text2: 'Would you like to approve of this message?',
+                    onPressed: () => exit(0),
+                  ),
+                  barrierDismissible: false,
+                ),
                 title: 'Exit',
               ),
             ],

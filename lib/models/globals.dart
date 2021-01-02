@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Global {
   //Color Variables
   static const Color white = const Color(0xffffffff);
+  static const Color black = const Color(0xff000000);
   static const Color focusedBlue = const Color(0xff004c8c);
   static const Color dark = const Color(0xff37414A); //*Sidebar top
   static const Color medium = const Color(0xff4A5864); //*Sidebar main

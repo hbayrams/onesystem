@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:onesystem/views/tablet/widgets/tabletcontent_widget.dart';
+import 'package:onesystem/views/tablet/widgets/tabletnav_widget.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-class HomePage extends StatelessWidget {
+class HomePageTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Home Page'),
-        ),
-        body: Row(
-          children: [
-            RaisedButton(
-              child: Text('LoginPage'),
-              onPressed: () => Get.toNamed('t/loginPage'),
+    return ResponsiveBuilder(
+      builder: (_, sizingInformation) {
+        return SafeArea(
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Container(
+              child: Row(
+                children: [
+                  TabletVerticalNavWidget(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: BodyContentTabletWidget(
+                        sizingInformation: sizingInformation,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            RaisedButton(
-              child: Text('ReleasePage'),
-              onPressed: () => Get.toNamed('t/releasePage'),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -11,7 +11,8 @@ class Themes {
       iconTheme: IconThemeData(color: Colors.black),
       brightness: Brightness.light,
       accentColor: Colors.pink,
-      scaffoldBackgroundColor: Color(0xfff1f1f1));
+      scaffoldBackgroundColor: Color(0xfff1f1f1),
+      );
 
 
   final darkTheme = ThemeData.dark().copyWith(

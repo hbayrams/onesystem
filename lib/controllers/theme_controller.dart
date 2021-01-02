@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:onesystem/models/globals.dart';
 
 class ThemeController extends GetxController {
   final _getStorage = GetStorage();
@@ -25,6 +26,14 @@ class ThemeController extends GetxController {
 
   bool isSavedDarkMode() {
     return _getStorage.read(storageKey) ?? false;
+  }
+
+  Color isColorChangeWD() {
+    return isSavedDarkMode() ? Global.white : Global.dark;
+  }
+
+  Color isColorChangeDW() {
+    return isSavedDarkMode() ? Global.dark : Global.white;
   }
 
   void saveThemeMode(bool isDarkMode) {
