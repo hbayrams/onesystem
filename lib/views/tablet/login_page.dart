@@ -176,16 +176,6 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
               ),
               RButtonWidget(
                 color: Global.medium,
-                // onClick: () => _showMyDialog(
-                //   'Exit',
-                //   'Close the application.',
-                //   'Would you like to approve of this message?',
-                //   'OK',
-                //   'CANCEL',
-                //   () {
-                //     exit(0);
-                //   },
-                // ),
                 onClick: () => Get.dialog(
                   ShowDialogWidget(
                     title: 'Exit',

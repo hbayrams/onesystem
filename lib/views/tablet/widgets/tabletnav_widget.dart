@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 
 class TabletVerticalNavWidget extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class TabletVerticalNavWidget extends StatefulWidget {
 
 class _TabletVerticalNavWidgetState extends State<TabletVerticalNavWidget> {
   int _buttonCurrentIndex = 0;
+  SharedPrefController sc = Get.put(SharedPrefController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class _TabletVerticalNavWidgetState extends State<TabletVerticalNavWidget> {
         decoration: BoxDecoration(
           border: Border(
             right: BorderSide(
-              width: 2,
+              width: 4,
               color: borderColor,
             ),
           ),
@@ -79,13 +82,13 @@ class _TabletVerticalNavWidgetState extends State<TabletVerticalNavWidget> {
                 });
               },
               child: _colSingleButton(
-                  icon: Icons.widgets,
+                  icon: Icons.home,
                   iconColor: _buttonCurrentIndex == 0
                       ? Global.focusedBlue
-                      : Colors.black,
+                      : Global.light,
                   borderColor: _buttonCurrentIndex == 0
                       ? Global.focusedBlue
-                      : Colors.transparent)),
+                      : Global.trnsp)),
           InkWell(
               onTap: () {
                 Get.toNamed('t/settingsPage');
@@ -97,79 +100,92 @@ class _TabletVerticalNavWidgetState extends State<TabletVerticalNavWidget> {
                   icon: Icons.score,
                   iconColor: _buttonCurrentIndex == 1
                       ? Global.focusedBlue
-                      : Colors.black,
+                      : Global.light,
                   borderColor: _buttonCurrentIndex == 1
                       ? Global.focusedBlue
-                      : Colors.transparent)),
+                      : Global.trnsp)),
           InkWell(
-            onTap: () {
-              setState(() {
-                _buttonCurrentIndex = 2;
-              });
-            },
-            child: _colSingleButton(
-                icon: Icons.calendar_today,
-                iconColor: _buttonCurrentIndex == 2
-                    ? Global.focusedBlue
-                    : Colors.black,
-                borderColor: _buttonCurrentIndex == 2
-                    ? Global.focusedBlue
-                    : Colors.transparent),
-          ),
+              onTap: () {
+                Get.toNamed('t/releasePage');
+                setState(() {
+                  _buttonCurrentIndex = 2;
+                });
+              },
+              child: _colSingleButton(
+                  icon: Icons.calendar_today,
+                  iconColor: _buttonCurrentIndex == 2
+                      ? Global.focusedBlue
+                      : Global.light,
+                  borderColor: _buttonCurrentIndex == 2
+                      ? Global.focusedBlue
+                      : Global.trnsp)),
           InkWell(
-            onTap: () {
-              setState(() {
-                _buttonCurrentIndex = 3;
-              });
-            },
-            child: _colSingleButton(
-                icon: Icons.pages,
-                iconColor: _buttonCurrentIndex == 3
-                    ? Global.focusedBlue
-                    : Colors.black,
-                borderColor: _buttonCurrentIndex == 3
-                    ? Global.focusedBlue
-                    : Colors.transparent),
-          ),
+              onTap: () {
+                setState(() {
+                  _buttonCurrentIndex = 3;
+                });
+              },
+              child: _colSingleButton(
+                  icon: Icons.pages,
+                  iconColor: _buttonCurrentIndex == 3
+                      ? Global.focusedBlue
+                      : Global.light,
+                  borderColor: _buttonCurrentIndex == 3
+                      ? Global.focusedBlue
+                      : Global.trnsp)),
           InkWell(
-            onTap: () {
-              setState(() {
-                _buttonCurrentIndex = 4;
-              });
-            },
-            child: _colSingleButton(
-                icon: Icons.message,
-                iconColor: _buttonCurrentIndex == 4
-                    ? Global.focusedBlue
-                    : Colors.black,
-                borderColor: _buttonCurrentIndex == 4
-                    ? Global.focusedBlue
-                    : Colors.transparent),
-          ),
+              onTap: () {
+                setState(() {
+                  _buttonCurrentIndex = 4;
+                });
+              },
+              child: _colSingleButton(
+                  icon: Icons.message,
+                  iconColor: _buttonCurrentIndex == 4
+                      ? Global.focusedBlue
+                      : Global.light,
+                  borderColor: _buttonCurrentIndex == 4
+                      ? Global.focusedBlue
+                      : Global.trnsp)),
           InkWell(
-            onTap: () {
-              setState(() {
-                _buttonCurrentIndex = 5;
-              });
-            },
-            child: _colSingleButton(
-                icon: Icons.settings,
-                iconColor: _buttonCurrentIndex == 5
-                    ? Global.focusedBlue
-                    : Colors.black,
-                borderColor: _buttonCurrentIndex == 5
-                    ? Global.focusedBlue
-                    : Colors.transparent),
-          ),
+              onTap: () {
+                setState(() {
+                  _buttonCurrentIndex = 5;
+                });
+              },
+              child: _colSingleButton(
+                  icon: Icons.settings,
+                  iconColor: _buttonCurrentIndex == 5
+                      ? Global.focusedBlue
+                      : Global.light,
+                  borderColor: _buttonCurrentIndex == 5
+                      ? Global.focusedBlue
+                      : Global.trnsp)),
         ],
       ),
     );
   }
 
   Widget _logoutButton() {
-    return Icon(
-      Icons.exit_to_app,
-      color: Global.focusedBlue,
+    return InkWell(
+      onTap: () => Get.dialog(
+          ShowDialogWidget(
+              title: 'Logout',
+              tbtn1: 'OK',
+              tbtn2: 'CANCEL',
+              text1: 'Do you check out the account?',
+              text2: 'Account preferences will be reset!',
+              onPressed: () {
+                sc.isLogin=false;
+                Get.offNamed('t/loginPage');
+                print('Çıkış yapıldı: '+sc.uname);
+              }),
+          transitionDuration: Duration(milliseconds: 700),
+          barrierDismissible: false),
+      child: Icon(
+        Icons.exit_to_app,
+        color: Global.dark_red,
+      ),
     );
   }
 }
