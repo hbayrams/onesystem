@@ -176,11 +176,11 @@ class _TabletVerticalNavWidgetState extends State<TabletVerticalNavWidget> {
               text1: 'Do you check out the account?',
               text2: 'Account preferences will be reset!',
               onPressed: () {
-                sc.isLogin=false;
+                sc.isLogin = false;
                 Get.offNamed('t/loginPage');
-                print('Çıkış yapıldı: '+sc.uname);
+                print('Çıkış yapıldı: ' + sc.uname);
               }),
-          transitionDuration: Duration(milliseconds: 700),
+          transitionDuration: Duration(milliseconds: 300),
           barrierDismissible: false),
       child: Icon(
         Icons.exit_to_app,

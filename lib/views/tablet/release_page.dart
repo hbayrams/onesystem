@@ -141,32 +141,40 @@ class _ReleasePageState extends State<ReleasePage> {
                       ),
                       Expanded(
                         flex: 7,
-                        child: SfDataGrid(isScrollbarAlwaysShown:true,
+                        child: SfDataGrid(
+                          frozenColumnsCount: 1,
+                          isScrollbarAlwaysShown: true,
+                          gridLinesVisibility: GridLinesVisibility.both,
                           source: _employeeDataSource,
                           columns: <GridColumn>[
                             GridNumericColumn(
-                                mappingName: 'id', headerText: 'ID'),
+                                mappingName: 'id', headerText: 'Weld'),
                             GridTextColumn(
-                                mappingName: 'name', headerText: 'Name'),
+                                mappingName: 'name', headerText: 'Type'),
                             GridTextColumn(
-                                mappingName: 'designation',
-                                headerText: 'Designation'),
+                                mappingName: 'designation', headerText: 'Size'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'MM'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'Thick.'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'Material'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'Heat-1'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'Heat-2'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary',
+                                headerText: 'Fit-Up Insp.'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'Process'),
                             GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Salary'),
+                                mappingName: 'salary', headerText: 'Welders'),
+                            GridNumericColumn(
+                                mappingName: 'salary',
+                                headerText: 'Weld Insp.'),
+                            GridNumericColumn(
+                                mappingName: 'salary', headerText: 'NDE'),
                           ],
                         ),
                         //ListView(
@@ -375,45 +383,45 @@ class _ReleasePageState extends State<ReleasePage> {
 
 void populateData() {
   _employees.add(Employee(10001, 'James', 'Project Lead', 20000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10002, 'Kathryn', 'Manager', 30000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10003, 'Lara', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10004, 'Michael', 'Designer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10005, 'Martin', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10006, 'Newberry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10007, 'Balnc', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10008, 'Perry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10009, 'Gable', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10010, 'Grimes', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10001, 'James', 'Project Lead', 20000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10002, 'Kathryn', 'Manager', 30000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10003, 'Lara', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10004, 'Michael', 'Designer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10005, 'Martin', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10006, 'Newberry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10007, 'Balnc', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10008, 'Perry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10009, 'Gable', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
   _employees.add(Employee(10010, 'Grimes', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000));
+      20000, 20000, 20000, 20000, 20000, 20000, 20000));
 }
 
 /// Custom business object class which contains properties to hold the detailed
@@ -431,7 +439,9 @@ class Employee {
       this.salary5,
       this.salary6,
       this.salary7,
-      this.salary8);
+      this.salary8,
+      this.salary9,
+      this.salary10);
 
   /// Id of an employee.
   final int id;
@@ -465,6 +475,12 @@ class Employee {
 
   /// Salary of an employee.
   final int salary8;
+
+  /// Salary of an employee.
+  final int salary9;
+
+  /// Salary of an employee.
+  final int salary10;
 }
 
 /// An object to set the employee collection data source to the datagrid. This

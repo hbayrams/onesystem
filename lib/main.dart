@@ -16,10 +16,10 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     SystemChrome.setPreferredOrientations([
-       DeviceOrientation.landscapeLeft,
-       DeviceOrientation.landscapeRight,
-     ]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.native,
