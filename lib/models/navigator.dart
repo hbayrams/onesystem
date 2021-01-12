@@ -5,7 +5,6 @@ import 'package:onesystem/views/tablet/login_help_page.dart';
 import 'package:onesystem/views/tablet/login_page.dart';
 import 'package:onesystem/views/tablet/settings_page.dart';
 import 'package:onesystem/views/tablet/release_page.dart';
-import 'package:onesystem/views/tablet/widgets/deneme.dart';
 
 class MyNavigator {
   static final route = [
@@ -15,6 +14,5 @@ class MyNavigator {
     GetPage(name: 't/loginHelpPage', page: () => LoginHelpPage()),
     GetPage(name: 't/settingsPage', page: () => SettingsPage()),
     GetPage(name: 't/releasePage', page: () => ReleasePage()),
-    GetPage(name: 'w/deneme', page: () => DenemePage()),
   ];
 }

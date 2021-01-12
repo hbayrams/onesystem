@@ -18,8 +18,8 @@ class TabNavWidget extends StatelessWidget {
   ];
   final List<IconData> navIcon = [
     Icons.widgets,
-    Icons.design_services,
     Icons.layers,
+    Icons.design_services,
     Icons.warning,
     Icons.assignment,
     //Icons.swap_horiz,
@@ -49,6 +49,7 @@ class TabNavWidget extends StatelessWidget {
           groupAlignment: 0,
           onDestinationSelected: (int index) {
             pc.pindex = index;
+            pc.pageindex(index);
           },
           leading: _leadingwidget(sc),
           destinations: [
