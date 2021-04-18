@@ -147,34 +147,34 @@ class _ReleasePageState extends State<ReleasePage> {
                           gridLinesVisibility: GridLinesVisibility.both,
                           source: _employeeDataSource,
                           columns: <GridColumn>[
-                            GridNumericColumn(
-                                mappingName: 'id', headerText: 'Weld'),
                             GridTextColumn(
-                                mappingName: 'name', headerText: 'Type'),
+                                columnName:'id', label:Text( 'Weld')),
                             GridTextColumn(
-                                mappingName: 'designation', headerText: 'Size'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'MM'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Thick.'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Material'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Heat-1'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Heat-2'),
-                            GridNumericColumn(
-                                mappingName: 'salary',
-                                headerText: 'Fit-Up Insp.'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Process'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'Welders'),
-                            GridNumericColumn(
-                                mappingName: 'salary',
-                                headerText: 'Weld Insp.'),
-                            GridNumericColumn(
-                                mappingName: 'salary', headerText: 'NDE'),
+                                columnName: 'name', label:Text( 'Type')),
+                            GridTextColumn(
+                                columnName: 'designation', label:Text( 'Size')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'MM')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'Thick.')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'Material')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'Heat-1')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'Heat-2')),
+                            GridTextColumn(
+                                columnName: 'salary',
+                                label:Text( 'Fit-Up Insp.')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'Process')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'Welders')),
+                            GridTextColumn(
+                                columnName: 'salary',
+                                label:Text( 'Weld Insp.')),
+                            GridTextColumn(
+                                columnName: 'salary', label:Text( 'NDE')),
                           ],
                         ),
                         //ListView(
@@ -485,28 +485,11 @@ class Employee {
 
 /// An object to set the employee collection data source to the datagrid. This
 /// is used to map the employee data to the datagrid widget.
-class EmployeeDataSource extends DataGridSource<Employee> {
+class EmployeeDataSource extends DataGridSource {
   @override
-  List<Employee> get dataSource => _employees;
-
-  @override
-  Object getValue(Employee employee, String columnName) {
-    switch (columnName) {
-      case 'id':
-        return employee.id;
-        break;
-      case 'name':
-        return employee.name;
-        break;
-      case 'salary':
-        return employee.salary;
-        break;
-      case 'designation':
-        return employee.designation;
-        break;
-      default:
-        return ' ';
-        break;
-    }
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    // TODO: implement buildRow
+    throw UnimplementedError();
   }
+ 
 }

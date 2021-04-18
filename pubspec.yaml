@@ -28,7 +28,8 @@ dependencies:
   mysql1:  
   get_storage:
   responsive_builder:
-  syncfusion_flutter_datagrid:
+  syncfusion_flutter_datagrid: ^19.1.55-beta
+  flutter_swiper:
 
 
   # The following adds the Cupertino Icons font to your application.

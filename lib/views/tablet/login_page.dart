@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/gestures.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/login_controller.dart';
@@ -15,6 +16,11 @@ class LoginPage extends StatelessWidget {
   LoginController lc = Get.put(LoginController());
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
+  List images = [
+    'assets/images/intro1_crossplatform.png',
+    'assets/images/intro2_qc.png',
+    'assets/images/intro3_database.png'
+  ];
   @override
   Widget build(BuildContext context) {
     final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
@@ -52,13 +58,27 @@ class LoginPage extends StatelessWidget {
               flex: 6,
               child: SingleChildScrollView(
                 child: Container(
+                  height: Get.height,
                   color: tc.isColorChangeWD(),
-                  child: Column(children: [
-                    Image.asset(
-                      'assets/images/home_right.png',
-                      height: Get.height,
-                    )
-                  ]),
+                  child: Swiper(
+                    scale: 0.9,
+                    viewportFraction: 0.9,
+                    itemCount: images.length,
+                    itemBuilder: (context, index) {
+                      return Image.asset(
+                        images[index],
+                        fit: BoxFit.fitWidth,
+                      );
+                    },
+                    autoplay: true,
+                    autoplayDelay: 3000,
+                    control: SwiperControl(color: tc.isColorChangeDW()),
+                    pagination: SwiperPagination(
+                      margin: EdgeInsets.only(bottom: 30),
+                      builder: DotSwiperPaginationBuilder(
+                          activeColor: Global.dark_red, activeSize: 15.0),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -125,9 +145,8 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
                       ],
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {},
-                    textColor: Global.dark,
                     child: Text(
                       'Forgot password?',
                       style: TextStyle(
@@ -151,7 +170,7 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
                 onClick: () {
                   if (lc.formKey.value.currentState.validate()) {
                     lc.formKey.value.currentState.save();
-                    Get.toNamed('t/settingsPage'); //with arguments
+                    Get.toNamed('t/homePage'); //with arguments
                     print('Sign in successfully' + lc.uname);
                     //sc.isLogin = lc.checkVal;                               //*buraya alınacak
                   } else {
