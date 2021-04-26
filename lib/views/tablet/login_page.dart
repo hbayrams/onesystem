@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/internet_controller.dart';
 import 'package:onesystem/controllers/login_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
@@ -16,6 +17,8 @@ class LoginPage extends StatelessWidget {
   LoginController lc = Get.put(LoginController());
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
+  NetController nc=Get.put(NetController());
+  
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',
@@ -28,7 +31,8 @@ class LoginPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: tc.isColorChangeDW(),
-        body: Row(
+        body: nc.checkOnline ?
+         Row(
           children: <Widget>[
             Expanded(
               flex: 3,
@@ -84,7 +88,8 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        )
+        : Center(child:Text('Hata'),),
       ),
     );
   }
