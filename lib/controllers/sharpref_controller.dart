@@ -74,10 +74,10 @@ class SharedPrefController extends GetxController {
     } else {
       _deleteFromPrefs();
     }
-    if (_controller.uname != null || _controller.password != null) {
-      print('Remember: Username=>' + box.read('name'));
-      print('Remember: Password=>' + box.read('pass'));
-    }
+    // if (_controller.uname != null || _controller.password != null) {
+    //   print('Remember: Username=>' + box.read('name'));
+    //   print('Remember: Password=>' + box.read('pass'));
+    // }
   }
 
 //Login remember shared pref end-----

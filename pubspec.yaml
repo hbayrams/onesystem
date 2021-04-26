@@ -30,6 +30,7 @@ dependencies:
   responsive_builder:
   syncfusion_flutter_datagrid: ^19.1.55-beta
   flutter_swiper:
+  connectivity:
 
 
   # The following adds the Cupertino Icons font to your application.

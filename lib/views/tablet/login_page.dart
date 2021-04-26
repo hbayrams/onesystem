@@ -19,7 +19,8 @@ class LoginPage extends StatelessWidget {
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',
-    'assets/images/intro3_database.png'
+    'assets/images/intro3_database.png',
+    'assets/images/intro4_welders.png'
   ];
   @override
   Widget build(BuildContext context) {
