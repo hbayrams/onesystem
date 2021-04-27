@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,80 +15,78 @@ class LoginPage extends StatelessWidget {
   LoginController lc = Get.put(LoginController());
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
-  NetController nc=Get.put(NetController());
-  
+  NetController nc = Get.put(NetController());
+
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',
     'assets/images/intro3_database.png',
     'assets/images/intro4_welders.png'
   ];
+
   @override
   Widget build(BuildContext context) {
     final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: tc.isColorChangeDW(),
-        body: nc.checkOnline ?
-         Row(
-          children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: SingleChildScrollView(
-                child: Container(
-                  //padding: EdgeInsets.only(left: sizeWidth * .05),
-                  color: tc.isColorChangeDW(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          tc.isSavedDarkMode()
-                              ? 'assets/images/dark1_lowheight.png'
-                              : 'assets/images/light1_lowheight.png',
-                          height: keyboardOpen ? 0 : 50,
+          backgroundColor: tc.isColorChangeDW(),
+          body: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: SingleChildScrollView(
+                  child: Container(
+                    //padding: EdgeInsets.only(left: sizeWidth * .05),
+                    color: tc.isColorChangeDW(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Image.asset(
+                            tc.isSavedDarkMode()
+                                ? 'assets/images/dark1_lowheight.png'
+                                : 'assets/images/light1_lowheight.png',
+                            height: keyboardOpen ? 0 : 50,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
-                      buildFormLogin2(sc, lc, tc, context),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 6,
-              child: SingleChildScrollView(
-                child: Container(
-                  height: Get.height,
-                  color: tc.isColorChangeWD(),
-                  child: Swiper(
-                    scale: 0.9,
-                    viewportFraction: 0.9,
-                    itemCount: images.length,
-                    itemBuilder: (context, index) {
-                      return Image.asset(
-                        images[index],
-                        fit: BoxFit.fitWidth,
-                      );
-                    },
-                    autoplay: true,
-                    autoplayDelay: 3000,
-                    control: SwiperControl(color: tc.isColorChangeDW()),
-                    pagination: SwiperPagination(
-                      margin: EdgeInsets.only(bottom: 30),
-                      builder: DotSwiperPaginationBuilder(
-                          activeColor: Global.dark_red, activeSize: 15.0),
+                        SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
+                        buildFormLogin2(sc, lc, tc, context),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        )
-        : Center(child:Text('Hata'),),
-      ),
+              Expanded(
+                flex: 6,
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: Get.height,
+                    color: tc.isColorChangeWD(),
+                    child: Swiper(
+                      scale: 0.9,
+                      viewportFraction: 0.9,
+                      itemCount: images.length,
+                      itemBuilder: (context, index) {
+                        return Image.asset(
+                          images[index],
+                          fit: BoxFit.fitWidth,
+                        );
+                      },
+                      autoplay: true,
+                      autoplayDelay: 3000,
+                      control: SwiperControl(color: tc.isColorChangeDW()),
+                      pagination: SwiperPagination(
+                        margin: EdgeInsets.only(bottom: 30),
+                        builder: DotSwiperPaginationBuilder(
+                            activeColor: Global.dark_red, activeSize: 15.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
