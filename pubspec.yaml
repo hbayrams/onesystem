@@ -31,6 +31,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^19.1.55-beta
   flutter_swiper:
   connectivity:
+  dropdown_search:
 
 
   # The following adds the Cupertino Icons font to your application.

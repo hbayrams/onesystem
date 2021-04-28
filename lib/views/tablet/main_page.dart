@@ -1,6 +1,8 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
+import 'package:onesystem/models/globals.dart';
 
 class MainPage extends StatelessWidget {
   DataviewController dvc = Get.put(DataviewController());
@@ -29,49 +31,63 @@ class MainPage extends StatelessWidget {
                                     flex: 1,
                                     child: Container(
                                       width: Get.width,
-                                      //color: Colors.red,
                                       child: Row(
                                         children: [
                                           Expanded(
                                             flex: 1,
-                                            child: Radio(
-                                              value: 0,
-                                              groupValue: dvc.radioValue,
-                                              onChanged: (value) {
-                                                dvc.radioValue = value;
-                                                print("value: $value");
-                                                print('value_getx: ' +
-                                                    dvc.radioValue.toString());
-                                              },
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Radio(
+                                                value: 0,
+                                                groupValue: dvc.radioValue,
+                                                onChanged: (value) {
+                                                  dvc.radioValue = value;
+                                                  print("value: $value");
+                                                  print('value_getx: ' +
+                                                      dvc.radioValue
+                                                          .toString());
+                                                },
+                                              ),
                                             ),
                                           ),
                                           Expanded(
-                                            flex: 4,
-                                            child: DropdownButton<String>(
-                                              value: dvc.ddValue,
-                                              hint: Text(
-                                                'Select List... ',
-                                                style: TextStyle(fontSize: 12),
+                                            flex: 3,
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: DropdownSearch(
+                                                dropdownSearchDecoration:
+                                                    InputDecoration(
+                                                        isDense: true,
+                                                        isCollapsed: true,
+                                                        border:
+                                                            InputBorder.none,
+                                                        contentPadding:
+                                                            EdgeInsets.all(1)),
+                                                popupTitle: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text('Select ISO No'),
+                                                ),
+                                                autoValidateMode:
+                                                    AutovalidateMode.always,
+
+                                                showSearchBox: true,
+                                                //label: 'Select File No',
+                                                items: [
+                                                  'YASDJAH',
+                                                  'OPOFDKOGKD'
+                                                ],
+                                                selectedItem: 'Select File No',
+                                                onChanged: print,
+                                                // validator: (String item) {
+                                                //   if (item == null)
+                                                //     return "Required field";
+                                                //   else if (item == "Select File No")
+                                                //     return "Invalid item";
+                                                //   else
+                                                //     return null;
+                                                // },
                                               ),
-                                              onChanged: (String id) {
-                                                dvc.ddValue = id;
-                                                dvc.widgetEnabled = true;
-                                                print("value: $id");
-                                                print('value_getx: ' +
-                                                    dvc.ddValue);
-                                              },
-                                              items: [
-                                                for (var i = 1; i < 100; i++)
-                                                  DropdownMenuItem<String>(
-                                                    value: i.toString(),
-                                                    child: Text(
-                                                      "9100-3-52-CL-036-AB1-TA" +
-                                                          i.toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 14),
-                                                    ),
-                                                  ),
-                                              ],
                                             ),
                                           ),
                                         ],
@@ -84,47 +100,58 @@ class MainPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           flex: 1,
-                                          child: Radio(
-                                            value: 1,
-                                            groupValue: dvc.radioValue,
-                                            onChanged: (value) {
-                                              dvc.radioValue = value;
-                                              print("value: $value");
-                                              print('value_getx: ' +
-                                                  dvc.radioValue.toString());
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: DropdownButton<String>(
-                                            value: dvc.ddValue,
-                                            hint: Text(
-                                              'Select List... ',
-                                              style: TextStyle(fontSize: 12),
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: Radio(
+                                              value: 1,
+                                              groupValue: dvc.radioValue,
+                                              onChanged: (value) {
+                                                dvc.radioValue = value;
+                                                print("value: $value");
+                                                print('value_getx: ' +
+                                                    dvc.radioValue.toString());
+                                              },
                                             ),
-                                            onChanged: (String id) {
-                                              dvc.ddValue = id;
-                                              dvc.widgetEnabled = true;
-                                              print("value: $id");
-                                              print(
-                                                  'value_getx: ' + dvc.ddValue);
-                                            },
-                                            items: [
-                                              for (var i = 1; i < 100; i++)
-                                                DropdownMenuItem<String>(
-                                                  value: i.toString(),
-                                                  child: Text(
-                                                      "0000" + i.toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 14)),
-                                                ),
-                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: DropdownSearch(
+                                            dropdownSearchDecoration:
+                                                InputDecoration(
+                                                    border: InputBorder.none,
+                                                    contentPadding:
+                                                        EdgeInsets.all(1)),
+                                            popupTitle: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text('Select File No'),
+                                            ),
+                                            autoValidateMode:
+                                                AutovalidateMode.always,
+                                            showSearchBox: true,
+                                            //label: 'Select File No',
+                                            items: ['0001', '0002'],
+                                            selectedItem: 'Select File No',
+                                            onChanged: print,
+                                            // validator: (String item) {
+                                            //   if (item == null)
+                                            //     return "Required field";
+                                            //   else if (item == "Select File No")
+                                            //     return "Invalid item";
+                                            //   else
+                                            //     return null;
+                                            // },
                                           ),
                                         ),
                                         Expanded(
                                           flex: 1,
-                                          child: Text('Rev. : 1A'),
+                                          child: Text(
+                                            'Rev. : 1A',
+                                            style: TextStyle(
+                                                color: Global.focusedBlue,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
                                       ],
                                     ),

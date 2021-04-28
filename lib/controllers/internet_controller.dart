@@ -7,7 +7,6 @@ import 'package:onesystem/models/globals.dart';
 
 class NetController extends GetxController {
   Connectivity _connectivity = new Connectivity();
-
   final _isOnline = false.obs;
 
   @override
@@ -74,7 +73,7 @@ Future netErrorDialog() async {
   d += 1;
   print('d= ' + d.toString());
   if (NetController().isOnline == false && d == 1) {
-    return await Get.defaultDialog(
+    await Get.defaultDialog(
       onWillPop: () async => false,
       titleStyle: TextStyle(color: Global.dark_red),
       title: 'Connection Error..!',
@@ -86,8 +85,10 @@ Future netErrorDialog() async {
       //     child: Text('OK'),
       //     style: ElevatedButton.styleFrom(primary: Global.dark_red)),
     );
+    d = 0;
   } else {
     print('patladı AQ');
   }
-  d = 0;
+
+  print('dson= ' + d.toString());
 }
