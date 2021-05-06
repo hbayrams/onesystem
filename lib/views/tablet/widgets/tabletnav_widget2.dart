@@ -51,7 +51,7 @@ class TabNavWidget extends StatelessWidget {
             pc.pindex = index;
             pc.pageindex(index);
           },
-          leading: _leadingwidget(sc),
+          leading: _navLogo(sc),
           destinations: [
             for (var i = 0; i < navIcon.length; i++)
               NavigationRailDestination(
@@ -60,22 +60,38 @@ class TabNavWidget extends StatelessWidget {
                   selectedIcon: Icon(navIcon[i], color: Global.focusedBlue)),
           ],
           selectedIndex: pc.pindex,
-          trailing: _logoutButton(sc),
+          trailing: Column(
+            children: [
+              _leadingwidget(sc),
+              _logoutButton(sc),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
+Widget _navLogo(SharedPrefController sc) {
+  return Padding(
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        children: [
+          Image.asset('assets/images/light2.png'),
+          Divider(color: Global.dark)
+        ],
+      ));
+}
+
 Widget _leadingwidget(SharedPrefController sc) {
   return Padding(
-    padding: const EdgeInsets.only(top:20),
+    padding: const EdgeInsets.only(top: 20),
     child: Column(
       children: [
         CircleAvatar(
-            backgroundColor: Global.dark_red,
-            radius: 30,
-            child: Icon(Icons.people, size: 40, color: Global.white)),
+            backgroundColor: Global.focusedBlue,
+            radius: 20,
+            child: Icon(Icons.people, size: 30, color: Global.white)),
         SizedBox(
           height: 10,
         ),
@@ -87,7 +103,7 @@ Widget _leadingwidget(SharedPrefController sc) {
 
 Widget _logoutButton(SharedPrefController sc) {
   return Padding(
-    padding: const EdgeInsets.only(top: 60,bottom: 10),
+    padding: const EdgeInsets.only(bottom: 10),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

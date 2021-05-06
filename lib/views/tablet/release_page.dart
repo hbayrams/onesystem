@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
+import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ReleasePage extends StatefulWidget {
@@ -9,15 +10,10 @@ class ReleasePage extends StatefulWidget {
   _ReleasePageState createState() => _ReleasePageState();
 }
 
-final List<Employee> _employees = <Employee>[];
-
-final EmployeeDataSource _employeeDataSource = EmployeeDataSource();
-
 class _ReleasePageState extends State<ReleasePage> {
   @override
   void initState() {
     super.initState();
-    populateData();
   }
 
   @override
@@ -82,48 +78,6 @@ class _ReleasePageState extends State<ReleasePage> {
                           ),
                         ),
                       ),
-                      //Expanded(
-                      //flex: 9,
-                      // child: ListView(
-                      //   children: <Widget>[
-                      //     Card(
-                      //       child: DataTable(
-                      //         //sortAscending: sort,
-                      //         dividerThickness: 2,
-                      //         sortColumnIndex: 1,
-                      //         dataRowHeight: 30,
-                      //         columns: [
-                      //           DataColumn(
-                      //             label: Text("Spool",
-                      //                 style: TextStyle(fontSize: 15)),
-                      //             numeric: false,
-                      //           ),
-                      //           DataColumn(
-                      //             label: Text("Condition",
-                      //                 style: TextStyle(fontSize: 15)),
-                      //             numeric: false,
-                      //           ),
-                      //         ],
-                      //         rows: [
-                      //           for (var i = 50; i < 150; i++)
-                      //             DataRow(
-                      //                 //selected: selectedAvengers.contains(avenger),
-                      //                 cells: [
-                      //                   DataCell(
-                      //                     Text('V' + i.toString()),
-                      //                     onTap: dvc.widgetFunc1,
-                      //                   ),
-                      //                   DataCell(
-                      //                     Text('-'),
-                      //                     onTap: dvc.widgetFunc1,
-                      //                   ),
-                      //                 ]),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      //),
                     ],
                   ),
                 ),
@@ -141,160 +95,42 @@ class _ReleasePageState extends State<ReleasePage> {
                       ),
                       Expanded(
                         flex: 7,
-                        child: SfDataGrid(
-                          frozenColumnsCount: 1,
-                          isScrollbarAlwaysShown: true,
-                          gridLinesVisibility: GridLinesVisibility.both,
-                          source: _employeeDataSource,
-                          columns: <GridColumn>[
-                            GridTextColumn(
-                                columnName:'id', label:Text( 'Weld')),
-                            GridTextColumn(
-                                columnName: 'name', label:Text( 'Type')),
-                            GridTextColumn(
-                                columnName: 'designation', label:Text( 'Size')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'MM')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'Thick.')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'Material')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'Heat-1')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'Heat-2')),
-                            GridTextColumn(
-                                columnName: 'salary',
-                                label:Text( 'Fit-Up Insp.')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'Process')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'Welders')),
-                            GridTextColumn(
-                                columnName: 'salary',
-                                label:Text( 'Weld Insp.')),
-                            GridTextColumn(
-                                columnName: 'salary', label:Text( 'NDE')),
-                          ],
-                        ),
-                        //ListView(
-                        //     scrollDirection: Axis.horizontal,
-                        //     children: <Widget>[
-                        //       Card(
-                        //         child: SingleChildScrollView(
-                        //           child: DataTable(
-                        //             dataTextStyle: (TextStyle(
-                        //               fontSize: 16,
-                        //               color: tc.isColorChangeWD(),
-                        //             )),
-                        //             //sortAscending: sort,
-                        //             dividerThickness: 2,
-                        //             sortColumnIndex: 1,
-                        //             dataRowHeight: 30,
-                        //             columns: [
-                        //               DataColumn(
-                        //                 label: Text("Spool",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Joint",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Spool",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Joint",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Item-1",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Heat-1",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Item-2",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Heat-2",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("FitUpDate",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //               DataColumn(
-                        //                 label: Text("Test",
-                        //                     style: TextStyle(fontSize: 12)),
-                        //                 numeric: false,
-                        //               ),
-                        //             ],
-                        //             rows: [
-                        //               for (var i = 0; i < 20; i++)
-                        //                 DataRow(
-                        //                     //selected: selectedAvengers.contains(avenger),
-                        //                     cells: [
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1 ? 'S1' : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1
-                        //                             ? i.toString()
-                        //                             : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1 ? 'S1' : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1
-                        //                             ? i.toString()
-                        //                             : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1 ? 'S1' : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1
-                        //                             ? i.toString()
-                        //                             : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1 ? 'S1' : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1
-                        //                             ? i.toString()
-                        //                             : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1 ? 'S1' : ''),
-                        //                       ),
-                        //                       DataCell(
-                        //                         Text(dvc.fillData1
-                        //                             ? i.toString()
-                        //                             : ''),
-                        //                       ),
-                        //                     ]),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
+                        child: DataGridWidget(),
+                        // child: SfDataGrid(
+                        //   frozenColumnsCount: 1,
+                        //   isScrollbarAlwaysShown: true,
+                        //   gridLinesVisibility: GridLinesVisibility.both,
+                        //   columns: <GridColumn>[
+                        //     GridTextColumn(
+                        //         columnName: 'id', label: Text('Weld')),
+                        //     GridTextColumn(
+                        //         columnName: 'name', label: Text('Type')),
+                        //     GridTextColumn(
+                        //         columnName: 'designation', label: Text('Size')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('MM')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('Thick.')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('Material')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('Heat-1')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('Heat-2')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary',
+                        //         label: Text('Fit-Up Insp.')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('Process')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('Welders')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary',
+                        //         label: Text('Weld Insp.')),
+                        //     GridTextColumn(
+                        //         columnName: 'salary', label: Text('NDE')),
+                        //   ],
+                        // ),
                       ),
                     ],
                   ),
@@ -308,48 +144,6 @@ class _ReleasePageState extends State<ReleasePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Expanded(
-                      //   flex: 9,
-                      //   child: ListView(
-                      //     children: <Widget>[
-                      //       Card(
-                      //         child: DataTable(
-                      //           //sortAscending: sort,
-                      //           dividerThickness: 2,
-                      //           sortColumnIndex: 1,
-                      //           dataRowHeight: 30,
-                      //           columns: [
-                      //             DataColumn(
-                      //               label: Text("Spool",
-                      //                   style: TextStyle(fontSize: 15)),
-                      //               numeric: false,
-                      //             ),
-                      //             DataColumn(
-                      //               label: Text("State",
-                      //                   style: TextStyle(fontSize: 15)),
-                      //               numeric: false,
-                      //             ),
-                      //           ],
-                      //           rows: [
-                      //             for (var i = 0; i < 50; i++)
-                      //               DataRow(
-                      //                   //selected: selectedAvengers.contains(avenger),
-                      //                   cells: [
-                      //                     DataCell(
-                      //                       Text(dvc.fillData
-                      //                           ? 'V' + i.toString()
-                      //                           : ''),
-                      //                     ),
-                      //                     DataCell(
-                      //                       Text(dvc.fillData ? '-' : ''),
-                      //                     ),
-                      //                   ]),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Expanded(
                         flex: 1,
                         child: Row(
@@ -379,117 +173,4 @@ class _ReleasePageState extends State<ReleasePage> {
       ),
     );
   }
-}
-
-void populateData() {
-  _employees.add(Employee(10001, 'James', 'Project Lead', 20000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10002, 'Kathryn', 'Manager', 30000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10003, 'Lara', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10004, 'Michael', 'Designer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10005, 'Martin', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10006, 'Newberry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10007, 'Balnc', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10008, 'Perry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10009, 'Gable', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10010, 'Grimes', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10001, 'James', 'Project Lead', 20000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10002, 'Kathryn', 'Manager', 30000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10003, 'Lara', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10004, 'Michael', 'Designer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10005, 'Martin', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10006, 'Newberry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10007, 'Balnc', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10008, 'Perry', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10009, 'Gable', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-  _employees.add(Employee(10010, 'Grimes', 'Developer', 15000, 20000, 20000,
-      20000, 20000, 20000, 20000, 20000, 20000, 20000));
-}
-
-/// Custom business object class which contains properties to hold the detailed
-/// information about the employee which will be rendered in datagrid.
-class Employee {
-  /// Creates the employee class with required details.
-  Employee(
-      this.id,
-      this.name,
-      this.designation,
-      this.salary,
-      this.salary2,
-      this.salary3,
-      this.salary4,
-      this.salary5,
-      this.salary6,
-      this.salary7,
-      this.salary8,
-      this.salary9,
-      this.salary10);
-
-  /// Id of an employee.
-  final int id;
-
-  /// Name of an employee.
-  final String name;
-
-  /// Designation of an employee.
-  final String designation;
-
-  /// Salary of an employee.
-  final int salary;
-
-  /// Salary of an employee.
-  final int salary2;
-
-  /// Salary of an employee.
-  final int salary3;
-
-  /// Salary of an employee.
-  final int salary4;
-
-  /// Salary of an employee.
-  final int salary5;
-
-  /// Salary of an employee.
-  final int salary6;
-
-  /// Salary of an employee.
-  final int salary7;
-
-  /// Salary of an employee.
-  final int salary8;
-
-  /// Salary of an employee.
-  final int salary9;
-
-  /// Salary of an employee.
-  final int salary10;
-}
-
-/// An object to set the employee collection data source to the datagrid. This
-/// is used to map the employee data to the datagrid widget.
-class EmployeeDataSource extends DataGridSource {
-  @override
-  DataGridRowAdapter buildRow(DataGridRow row) {
-    // TODO: implement buildRow
-    throw UnimplementedError();
-  }
- 
 }
