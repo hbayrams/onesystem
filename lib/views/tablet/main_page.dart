@@ -2,11 +2,13 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 
 class MainPage extends StatelessWidget {
   DataviewController dvc = Get.put(DataviewController());
+  ThemeController tc = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -190,8 +192,8 @@ class MainPage extends StatelessWidget {
                         flex: 2,
                         child: Container(
                           height: Get.height,
-                          //color: Colors.green,
-                          child: DataGridWidget(),
+                          child: DataGridWidget(
+                              title: 'Spool List', openDialog: false),
                         ),
                       ),
                     ],
@@ -201,8 +203,8 @@ class MainPage extends StatelessWidget {
                   flex: 1,
                   child: Container(
                     width: Get.width,
-                    //color: Colors.amber,
-                    child: DataGridWidget(),
+                    child:
+                        DataGridWidget(title: 'Weld List', openDialog: false),
                   ),
                 ),
               ],

@@ -95,42 +95,8 @@ class _ReleasePageState extends State<ReleasePage> {
                       ),
                       Expanded(
                         flex: 7,
-                        child: DataGridWidget(),
-                        // child: SfDataGrid(
-                        //   frozenColumnsCount: 1,
-                        //   isScrollbarAlwaysShown: true,
-                        //   gridLinesVisibility: GridLinesVisibility.both,
-                        //   columns: <GridColumn>[
-                        //     GridTextColumn(
-                        //         columnName: 'id', label: Text('Weld')),
-                        //     GridTextColumn(
-                        //         columnName: 'name', label: Text('Type')),
-                        //     GridTextColumn(
-                        //         columnName: 'designation', label: Text('Size')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('MM')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('Thick.')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('Material')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('Heat-1')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('Heat-2')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary',
-                        //         label: Text('Fit-Up Insp.')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('Process')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('Welders')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary',
-                        //         label: Text('Weld Insp.')),
-                        //     GridTextColumn(
-                        //         columnName: 'salary', label: Text('NDE')),
-                        //   ],
-                        // ),
+                        child: DataGridWidget(
+                            title: 'Weld Info', openDialog: false),
                       ),
                     ],
                   ),

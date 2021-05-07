@@ -45,25 +45,29 @@ class TabNavWidget extends StatelessWidget {
         width: 75,
         height: Get.height,
         child: NavigationRail(
+          backgroundColor: tc.isColorChangeDW(),
           labelType: NavigationRailLabelType.selected,
           groupAlignment: 0,
           onDestinationSelected: (int index) {
             pc.pindex = index;
             pc.pageindex(index);
           },
-          leading: _navLogo(sc),
+          leading: _navLogo(sc, tc),
           destinations: [
             for (var i = 0; i < navIcon.length; i++)
               NavigationRailDestination(
                   icon: Icon(navIcon[i], color: tc.isColorChangeWD()),
-                  label: Text(navList[i]),
+                  label: Text(
+                    navList[i],
+                    style: TextStyle(color: Global.focusedBlue),
+                  ),
                   selectedIcon: Icon(navIcon[i], color: Global.focusedBlue)),
           ],
           selectedIndex: pc.pindex,
           trailing: Column(
             children: [
-              _leadingwidget(sc),
-              _logoutButton(sc),
+              _leadingwidget(sc, tc),
+              //_logoutButton(sc),
             ],
           ),
         ),
@@ -72,30 +76,33 @@ class TabNavWidget extends StatelessWidget {
   }
 }
 
-Widget _navLogo(SharedPrefController sc) {
+Widget _navLogo(SharedPrefController sc, ThemeController tc) {
   return Padding(
       padding: const EdgeInsets.all(5),
       child: Column(
         children: [
-          Image.asset('assets/images/light2.png'),
-          Divider(color: Global.dark)
+          Image.asset(tc.isSavedDarkMode()
+              ? "assets/images/dark2.png"
+              : "assets/images/light2.png"),
+          Divider(color: tc.isColorChangeWD())
         ],
       ));
 }
 
-Widget _leadingwidget(SharedPrefController sc) {
+Widget _leadingwidget(SharedPrefController sc, ThemeController tc) {
   return Padding(
-    padding: const EdgeInsets.only(top: 20),
+    padding: const EdgeInsets.only(top: 70, left: 5, right: 5),
     child: Column(
       children: [
+        Divider(color: tc.isColorChangeWD()),
         CircleAvatar(
             backgroundColor: Global.focusedBlue,
             radius: 20,
             child: Icon(Icons.people, size: 30, color: Global.white)),
-        SizedBox(
-          height: 10,
-        ),
-        Text(sc.uname, style: TextStyle(fontWeight: FontWeight.bold))
+        // SizedBox(
+        //   height: 10,
+        // ),
+        // Text(sc.uname, style: TextStyle(fontWeight: FontWeight.bold))
       ],
     ),
   );
