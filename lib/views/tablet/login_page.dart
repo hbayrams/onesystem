@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
   NetController nc = Get.put(NetController());
-  DatabaseOperations db=DatabaseOperations();
+  DatabaseOperations db = DatabaseOperations();
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
-                        buildFormLogin2(sc, lc, tc,db, context),
+                        buildFormLogin2(sc, lc, tc, db, context),
                       ],
                     ),
                   ),
@@ -93,7 +93,7 @@ class LoginPage extends StatelessWidget {
 }
 
 Form buildFormLogin2(SharedPrefController sc, LoginController lc,
-    ThemeController tc,DatabaseOperations db, BuildContext context) {
+    ThemeController tc, DatabaseOperations db, BuildContext context) {
   return Form(
     key: lc.formKey.value,
     // ignore: deprecated_member_use
@@ -170,26 +170,25 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
             children: [
               RButtonWidget(
                 color: Global.focusedBlue,
-                onClick: ()async {
-                  bool a=await db.loginQuery(name: lc.uname, pass: lc.password);
-                  if (lc.formKey.value.currentState.validate() && a) {
+                onClick: () async {
+                  bool access =
+                      await db.loginQuery(name: lc.uname, pass: lc.password);
+                  print('Access: ' + access.toString());
+                  print('Sign ' + lc.uname);
+                  if (lc.formKey.value.currentState.validate() && access) {
                     lc.formKey.value.currentState.save();
-                    Get.toNamed('t/homePage'); //with arguments
-                    print('Sign in successfully' + lc.uname+db.isLogin.value.toString());
-                    //sc.isLogin = lc.checkVal;                               //*buraya alınacak
+                    Get.offNamed('t/homePage'); //with arguments
+                    print('Sign in successfully' +
+                        lc.uname +
+                        db.isLogin.value.toString());
+                  } else if (access == false &&
+                      (lc.uname.length > 5 && lc.password.length > 5)) {
+                    Get.snackbar('Hata', 'Kayıtlı kullanıcı bulunamadı....',
+                        backgroundColor: Global.dark_red,
+                        colorText: Global.light_pink);
                   } else {
                     lc.autoValidate = true;
-                    print('Failed to sign in '+db.isLogin.value.toString());
-                    // _showMyDialog(
-                    //   'Warning',
-                    //   'Username or password  is wrong.',
-                    //   'Or not registered in the system',
-                    //   'HELP',
-                    //   'OK',
-                    //   () {
-                    //     MyNavigator.gotoLoginHelp(context);
-                    //   },
-                    //);
+                    print('Failed to sign in ' + db.isLogin.value.toString());
                   }
                 },
                 title: 'Login',

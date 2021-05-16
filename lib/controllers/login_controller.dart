@@ -31,6 +31,7 @@ class LoginController extends GetxController {
     } else if (value.length < 6) {
       return 'Username must be 6 length character';
     } else {
+      print('nullbura');
       return null;
     }
   }
@@ -41,6 +42,7 @@ class LoginController extends GetxController {
     } else if (value.length < 6) {
       return 'Password must be 6 length character';
     } else {
+      print('nullburada');
       return null;
     }
   }
