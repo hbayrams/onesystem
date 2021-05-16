@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/internet_controller.dart';
 import 'package:onesystem/controllers/login_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
@@ -16,7 +17,7 @@ class LoginPage extends StatelessWidget {
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
   NetController nc = Get.put(NetController());
-
+  DatabaseOperations db=DatabaseOperations();
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',
@@ -51,7 +52,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
-                        buildFormLogin2(sc, lc, tc, context),
+                        buildFormLogin2(sc, lc, tc,db, context),
                       ],
                     ),
                   ),
@@ -92,7 +93,7 @@ class LoginPage extends StatelessWidget {
 }
 
 Form buildFormLogin2(SharedPrefController sc, LoginController lc,
-    ThemeController tc, BuildContext context) {
+    ThemeController tc,DatabaseOperations db, BuildContext context) {
   return Form(
     key: lc.formKey.value,
     // ignore: deprecated_member_use
@@ -169,15 +170,16 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
             children: [
               RButtonWidget(
                 color: Global.focusedBlue,
-                onClick: () {
-                  if (lc.formKey.value.currentState.validate()) {
+                onClick: ()async {
+                  bool a=await db.loginQuery(name: lc.uname, pass: lc.password);
+                  if (lc.formKey.value.currentState.validate() && a) {
                     lc.formKey.value.currentState.save();
                     Get.toNamed('t/homePage'); //with arguments
-                    print('Sign in successfully' + lc.uname);
+                    print('Sign in successfully' + lc.uname+db.isLogin.value.toString());
                     //sc.isLogin = lc.checkVal;                               //*buraya alınacak
                   } else {
                     lc.autoValidate = true;
-                    print('Failed to sign in');
+                    print('Failed to sign in '+db.isLogin.value.toString());
                     // _showMyDialog(
                     //   'Warning',
                     //   'Username or password  is wrong.',

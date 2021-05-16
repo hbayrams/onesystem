@@ -1,7 +1,9 @@
 class SigninModel {
-  int id;
-  String name;
-  String password;
+  int id, levels_id;
+  String user_Name, user_Password;
   bool login;
-  SigninModel(this.id, this.login, this.name, this.password);
+
+  SigninModel(this.login, this.user_Name, this.user_Password, this.levels_id,
+      {this.id});
 }
+

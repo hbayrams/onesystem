@@ -76,8 +76,8 @@ class _DataGridWidgetState extends State<DataGridWidget> {
           source: employeeDataSource,
           columnWidthMode: ColumnWidthMode.none,
           gridLinesVisibility: GridLinesVisibility.both,
-          headerRowHeight: 40,
-          rowHeight: 30,
+          headerRowHeight: 50,
+          rowHeight: 40,
           columns: <GridColumn>[
             GridTextColumn(
                 columnName: 'id',

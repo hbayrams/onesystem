@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:onesystem/models/signin_model.dart';
 
-class DatabaseOperations {
+class DatabaseOperations extends GetxController {
   final String _host = '10.0.2.2';
   final int _port = 3306;
   final String _user = 'oguzkaba';
   final String _password = '523287';
-  final String _db = 'program_database';
-  final String _tablename = 'user_data';
+  final String _db = 'users';
+  final String _tablename = 'user';
 
-  bool isLogin;
+  final isLogin = false.obs;
 
   DatabaseOperations();
 
@@ -26,24 +27,19 @@ class DatabaseOperations {
             db: _db),
       );
       var sonuc = await baglan.query(
-          'SELECT * FROM $_db.$_tablename where name=? and password=?',
+          'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=?',
           [name, pass]);
 
       var a = sonuc.length;
-
-      if (a >= 1) {
-        isLogin = true;
+      print(a.toString());
+      if (a == 1) {
+        isLogin.value = true;
         print('Tamam tamam oldu ' + a.toString() + ' ' + isLogin.toString());
       } else {
-        isLogin = false;
+        isLogin.value = false;
       }
-
-      // for (var row in sonuc) {
-      //   print('Name: ${row[1]}, password: ${row[2]}, sonuc: $a');
-      // }
-      //setLogin(name);
       await baglan.close();
-      return isLogin;
+      return isLogin.value;
     } catch (e) {
       return null;
     }
