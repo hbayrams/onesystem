@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:onesystem/controllers/database_controller.dart';
-import 'package:onesystem/controllers/login_controller.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class SigninModel {
@@ -14,11 +12,6 @@ class SigninModel {
       {this.id});
 }
 
-List<SigninModel> getEmployeeData() {
-  return [
-    SigninModel('tumVeriler[0].user_Name', 'tumVeriler[0].user_Password', 1, 2)
-  ];
-}
 
 /// Custom business object class which contains properties to hold the detailed
 /// information about the employee which will be rendered in datagrid.

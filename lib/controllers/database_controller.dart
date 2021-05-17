@@ -4,7 +4,7 @@ import 'package:mysql1/mysql1.dart';
 import 'package:onesystem/models/signin_model.dart';
 
 class DatabaseOperations extends GetxController {
-  final String _host = '10.0.3.2';
+  final String _host = '10.0.2.2';//Standart emulator is ip=10.0.2.2 , Genymotion emulator is ip=10.0.3.2
   final int _port = 3306;
   final String _user = 'oguzkaba';
   final String _password = '523287';
@@ -12,8 +12,9 @@ class DatabaseOperations extends GetxController {
   final String _tablename = 'user';
 
   final isLogin = false.obs;
-  final List<SigninModel> listem = <SigninModel>[].obs;
+  final List<SigninModel> _listem = <SigninModel>[].obs;
   DatabaseOperations();
+  List<SigninModel> get listem => _listem;
 
   Future<bool> loginQuery(
       {@required String name, @required String pass}) async {
@@ -33,14 +34,14 @@ class DatabaseOperations extends GetxController {
 
       var a = sonuc.length;
       print(a.toString());
-
+      
       for (var item in sonuc) {
-        listem.add(
+        _listem.add(
           SigninModel(item[1], item[2], item[5], item[3]),
         );
-        print('Name: ${listem[0].user_Name}');
+        print('Items: ${item[1]}');
       }
-
+      print('Dataop daki listemiz : '+listem.length.toString());
       if (a == 1) {
         isLogin.value = true;
         print('Tamam tamam oldu ' + a.toString() + ' ' + isLogin.toString());
@@ -56,7 +57,7 @@ class DatabaseOperations extends GetxController {
     }
   }
 
-  Future<List<SigninModel>> verileriGetir(
+  Future<List<SigninModel>> getUsers(
       {@required String name, @required String pass}) async {
     try {
       final baglan = await MySqlConnection.connect(
@@ -68,19 +69,18 @@ class DatabaseOperations extends GetxController {
             db: _db),
       );
 
-      List<SigninModel> listem = [];
       var sonuc = await baglan.query(
-          'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=?',
+          'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=? and user_Actual=1',
           [name, pass]);
 
       //print(verilerinListesi.toList());
       for (var item in sonuc) {
-        listem.add(
+        _listem.add(
           SigninModel(item[1], item[2], item[5], item[3]),
         );
       }
-      print("İlk gelen veriler");
-      print(listem[0].user_Name.toString());
+      // print("İlk gelen veriler");
+      // print(listem[0].user_Name.toString());
       await baglan.close();
       return listem;
     } catch (e) {

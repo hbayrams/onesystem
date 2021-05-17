@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/signin_model.dart';
@@ -22,11 +23,12 @@ class _DataGridWidgetState extends State<DataGridWidget> {
   List<SigninModel> employees = <SigninModel>[];
   EmployeeDataSource employeeDataSource;
   ThemeController tc = Get.put(ThemeController());
+  DatabaseOperations dbc = Get.put(DatabaseOperations());
 
   @override
   void initState() {
     super.initState();
-    employees = getEmployeeData();
+    employees = dbc.listem;
     employeeDataSource = EmployeeDataSource(employeeData: employees);
   }
 
