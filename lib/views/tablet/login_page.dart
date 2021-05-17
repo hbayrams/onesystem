@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
   NetController nc = Get.put(NetController());
-  DatabaseOperations db = DatabaseOperations();
+  DatabaseOperations db = Get.put(DatabaseOperations());
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',

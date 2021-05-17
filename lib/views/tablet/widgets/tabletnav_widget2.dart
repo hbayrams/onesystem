@@ -67,7 +67,7 @@ class TabNavWidget extends StatelessWidget {
           trailing: Column(
             children: [
               _leadingwidget(sc, tc),
-              //_logoutButton(sc),
+              _logoutButton(sc),
             ],
           ),
         ),
