@@ -20,7 +20,7 @@ class Global {
   static const Color dark_red = const Color(0xff8e0000); //*Alert button
   static const Color trnsp = const Color(0x00FFFFFF);
 
-  static const lists = [
+  static const listsSpool = [
     'Spool',
     'Pipe Class',
     'Activity',

@@ -5,11 +5,11 @@ import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/models/spoollist_model.dart';
 
 class DatabaseOperations extends GetxController {
-  final String _host = '10.0.3.2';
+  final String _host = 'sql11.freemysqlhosting.net';
   final int _port = 3306;
-  final String _user = 'oguzkaba';
-  final String _password = '523287';
-  final String _db = 'users';
+  final String _user = 'sql11413286';
+  final String _password = 'FwvhmY55IY';
+  final String _db = 'sql11413286';
   final String _tablename = 'user';
 
   final isLogin = false.obs;
@@ -61,39 +61,8 @@ class DatabaseOperations extends GetxController {
     }
   }
 
-  // Future<List<SigninModel>> getUsers(
-  //     {@required String name, @required String pass}) async {
-  //   try {
-  //     final baglan = await MySqlConnection.connect(
-  //       ConnectionSettings(
-  //           host: _host,
-  //           port: _port,
-  //           user: _user,
-  //           password: _password,
-  //           db: _db),
-  //     );
-
-  //     var sonuc = await baglan.query(
-  //         'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=? and user_Actual=1',
-  //         [name, pass]);
-
-  //     //print(verilerinListesi.toList());
-  //     for (var item in sonuc) {
-  //       _listem.add(
-  //         SigninModel(item[1], item[2], item[5], item[3]),
-  //       );
-  //     }
-  //     // print("İlk gelen veriler");
-  //     // print(listem[0].user_Name.toString());
-  //     await baglan.close();
-  //     return listem;
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
-
   Future<List<SpoolListModel>> getSpool({@required String fno}) async {
-    final _dbs = 'spool';
+    //final _dbs = 'spool';
     try {
       final baglan = await MySqlConnection.connect(
         ConnectionSettings(
@@ -101,12 +70,12 @@ class DatabaseOperations extends GetxController {
             port: _port,
             user: _user,
             password: _password,
-            db: _dbs),
+            db: _db),
       );
 
       var _table = 'spool_list';
       var sonuc = await baglan
-          .query('SELECT * FROM $_dbs.$_table where fileNo_id=?', [fno]);
+          .query('SELECT * FROM $_db.$_table where fileNo_id=?', [fno]);
       _listem2.clear();
       //print(verilerinListesi.toList());
       for (var item in sonuc) {

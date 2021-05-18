@@ -223,9 +223,9 @@ class _MainPageState extends State<MainPage> {
                                   title: 'Spool List',
                                   openDialog: false,
                                   dataSource: employeeDataSource,
-                                  // tapFunc: (index) {
-                                  //   var a=true;
-                                  // },
+                                  tapFunc: (DataGridCellDoubleTapDetails details) {
+                                    print(details.rowColumnIndex.toString());
+                                  },
                                 ),
                         ),
                       ),

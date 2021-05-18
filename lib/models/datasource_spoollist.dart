@@ -8,7 +8,7 @@ class EmployeeDataSource extends DataGridSource {
     _employeeData = employeeData
         .map<DataGridRow>((e) => DataGridRow(cells: [
               //for (var i = 0; i < Global.lists.length; i++)   ///kontrol edilecek......
-              DataGridCell(columnName: ' activity', value: e.activity),
+              DataGridCell(columnName: 'activity', value: e.activity),
               DataGridCell(columnName: 'blasting', value: e.blasting),
               DataGridCell(columnName: 'blastingDate', value: e.blastingDate),
               DataGridCell(columnName: 'cleaning', value: e.cleaning),
@@ -22,7 +22,7 @@ class EmployeeDataSource extends DataGridSource {
               DataGridCell(columnName: 'pipeClass', value: e.pipeClass),
               DataGridCell(columnName: 'pressTest', value: e.pressTest),
               DataGridCell(columnName: 'presstestNo', value: e.presstestNo),
-              DataGridCell(columnName: 'release', value: e.release),
+              DataGridCell(columnName: 'release', value: e.released),
               DataGridCell(columnName: 'rubber', value: e.rubber),
               DataGridCell(columnName: 'rubberR', value: e.rubberR),
               DataGridCell(columnName: 'shipDate', value: e.shipDate),

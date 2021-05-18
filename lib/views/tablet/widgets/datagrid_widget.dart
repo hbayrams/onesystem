@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
@@ -87,15 +85,15 @@ class _DataGridWidgetState extends State<DataGridWidget> {
           headerRowHeight: 50,
           rowHeight: 40,
           columns: <GridColumn>[
-            for (var j = 0; j < Global.lists.length; j++)
+            for (var j = 0; j < Global.listsSpool.length; j++)
               GridTextColumn(
                   //visible: widget.visible,
                   width: 150,
-                  columnName: Global.lists[j],
+                  columnName: Global.listsSpool[j],
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(Global.lists[j]))),
+                      child: Text(Global.listsSpool[j]))),
           ],
         ),
       ),
