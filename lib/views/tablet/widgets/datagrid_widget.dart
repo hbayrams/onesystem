@@ -1,35 +1,37 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
-import 'package:onesystem/models/signin_model.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 /// The home page of the application which hosts the datagrid.
 class DataGridWidget extends StatefulWidget {
   final String title;
   final bool openDialog;
-  //final Function onClick;
+  final DataGridSource dataSource;
+  final Function tapFunc;
+  // final bool visible;
 
-  const DataGridWidget({Key key, this.title, this.openDialog})
-      : super(key: key);
+  const DataGridWidget({
+    Key key,
+    this.title,
+    this.openDialog,
+    this.dataSource,
+    this.tapFunc,
+  }) : super(key: key);
 
   @override
   _DataGridWidgetState createState() => _DataGridWidgetState();
 }
 
 class _DataGridWidgetState extends State<DataGridWidget> {
-  List<SigninModel> employees = <SigninModel>[];
-  EmployeeDataSource employeeDataSource;
   ThemeController tc = Get.put(ThemeController());
-  DatabaseOperations dbc = Get.put(DatabaseOperations());
 
   @override
   void initState() {
     super.initState();
-    employees = dbc.listem;
-    employeeDataSource = EmployeeDataSource(employeeData: employees);
   }
 
   @override
@@ -52,8 +54,11 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                       content: Container(
                           width: Get.width,
                           height: Get.height,
-                          child:
-                              DataGridWidget(title: 'oha', openDialog: true)),
+                          child: DataGridWidget(
+                            title: 'oha',
+                            openDialog: true,
+                            dataSource: widget.dataSource,
+                          )),
                     )),
               icon: widget.openDialog
                   ? Icon(Icons.close,
@@ -72,44 +77,25 @@ class _DataGridWidgetState extends State<DataGridWidget> {
         margin: EdgeInsets.all(2),
         decoration: BoxDecoration(border: Border.all(width: 1)),
         child: SfDataGrid(
+          onCellDoubleTap: widget.tapFunc,
           headerGridLinesVisibility: GridLinesVisibility.both,
           allowPullToRefresh: true,
           defaultColumnWidth: 105,
-          source: employeeDataSource,
+          source: widget.dataSource,
           columnWidthMode: ColumnWidthMode.none,
           gridLinesVisibility: GridLinesVisibility.both,
           headerRowHeight: 50,
           rowHeight: 40,
           columns: <GridColumn>[
-            GridTextColumn(
-                columnName: 'user_Name',
-                label: Container(
-                    padding: EdgeInsets.all(8.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'ID',
-                    ))),
-            GridTextColumn(
-                columnName: 'user_Password',
-                label: Container(
-                    padding: EdgeInsets.all(8.0),
-                    alignment: Alignment.center,
-                    child: Text('Name'))),
-            GridTextColumn(
-                columnName: 'Levels_id',
-                label: Container(
-                    padding: EdgeInsets.all(8.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Designation',
-                      overflow: TextOverflow.ellipsis,
-                    ))),
-            GridTextColumn(
-                columnName: 'user_Actual',
-                label: Container(
-                    padding: EdgeInsets.all(8.0),
-                    alignment: Alignment.center,
-                    child: Text('Salary'))),
+            for (var j = 0; j < Global.lists.length; j++)
+              GridTextColumn(
+                  //visible: widget.visible,
+                  width: 150,
+                  columnName: Global.lists[j],
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(Global.lists[j].toUpperCase()))),
           ],
         ),
       ),

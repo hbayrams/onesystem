@@ -19,4 +19,29 @@ class Global {
       const Color(0xffFFECEF); //*Alert background top
   static const Color dark_red = const Color(0xff8e0000); //*Alert button
   static const Color trnsp = const Color(0x00FFFFFF);
+
+  static const lists = [
+    'activity',
+    'blasting',
+    'blastingDate',
+    'cleaning',
+    'cleaningR',
+    'fabrication',
+    'finalReport',
+    'galv',
+    'galvNo',
+    'paint',
+    'paintNo',
+    'pipeClass',
+    'pressTest',
+    'presstestNo',
+    'release',
+    'rubber',
+    'rubberR',
+    'shipDate',
+    'shipNo',
+    'spool',
+    'weldlogDate',
+    'weldlogNo',
+  ];
 }

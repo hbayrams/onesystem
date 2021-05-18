@@ -1,0 +1,65 @@
+INSERT INTO `spool`.`spool_list` (`id`, `spool`, `pipeClass`, `activity`, `fabrication`, `pressTest`, `presstestNo`, `release`, `weldlogNo`, `weldlogDate`, `blasting`, `blastingDate`, `cleaning`, `cleaningR`, `rubber`, `rubberR`, `galv`, `galvNo`, `paint`, `paintNo`, `shipNo`, `finalReport`, `shipDate`, `fileNo_id`) VALUES ('1', 'S1', 'JLKASLKDJKLSJA', 'Active', '2020-04-25', '-', '-', '2020-04-25', 'GT-WL-0541-S1', '2020-04-25', 'On Going', '-', '-', '-', '-', '-', '-', '-', 'Waiting', '-', '-', '-', 'Waiting','F00002');
+
+
+EmployeeDataSource({List<SpoolListModel> employeeData}) {
+    _employeeData = employeeData
+        .map<DataGridRow>((e) => DataGridRow(cells: [
+              //for (var i = 0; i < Global.lists.length; i++)   ///kontrol edilecek......
+              DataGridCell(columnName: ' activity', value: e.activity),
+              DataGridCell(columnName: 'blasting', value: e.blasting),
+              DataGridCell(columnName: 'blastingDate', value: e.blastingDate),
+              DataGridCell(columnName: 'cleaning', value: e.cleaning),
+              DataGridCell(columnName: 'cleaningR', value: e.cleaningR),
+              DataGridCell(columnName: 'fabrication', value: e.fabrication),
+              DataGridCell(columnName: 'finalReport', value: e.finalReport),
+              DataGridCell(columnName: 'galv', value: e.galv),
+              DataGridCell(columnName: 'galvNo', value: e.galvNo),
+              DataGridCell(columnName: 'paint', value: e.paint),
+              DataGridCell(columnName: 'paintNo', value: e.paintNo),
+              DataGridCell(columnName: 'pipeClass', value: e.pipeClass),
+              DataGridCell(columnName: 'pressTest', value: e.pressTest),
+              DataGridCell(columnName: 'presstestNo', value: e.presstestNo),
+              DataGridCell(columnName: 'release', value: e.release),
+              DataGridCell(columnName: 'rubber', value: e.rubber),
+              DataGridCell(columnName: 'rubberR', value: e.rubberR),
+              DataGridCell(columnName: 'shipDate', value: e.shipDate),
+              DataGridCell(columnName: 'shipNo', value: e.shipNo),
+              DataGridCell(columnName: 'spool', value: e.spool),
+              DataGridCell(columnName: 'weldlogDate', value: e.weldlogDate),
+              DataGridCell(columnName: 'weldlogNo', value: e.weldlogNo)
+            ]))
+        .toList();
+  }
+
+-------------------------------------------------------------------------------------------------
+final List<Employee> _employees = <Employee>[];
+ 
+final EmployeeDataSource _employeeDataSource = EmployeeDataSource();
+ 
+class EmployeeDataSource extends DataGridSource {
+  @override
+  List<Object> get dataSource => _employees;
+ 
+  @override
+  getCellValue(int rowIndex, String columnName) {
+    switch (columnName) {
+      case 'id':
+        return _employees[rowIndex].id;
+        break;
+      case 'name':
+        return _employees[rowIndex].name;
+        break;
+      case 'salary':
+        return _employees[rowIndex].salary;
+        break;
+      case 'designation':
+        return _employees[rowIndex].designation;
+        break;
+      default:
+        return ' ';
+        break;
+    }
+  }
+
+=D��EYARA(H2;'[RUSYA SUPPORT TAK�P.xlsx]RUSYA CS '!$A:$D;4;0)
+=B�RLE�T�R(B2;"-";C2)

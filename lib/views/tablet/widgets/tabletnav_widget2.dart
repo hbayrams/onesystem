@@ -66,7 +66,7 @@ class TabNavWidget extends StatelessWidget {
           selectedIndex: pc.pindex,
           trailing: Column(
             children: [
-              _leadingwidget(sc, tc),
+              //_leadingwidget(sc, tc),
               _logoutButton(sc),
             ],
           ),

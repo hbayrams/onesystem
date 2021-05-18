@@ -1,14 +1,31 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
+import 'package:onesystem/models/datasource_spoollist.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/models/spoollist_model.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   DataviewController dvc = Get.put(DataviewController());
+
   ThemeController tc = Get.put(ThemeController());
+
+  DatabaseOperations dbc = Get.put(DatabaseOperations());
+
+  List<SpoolListModel> employees = <SpoolListModel>[];
+
+  EmployeeDataSource employeeDataSource;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -87,8 +104,7 @@ class MainPage extends StatelessWidget {
                                                     'YASDJAH',
                                                     'OPOFDKOGKD'
                                                   ],
-                                                  selectedItem:
-                                                      'Select File No',
+                                                  selectedItem: 'Select ISO No',
                                                   onChanged: print,
                                                   // validator: (String item) {
                                                   //   if (item == null)
@@ -143,9 +159,18 @@ class MainPage extends StatelessWidget {
                                                   AutovalidateMode.always,
                                               showSearchBox: true,
                                               //label: 'Select File No',
-                                              items: ['0001', '0002'],
+                                              items: ['F00001', 'F00002'],
                                               selectedItem: 'Select File No',
-                                              onChanged: print,
+                                              onChanged: (fno) async {
+                                                await dbc.getSpool(fno: fno);
+                                                employees = dbc.listem2;
+                                                print(
+                                                    'Yüklenen db buytu: ${dbc.listem2.length.toString()}');
+                                                employeeDataSource =
+                                                    EmployeeDataSource(
+                                                        employeeData:
+                                                            employees);
+                                              },
                                               // validator: (String item) {
                                               //   if (item == null)
                                               //     return "Required field";
@@ -192,8 +217,16 @@ class MainPage extends StatelessWidget {
                         flex: 2,
                         child: Container(
                           height: Get.height,
-                          child: DataGridWidget(
-                              title: 'Spool List', openDialog: false),
+                          child: dbc.listem2.length < 1
+                              ? null
+                              : DataGridWidget(
+                                  title: 'Spool List',
+                                  openDialog: false,
+                                  dataSource: employeeDataSource,
+                                  // tapFunc: (index) {
+                                  //   var a=true;
+                                  // },
+                                ),
                         ),
                       ),
                     ],
@@ -203,8 +236,12 @@ class MainPage extends StatelessWidget {
                   flex: 1,
                   child: Container(
                     width: Get.width,
-                    child:
-                        DataGridWidget(title: 'Weld List', openDialog: false),
+                    child: dbc.listem2.length < 1
+                        ? null
+                        : DataGridWidget(
+                            title: 'Weld List',
+                            openDialog: false,
+                            dataSource: employeeDataSource),
                   ),
                 ),
               ],
