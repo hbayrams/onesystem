@@ -95,7 +95,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(Global.lists[j].toUpperCase()))),
+                      child: Text(Global.lists[j]))),
           ],
         ),
       ),
