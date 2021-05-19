@@ -8,28 +8,28 @@ class EmployeeDataSource extends DataGridSource {
     _employeeData = employeeData
         .map<DataGridRow>((e) => DataGridRow(cells: [
               //for (var i = 0; i < Global.lists.length; i++)   ///kontrol edilecek......
+              DataGridCell(columnName: 'spool', value: e.spool),
+              DataGridCell(columnName: 'pipeClass', value: e.pipeClass),
               DataGridCell(columnName: 'activity', value: e.activity),
+              DataGridCell(columnName: 'fabrication', value: e.fabrication),
+              DataGridCell(columnName: 'pressTest', value: e.pressTest),
+              DataGridCell(columnName: 'presstestNo', value: e.presstestNo),
+              DataGridCell(columnName: 'release', value: e.released),
+              DataGridCell(columnName: 'weldlogNo', value: e.weldlogNo),
+              DataGridCell(columnName: 'weldlogDate', value: e.weldlogDate),
               DataGridCell(columnName: 'blasting', value: e.blasting),
               DataGridCell(columnName: 'blastingDate', value: e.blastingDate),
               DataGridCell(columnName: 'cleaning', value: e.cleaning),
               DataGridCell(columnName: 'cleaningR', value: e.cleaningR),
-              DataGridCell(columnName: 'fabrication', value: e.fabrication),
-              DataGridCell(columnName: 'finalReport', value: e.finalReport),
+              DataGridCell(columnName: 'rubber', value: e.rubber),
+              DataGridCell(columnName: 'rubberR', value: e.rubberR),
               DataGridCell(columnName: 'galv', value: e.galv),
               DataGridCell(columnName: 'galvNo', value: e.galvNo),
               DataGridCell(columnName: 'paint', value: e.paint),
               DataGridCell(columnName: 'paintNo', value: e.paintNo),
-              DataGridCell(columnName: 'pipeClass', value: e.pipeClass),
-              DataGridCell(columnName: 'pressTest', value: e.pressTest),
-              DataGridCell(columnName: 'presstestNo', value: e.presstestNo),
-              DataGridCell(columnName: 'release', value: e.released),
-              DataGridCell(columnName: 'rubber', value: e.rubber),
-              DataGridCell(columnName: 'rubberR', value: e.rubberR),
-              DataGridCell(columnName: 'shipDate', value: e.shipDate),
               DataGridCell(columnName: 'shipNo', value: e.shipNo),
-              DataGridCell(columnName: 'spool', value: e.spool),
-              DataGridCell(columnName: 'weldlogDate', value: e.weldlogDate),
-              DataGridCell(columnName: 'weldlogNo', value: e.weldlogNo)
+              DataGridCell(columnName: 'shipDate', value: e.shipDate),
+              DataGridCell(columnName: 'finalReport', value: e.finalReport)
             ]))
         .toList();
   }

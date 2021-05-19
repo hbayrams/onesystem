@@ -224,7 +224,7 @@ class _MainPageState extends State<MainPage> {
                                   openDialog: false,
                                   dataSource: employeeDataSource,
                                   tapFunc: (DataGridCellDoubleTapDetails details) {
-                                    print(details.rowColumnIndex.toString());
+                                    print(dbc.listem2[details.rowColumnIndex.rowIndex-1].spool.toString());
                                   },
                                 ),
                         ),

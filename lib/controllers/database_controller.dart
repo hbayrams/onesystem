@@ -5,14 +5,15 @@ import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/models/spoollist_model.dart';
 
 class DatabaseOperations extends GetxController {
-  final String _host = 'sql11.freemysqlhosting.net';
+  final String _host = 'remotemysql.com';
   final int _port = 3306;
-  final String _user = 'sql11413286';
-  final String _password = 'FwvhmY55IY';
-  final String _db = 'sql11413286';
+  final String _user = 'nQ9Fu2zziy';
+  final String _password = 'odtQEyU3Bs';
+  final String _db = 'nQ9Fu2zziy';
   final String _tablename = 'user';
 
-  final isLogin = false.obs;
+  final _islogin = false.obs;
+  bool get islogin=>_islogin.value;
   final List<SigninModel> _listem = <SigninModel>[].obs;
   List<SigninModel> get listem => _listem;
   final List<SpoolListModel> _listem2 = <SpoolListModel>[].obs;
@@ -20,7 +21,7 @@ class DatabaseOperations extends GetxController {
 
   DatabaseOperations();
 
-  Future<bool> loginQuery(
+  Future<List<SigninModel>> loginQuery(
       {@required String name, @required String pass}) async {
     try {
       print('bağlanmayı deniyorum...');
@@ -33,7 +34,7 @@ class DatabaseOperations extends GetxController {
             db: _db),
       );
       var sonuc = await baglan.query(
-          'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=? and user_Actual=1',
+          'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=?',
           [name, pass]);
 
       var a = sonuc.length;
@@ -47,22 +48,21 @@ class DatabaseOperations extends GetxController {
       }
       print('Dataop daki listemiz1 : ' + listem.length.toString());
       if (a >= 1) {
-        isLogin.value = true;
-        print('Tamam tamam oldu ' + a.toString() + ' ' + isLogin.toString());
+        _islogin.value = true;
+        print('Tamam tamam oldu ' + a.toString() + ' ' + _islogin.toString());
       } else {
-        print('kullanıcı yok...');
-        isLogin.value = false;
+        print('kullanıcı yok ve pasif...');
+        _islogin.value = false;
       }
       await baglan.close();
-      return isLogin.value;
+      return listem;
     } catch (e) {
       print(e.toString());
-      return false;
+      return null;
     }
   }
 
   Future<List<SpoolListModel>> getSpool({@required String fno}) async {
-    //final _dbs = 'spool';
     try {
       final baglan = await MySqlConnection.connect(
         ConnectionSettings(

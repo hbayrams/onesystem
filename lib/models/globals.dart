@@ -41,7 +41,7 @@ class Global {
     'Paint No',
     'Paint',
     'Ship No',
-    'Final Report',
-    'Ship Date'
+    'Ship Date',
+    'Final Report'
   ];
 }

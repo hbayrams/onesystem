@@ -8,6 +8,7 @@ import 'package:onesystem/controllers/login_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 import 'package:onesystem/views/tablet/widgets/rbutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/textformfield_widget.dart';
@@ -171,24 +172,31 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
               RButtonWidget(
                 color: Global.focusedBlue,
                 onClick: () async {
-                  bool access =
+                  List<SigninModel> access =
                       await db.loginQuery(name: lc.uname, pass: lc.password);
-                  print('Access: ' + access.toString());
+                  print('Access: ' + db.islogin.toString());
                   print('Sign ' + lc.uname);
-                  if (lc.formKey.value.currentState.validate() && access) {
-                    lc.formKey.value.currentState.save();
-                    Get.offNamed('t/homePage'); //with arguments
-                    print('Sign in successfully' +
-                        lc.uname +
-                        db.isLogin.value.toString());
-                  } else if (access == false &&
-                      (lc.uname.length > 5 && lc.password.length > 5)) {
-                    Get.snackbar('Hata', 'Kayıtlı kullanıcı bulunamadı....',
-                        backgroundColor: Global.dark_red,
-                        colorText: Global.light_pink);
+                  if (lc.formKey.value.currentState.validate()) {
+                    if (db.islogin) {
+                      if (access[0].user_Actual == 1) {
+                        lc.formKey.value.currentState.save();
+                        Get.offNamed('t/homePage'); //with arguments
+                        print('Sign in successfully' +
+                            lc.uname +
+                            db.islogin.toString());
+                      } else {
+                        Get.snackbar('Hata', 'Kullanıcı aktif değil....',
+                            backgroundColor: Global.dark_red,
+                            colorText: Global.light_pink);
+                      }
+                    } else {
+                      Get.snackbar('Hata', 'Kayıtlı kullanıcı bulunamadı....',
+                          backgroundColor: Global.dark_red,
+                          colorText: Global.light_pink);
+                    }
                   } else {
                     lc.autoValidate = true;
-                    print('Failed to sign in ' + db.isLogin.value.toString());
+                    print('Failed to sign in ' + db.islogin.toString());
                   }
                 },
                 title: 'Login',
