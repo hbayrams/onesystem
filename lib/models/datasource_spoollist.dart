@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:onesystem/models/spoollist_model.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class EmployeeDataSource extends DataGridSource {
+class EmployeeDataSource1 extends DataGridSource {
   /// Creates the employee data source class with required details.
-  EmployeeDataSource({List<SpoolListModel> employeeData}) {
+  EmployeeDataSource1({List<SpoolListModel> employeeData}) {
+    print(employeeData.length.toString());
     _employeeData = employeeData
         .map<DataGridRow>((e) => DataGridRow(cells: [
-              //for (var i = 0; i < Global.lists.length; i++)   ///kontrol edilecek......
+              //for (var j = 0; j < employeeData.length - 1; j++)
               DataGridCell(columnName: 'spool', value: e.spool),
               DataGridCell(columnName: 'pipeClass', value: e.pipeClass),
               DataGridCell(columnName: 'activity', value: e.activity),

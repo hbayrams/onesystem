@@ -5,9 +5,12 @@ import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource_spoollist.dart';
+import 'package:onesystem/models/datasource_weldlist.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/spoollist_model.dart';
-import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
+import 'package:onesystem/models/weldlist_model.dart';
+import 'package:onesystem/views/tablet/widgets/spooldatagrid_widget.dart';
+import 'package:onesystem/views/tablet/widgets/welddatagrid_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,14 +20,15 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   DataviewController dvc = Get.put(DataviewController());
-
   ThemeController tc = Get.put(ThemeController());
-
   DatabaseOperations dbc = Get.put(DatabaseOperations());
+  List<SpoolListModel> employees1 = <SpoolListModel>[];
+  EmployeeDataSource1 employeeDataSource1;
+  List<WeldListModel> employees2 = <WeldListModel>[];
+  EmployeeDataSource2 employeeDataSource2;
 
-  List<SpoolListModel> employees = <SpoolListModel>[];
-
-  EmployeeDataSource employeeDataSource;
+  dynamic fileno = '';
+  dynamic spoolno = '';
 
   @override
   Widget build(BuildContext context) {
@@ -159,17 +163,23 @@ class _MainPageState extends State<MainPage> {
                                                   AutovalidateMode.always,
                                               showSearchBox: true,
                                               //label: 'Select File No',
-                                              items: ['F00001', 'F00002'],
+                                              items: [
+                                                'F00001',
+                                                'F00002',
+                                                'F00003',
+                                                'F00004'
+                                              ],
                                               selectedItem: 'Select File No',
                                               onChanged: (fno) async {
+                                                fileno = fno;
                                                 await dbc.getSpool(fno: fno);
-                                                employees = dbc.listem2;
+                                                employees1 = dbc.listem2;
                                                 print(
                                                     'Yüklenen db buytu: ${dbc.listem2.length.toString()}');
-                                                employeeDataSource =
-                                                    EmployeeDataSource(
+                                                employeeDataSource1 =
+                                                    EmployeeDataSource1(
                                                         employeeData:
-                                                            employees);
+                                                            employees1);
                                               },
                                               // validator: (String item) {
                                               //   if (item == null)
@@ -219,12 +229,28 @@ class _MainPageState extends State<MainPage> {
                           height: Get.height,
                           child: dbc.listem2.length < 1
                               ? null
-                              : DataGridWidget(
+                              : SpoolDataGridWidget(
                                   title: 'Spool List',
                                   openDialog: false,
-                                  dataSource: employeeDataSource,
-                                  tapFunc: (DataGridCellDoubleTapDetails details) {
-                                    print(dbc.listem2[details.rowColumnIndex.rowIndex-1].spool.toString());
+                                  dataSource: employeeDataSource1,
+                                  tapFunc: (DataGridCellDoubleTapDetails
+                                      details) async {
+                                    spoolno = dbc
+                                        .listem2[
+                                            details.rowColumnIndex.rowIndex - 1]
+                                        .spool
+                                        .toString();
+                                    print('Seçilen file-spool: ' +
+                                        fileno.toString() +
+                                        '-' +
+                                        spoolno.toString());
+                                    await dbc.getWeld(
+                                        fno: fileno, sno: spoolno);
+                                    employees2 = dbc.listem3;
+                                    print(
+                                        'Yüklenen db buytu: ${dbc.listem3.length.toString()}');
+                                    employeeDataSource2 = EmployeeDataSource2(
+                                        employeeData2: employees2);
                                   },
                                 ),
                         ),
@@ -236,12 +262,12 @@ class _MainPageState extends State<MainPage> {
                   flex: 1,
                   child: Container(
                     width: Get.width,
-                    child: dbc.listem2.length < 1
+                    child: dbc.listem3.length < 1
                         ? null
-                        : DataGridWidget(
+                        : WeldDataGridWidget(
                             title: 'Weld List',
                             openDialog: false,
-                            dataSource: employeeDataSource),
+                            dataSource: employeeDataSource2),
                   ),
                 ),
               ],

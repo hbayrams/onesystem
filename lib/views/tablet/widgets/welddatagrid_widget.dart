@@ -5,14 +5,14 @@ import 'package:onesystem/models/globals.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 /// The home page of the application which hosts the datagrid.
-class DataGridWidget extends StatefulWidget {
+class WeldDataGridWidget extends StatefulWidget {
   final String title;
   final bool openDialog;
   final DataGridSource dataSource;
   final Function tapFunc;
   // final bool visible;
 
-  const DataGridWidget({
+  const WeldDataGridWidget({
     Key key,
     this.title,
     this.openDialog,
@@ -21,10 +21,10 @@ class DataGridWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DataGridWidgetState createState() => _DataGridWidgetState();
+  _WeldDataGridWidgetState createState() => _WeldDataGridWidgetState();
 }
 
-class _DataGridWidgetState extends State<DataGridWidget> {
+class _WeldDataGridWidgetState extends State<WeldDataGridWidget> {
   ThemeController tc = Get.put(ThemeController());
 
   @override
@@ -52,8 +52,8 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                       content: Container(
                           width: Get.width,
                           height: Get.height,
-                          child: DataGridWidget(
-                            title: 'oha',
+                          child: WeldDataGridWidget(
+                            title: widget.title,
                             openDialog: true,
                             dataSource: widget.dataSource,
                           )),
@@ -75,6 +75,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
         margin: EdgeInsets.all(2),
         decoration: BoxDecoration(border: Border.all(width: 1)),
         child: SfDataGrid(
+          frozenColumnsCount: 1,
           onCellDoubleTap: widget.tapFunc,
           headerGridLinesVisibility: GridLinesVisibility.both,
           allowPullToRefresh: true,
@@ -85,15 +86,15 @@ class _DataGridWidgetState extends State<DataGridWidget> {
           headerRowHeight: 50,
           rowHeight: 40,
           columns: <GridColumn>[
-            for (var j = 0; j < Global.listsSpool.length; j++)
+            for (var j = 0; j < Global.listsWeld.length; j++)
               GridTextColumn(
                   //visible: widget.visible,
                   width: 150,
-                  columnName: Global.listsSpool[j],
+                  columnName: Global.listsWeld[j],
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(Global.listsSpool[j]))),
+                      child: Text(Global.listsWeld[j]))),
           ],
         ),
       ),

@@ -21,9 +21,9 @@ class SpoolListModel {
       paintNo,
       shipNo,
       shipDate,
-      finalReport;
+      finalReport,
       // ignore: non_constant_identifier_names
-      //fileNo_id;
+      fileNo_id;
 
   SpoolListModel(
       this.spool,
@@ -48,5 +48,6 @@ class SpoolListModel {
       this.shipNo,
       this.shipDate,
       this.finalReport,
+      this.fileNo_id,
       {this.id});
 }
