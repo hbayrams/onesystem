@@ -24,6 +24,8 @@ class DatabaseOperations extends GetxController {
   List<SpoolListModel> get listem2 => _listem2;
   final List<WeldListModel> _listem3 = <WeldListModel>[].obs;
   List<WeldListModel> get listem3 => _listem3;
+  final List<dynamic> _listForFields = <dynamic>[].obs;
+  List<dynamic> get listForFields => _listForFields;
 
   DatabaseOperations();
 
@@ -39,21 +41,21 @@ class DatabaseOperations extends GetxController {
             password: _password,
             db: _db),
       );
-      var _sonuc = await baglan.query(
+      var sonuc = await baglan.query(
           'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=?',
           [name, pass]);
 
-      var a = _sonuc.length;
+      var a = sonuc.length;
       print(a.toString());
       _listem.clear();
-      for (var item in _sonuc) {
+      for (var item in sonuc) {
         _listem.add(
           SigninModel(item[1], item[2], item[5], item[3]),
         );
         print('Items: ${item[1]}');
       }
       print('Dataop daki listemiz1 : ' + listem.length.toString());
-      if (a >= 1) {
+      if (sonuc.isNotEmpty) {
         _islogin.value = true;
         print('Tamam tamam oldu ' + a.toString() + ' ' + _islogin.toString());
       } else {
@@ -84,6 +86,7 @@ class DatabaseOperations extends GetxController {
           .query('SELECT * FROM $_db.$_table where fileNo_id=?', [fno]);
       _listem2.clear();
       //print(verilerinListesi.toList());
+
       for (var item in sonuc) {
         _listem2.add(SpoolListModel(
             item[1],
@@ -111,7 +114,18 @@ class DatabaseOperations extends GetxController {
             item[23]));
       }
 
-      print(listem2[1].toString());
+      //Kolon isimlerini al
+      List<dynamic> getfields() {
+        _listForFields.clear();
+
+        for (int z = 0; z < 23; z++) {
+          _listForFields.add(sonuc.fields[z].name);
+        }
+        return listForFields;
+      }
+
+      getfields();
+      print('Fields : ' + listForFields.length.toString());
       print('Dataop daki listemiz2 : ' + listem2.length.toString());
       await baglan.close();
       return listem2;
