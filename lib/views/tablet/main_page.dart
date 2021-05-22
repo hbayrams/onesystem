@@ -237,10 +237,7 @@ class _MainPageState extends State<MainPage> {
                                       details) async {
                                     spoolno = dbc
                                         .listem2[
-                                            details.rowColumnIndex.rowIndex - 1]
-                                        .spool
-
-                                        .toString();
+                                            details.rowColumnIndex.rowIndex - 1]['spool'].toString();
                                     print('Seçilen file-spool: ' +
                                         fileno.toString() +
                                         '-' +
