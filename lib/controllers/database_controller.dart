@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:onesystem/models/signin_model.dart';
-import 'package:onesystem/models/spoollist_model.dart';
 import 'package:onesystem/models/weldlist_model.dart';
 
 class DatabaseOperations extends GetxController {
@@ -20,8 +19,8 @@ class DatabaseOperations extends GetxController {
   bool get islogin => _islogin.value;
   final List<SigninModel> _listem = <SigninModel>[].obs;
   List<SigninModel> get listem => _listem;
-  final List<SpoolListModel> _listem2 = <SpoolListModel>[].obs;
-  List<SpoolListModel> get listem2 => _listem2;
+  List<dynamic> _listem2 = <dynamic>[].obs;
+  List<dynamic> get listem2 => _listem2;
   final List<WeldListModel> _listem3 = <WeldListModel>[].obs;
   List<WeldListModel> get listem3 => _listem3;
   final List<dynamic> _listForFields = <dynamic>[].obs;
@@ -70,7 +69,7 @@ class DatabaseOperations extends GetxController {
     }
   }
 
-  Future<List<SpoolListModel>> getSpool({@required String fno}) async {
+  Future<List<dynamic>> getSpool({@required String fno}) async {
     try {
       final baglan = await MySqlConnection.connect(
         ConnectionSettings(
@@ -87,32 +86,12 @@ class DatabaseOperations extends GetxController {
       _listem2.clear();
       //print(verilerinListesi.toList());
 
-      for (var item in sonuc) {
-        _listem2.add(SpoolListModel(
-            item[1],
-            item[2],
-            item[3],
-            item[4],
-            item[5],
-            item[6],
-            item[7],
-            item[8],
-            item[9],
-            item[10],
-            item[11],
-            item[12],
-            item[13],
-            item[14],
-            item[15],
-            item[16],
-            item[17],
-            item[18],
-            item[19],
-            item[20],
-            item[21],
-            item[22],
-            item[23]));
-      }
+      // for (var item in sonuc) {
+      //   for (var j = 0; j < 23; j++) _listem2.add(item[j]);
+      // }
+      _sonuc.value=sonuc.length;
+       //_listem2.add(sonuc.map((entry) => (entry)).toList());
+       sonuc.forEach((v) => _listem2.add(v));
 
       //Kolon isimlerini al
       List<dynamic> getfields() {
@@ -125,6 +104,7 @@ class DatabaseOperations extends GetxController {
       }
 
       getfields();
+      print('Sonuc listesi: '+sonuc.toList().toString());
       print('Fields : ' + listForFields.length.toString());
       print('Dataop daki listemiz2 : ' + listem2.length.toString());
       await baglan.close();

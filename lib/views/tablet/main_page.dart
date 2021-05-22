@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   DataviewController dvc = Get.put(DataviewController());
   ThemeController tc = Get.put(ThemeController());
   DatabaseOperations dbc = Get.put(DatabaseOperations());
-  List<SpoolListModel> employees1 = <SpoolListModel>[];
+  List<dynamic> employees1 = <dynamic>[];
   EmployeeDataSource1 employeeDataSource1;
   List<WeldListModel> employees2 = <WeldListModel>[];
   EmployeeDataSource2 employeeDataSource2;
@@ -227,7 +227,7 @@ class _MainPageState extends State<MainPage> {
                         flex: 2,
                         child: Container(
                           height: Get.height,
-                          child: dbc.listem2.length < 1
+                          child: dbc.listem2.isEmpty
                               ? null
                               : SpoolDataGridWidget(
                                   title: 'Spool List',
@@ -239,6 +239,7 @@ class _MainPageState extends State<MainPage> {
                                         .listem2[
                                             details.rowColumnIndex.rowIndex - 1]
                                         .spool
+
                                         .toString();
                                     print('Seçilen file-spool: ' +
                                         fileno.toString() +
@@ -262,7 +263,7 @@ class _MainPageState extends State<MainPage> {
                   flex: 1,
                   child: Container(
                     width: Get.width,
-                    child: dbc.listem3.length < 1
+                    child: dbc.listem3.isEmpty
                         ? null
                         : WeldDataGridWidget(
                             title: 'Weld List',
