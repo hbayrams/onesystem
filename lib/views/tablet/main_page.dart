@@ -171,6 +171,7 @@ class _MainPageState extends State<MainPage> {
                                               ],
                                               selectedItem: 'Select File No',
                                               onChanged: (fno) async {
+                                                dbc.listem3.clear();
                                                 fileno = fno;
                                                 await dbc.getSpool(fno: fno);
                                                 employees1 = dbc.listem2;
