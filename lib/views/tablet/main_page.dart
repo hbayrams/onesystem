@@ -7,6 +7,7 @@ import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource_spoollist.dart';
 import 'package:onesystem/models/datasource_weldlist.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/models/spoollist_model.dart';
 import 'package:onesystem/models/weldlist_model.dart';
 import 'package:onesystem/views/tablet/widgets/spooldatagrid_widget.dart';
@@ -173,7 +174,10 @@ class _MainPageState extends State<MainPage> {
                                               onChanged: (fno) async {
                                                 dbc.listem3.clear();
                                                 fileno = fno;
-                                                await dbc.getSpool(fno: fno);
+                                                await dbc.getSpool(
+                                                    fno: fno,
+                                                    query: MysqlQuery()
+                                                        .queryList['getSpool']);
                                                 employees1 = dbc.listem2;
                                                 print(
                                                     'Yüklenen db buytu: ${dbc.listem2.length.toString()}');
@@ -236,20 +240,21 @@ class _MainPageState extends State<MainPage> {
                                   dataSource: employeeDataSource1,
                                   tapFunc: (DataGridCellDoubleTapDetails
                                       details) async {
-                                    spoolno = dbc
-                                        .listem2[
-                                            details.rowColumnIndex.rowIndex - 1]['spool'].toString();
+                                    spoolno = dbc.listem2[
+                                            details.rowColumnIndex.rowIndex - 1]
+                                            ['spool']
+                                        .toString();
                                     print('Seçilen file-spool: ' +
                                         fileno.toString() +
                                         '-' +
                                         spoolno.toString());
-                                    await dbc.getWeld(
-                                        fno: fileno, sno: spoolno);
-                                    employees2 = dbc.listem3;
-                                    print(
-                                        'Yüklenen db buytu: ${dbc.listem3.length.toString()}');
-                                    employeeDataSource2 = EmployeeDataSource2(
-                                        employeeData2: employees2);
+                                    // await dbc.getWeld(
+                                    //     fno: fileno, sno: spoolno);
+                                    // employees2 = dbc.listem3;
+                                    // print(
+                                    //     'Yüklenen db buytu: ${dbc.listem3.length.toString()}');
+                                    // employeeDataSource2 = EmployeeDataSource2(
+                                    //     employeeData2: employees2);
                                   },
                                 ),
                         ),

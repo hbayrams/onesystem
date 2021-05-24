@@ -8,6 +8,7 @@ import 'package:onesystem/controllers/login_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 import 'package:onesystem/views/tablet/widgets/rbutton_widget.dart';
@@ -172,8 +173,10 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
               RButtonWidget(
                 color: Global.focusedBlue,
                 onClick: () async {
-                  List<SigninModel> access =
-                      await db.loginQuery(name: lc.uname, pass: lc.password);
+                  List<SigninModel> access = await db.loginQuery(
+                      name: lc.uname,
+                      pass: lc.password,
+                      query: MysqlQuery().queryList['login']);
                   print('Access: ' + db.islogin.toString());
                   print('Sign ' + lc.uname);
                   if (lc.formKey.value.currentState.validate()) {

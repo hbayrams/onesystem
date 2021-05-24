@@ -31,7 +31,7 @@ class EmployeeDataSource1 extends DataGridSource {
     _employeeData = employeeData
         .map<DataGridRow>((e) => DataGridRow(cells: [
               //for (var z = 0; z < 3; z++)
-              for (var f = 1; f <  dbc.listForFields.length; f++)
+              for (var f = 1; f < 23; f++)
                 DataGridCell(columnName: e[f].toString(), value: e[f]),
             ]))
         .toList();

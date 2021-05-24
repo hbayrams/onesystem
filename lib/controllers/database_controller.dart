@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mysql1/mysql1.dart';
+import 'package:onesystem/models/mysql_conn.dart';
 import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/models/weldlist_model.dart';
 
 class DatabaseOperations extends GetxController {
-  final String _host = 'remotemysql.com';
-  final int _port = 3306;
-  final String _user = 'nQ9Fu2zziy';
-  final String _password = 'odtQEyU3Bs';
-  final String _db = 'nQ9Fu2zziy';
-  final String _tablename = 'user';
-
   //OBS GetStateManagement variables
-  final _sonuc = 0.obs;
-  int get sonuc => _sonuc.value;
+  final _result = 0.obs;
+  int get sonuc => _result.value;
   final _islogin = false.obs;
   bool get islogin => _islogin.value;
   final List<SigninModel> _listem = <SigninModel>[].obs;
@@ -28,162 +22,153 @@ class DatabaseOperations extends GetxController {
 
   DatabaseOperations();
 
+//#region DATABASE-LOGIN KONTROL METHOD
   Future<List<SigninModel>> loginQuery(
-      {@required String name, @required String pass}) async {
+      {@required String name,
+      @required String pass,
+      @required String query}) async {
     try {
       print('bağlanmayı deniyorum...');
-      final baglan = await MySqlConnection.connect(
-        ConnectionSettings(
-            host: _host,
-            port: _port,
-            user: _user,
-            password: _password,
-            db: _db),
-      );
-      var sonuc = await baglan.query(
-          'SELECT * FROM $_db.$_tablename where user_Name=? and user_Password=?',
-          [name, pass]);
+      var connect = await MysqlConn().getConnection();
 
-      var a = sonuc.length;
-      print(a.toString());
+//#region SORGU OLUSTUR
+      var result = await connect.query(query, [name, pass]);
+//#endregion
+
+//#region SONUCU LISTEYE AKTAR
       _listem.clear();
-      for (var item in sonuc) {
+      for (var item in result) {
         _listem.add(
           SigninModel(item[1], item[2], item[5], item[3]),
         );
-        print('Items: ${item[1]}');
       }
       print('Dataop daki listemiz1 : ' + listem.length.toString());
-      if (sonuc.isNotEmpty) {
+//#endregion
+
+//#region SONUC BOSMU KONTROL
+      if (result.isNotEmpty) {
         _islogin.value = true;
-        print('Tamam tamam oldu ' + a.toString() + ' ' + _islogin.toString());
       } else {
-        print('kullanıcı yok ve pasif...');
         _islogin.value = false;
       }
-      await baglan.close();
+//#endregion
+
+      await connect.close();
       return listem;
     } catch (e) {
       print(e.toString());
       return null;
     }
   }
+//#endregion
 
-  Future<List<dynamic>> getSpool({@required String fno}) async {
+  Future<List<dynamic>> getSpool(
+      {@required String fno, @required String query}) async {
     try {
-      final baglan = await MySqlConnection.connect(
-        ConnectionSettings(
-            host: _host,
-            port: _port,
-            user: _user,
-            password: _password,
-            db: _db),
-      );
+      var connect = await MysqlConn().getConnection();
 
-      var _table = 'spool_list';
-      var sonuc = await baglan
-          .query('SELECT * FROM $_db.$_table where fileNo_id=?', [fno]);
+//#region SORGU OLUSTUR
+      var result = await connect.query(query, [fno]);
+//#endregion
+
       _listem2.clear();
-      //print(verilerinListesi.toList());
 
-      // for (var item in sonuc) {
-      //   for (var j = 0; j < 23; j++) _listem2.add(item[j]);
-      // }
-      _sonuc.value=sonuc.length;
-       //_listem2.add(sonuc.map((entry) => (entry)).toList());
-       sonuc.forEach((v) => _listem2.add(v));
+      _result.value = result.length;
 
-      //Kolon isimlerini al
+      //#region KOLON ISIMLERINI AL
       List<dynamic> getfields() {
         _listForFields.clear();
 
         for (int z = 0; z < 23; z++) {
-          _listForFields.add(sonuc.fields[z].name);
+          _listForFields.add(result.fields[z].name);
         }
         return listForFields;
       }
+//#endregion
+
+      result.forEach((v) => _listem2.add(v));
 
       getfields();
-      print('Sonuc listesi: '+sonuc.toList().toString());
+
       print('Fields : ' + listForFields.length.toString());
       print('Dataop daki listemiz2 : ' + listem2.length.toString());
-      await baglan.close();
+      await connect.close();
       return listem2;
     } catch (e) {
       return null;
     }
   }
 
-  Future<List<WeldListModel>> getWeld(
-      {@required String fno, @required String sno}) async {
-    try {
-      print('bağlanmayı deniyorum...GETWELD');
-      final baglan = await MySqlConnection.connect(
-        ConnectionSettings(
-            host: _host,
-            port: _port,
-            user: _user,
-            password: _password,
-            db: _db),
-      );
+  // Future<List<WeldListModel>> getWeld(
+  //     {@required String fno, @required String sno}) async {
+  //   try {
+  //     print('bağlanmayı deniyorum...GETWELD');
+  //     final baglan = await MySqlConnection.connect(
+  //       ConnectionSettings(
+  //           host: _host,
+  //           port: _port,
+  //           user: _user,
+  //           password: _password,
+  //           db: _db),
+  //     );
 
-      var _table = 'weld_list';
-      var sonuc = await baglan.query(
-          'SELECT * FROM $_db.$_table where fileNo_id=? and spoolNo_id=?',
-          [fno, sno]);
-      _listem3.clear();
-      //print(verilerinListesi.toList());
-      for (var item in sonuc) {
-        _listem3.add(WeldListModel(
-            item[1],
-            item[2],
-            item[3],
-            item[4],
-            item[5],
-            item[6],
-            item[7],
-            item[8],
-            item[9],
-            item[10],
-            item[11],
-            item[12],
-            item[13],
-            item[14],
-            item[15],
-            item[16],
-            item[17],
-            item[18],
-            item[19],
-            item[20],
-            item[21],
-            item[22],
-            item[23],
-            item[24],
-            item[25],
-            item[26],
-            item[27],
-            item[28],
-            item[29],
-            item[30],
-            item[31],
-            item[32],
-            item[33],
-            item[34],
-            item[35],
-            item[36],
-            item[37],
-            item[38],
-            item[39]));
-      }
+  //     var _table = 'weld_list';
+  //     var sonuc = await baglan.query(
+  //         'SELECT * FROM $_db.$_table where fileNo_id=? and spoolNo_id=?',
+  //         [fno, sno]);
+  //     _listem3.clear();
+  //     //print(verilerinListesi.toList());
+  //     for (var item in sonuc) {
+  //       _listem3.add(WeldListModel(
+  //           item[1],
+  //           item[2],
+  //           item[3],
+  //           item[4],
+  //           item[5],
+  //           item[6],
+  //           item[7],
+  //           item[8],
+  //           item[9],
+  //           item[10],
+  //           item[11],
+  //           item[12],
+  //           item[13],
+  //           item[14],
+  //           item[15],
+  //           item[16],
+  //           item[17],
+  //           item[18],
+  //           item[19],
+  //           item[20],
+  //           item[21],
+  //           item[22],
+  //           item[23],
+  //           item[24],
+  //           item[25],
+  //           item[26],
+  //           item[27],
+  //           item[28],
+  //           item[29],
+  //           item[30],
+  //           item[31],
+  //           item[32],
+  //           item[33],
+  //           item[34],
+  //           item[35],
+  //           item[36],
+  //           item[37],
+  //           item[38],
+  //           item[39]));
+  //     }
 
-      print(listem3[0].weld.toString());
-      print('Dataop daki listemiz3 : ' + listem3.length.toString());
-      await baglan.close();
-      return listem3;
-    } catch (e) {
-      return null;
-    }
-  }
+  //     print(listem3[0].weld.toString());
+  //     print('Dataop daki listemiz3 : ' + listem3.length.toString());
+  //     await baglan.close();
+  //     return listem3;
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 
 // SELECT `COLUMN_NAME`
 // FROM `INFORMATION_SCHEMA`.`COLUMNS`
