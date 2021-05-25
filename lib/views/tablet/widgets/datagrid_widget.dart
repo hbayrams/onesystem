@@ -5,28 +5,32 @@ import 'package:onesystem/models/globals.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 /// The home page of the application which hosts the datagrid.
-class SpoolDataGridWidget extends StatefulWidget {
+class DataGridWidget extends StatefulWidget {
   final String title;
   final bool openDialog;
   final DataGridSource dataSource;
   final Function tapFunc;
   final double height;
+  final int columnqty;
+  final List<String> colName;
   // final bool visible;
 
-  const SpoolDataGridWidget({
-    Key key,
-    this.title,
-    this.openDialog,
-    this.dataSource,
-    this.tapFunc,
-    this.height
-  }) : super(key: key);
+  const DataGridWidget(
+      {Key key,
+      this.title,
+      this.openDialog,
+      this.dataSource,
+      this.tapFunc,
+      this.height,
+      this.columnqty,
+      this.colName})
+      : super(key: key);
 
   @override
-  _SpoolDataGridWidgetState createState() => _SpoolDataGridWidgetState();
+  _DataGridWidgetState createState() => _DataGridWidgetState();
 }
 
-class _SpoolDataGridWidgetState extends State<SpoolDataGridWidget> {
+class _DataGridWidgetState extends State<DataGridWidget> {
   ThemeController tc = Get.put(ThemeController());
 
   @override
@@ -65,10 +69,9 @@ class _SpoolDataGridWidgetState extends State<SpoolDataGridWidget> {
             width: double.infinity,
             height: 28,
             padding: EdgeInsets.only(left: 10),
-
           ),
           Container(
-            height: widget.height==null?Get.height/2.25:widget.height,
+            height: widget.height == null ? Get.height / 2.25 : widget.height,
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
               frozenColumnsCount: 1,
@@ -82,14 +85,14 @@ class _SpoolDataGridWidgetState extends State<SpoolDataGridWidget> {
               headerRowHeight: 50,
               rowHeight: 40,
               columns: <GridColumn>[
-                for (var j = 0; j < Global.listsSpool.length; j++)
+                for (var j = 1; j < widget.columnqty; j++)
                   GridTextColumn(
                       width: 150,
-                      columnName: Global.listsSpool[j],
+                      columnName: widget.colName[j - 1],
                       label: Container(
                           padding: EdgeInsets.all(8.0),
                           alignment: Alignment.center,
-                          child: Text(Global.listsSpool[j]))),
+                          child: Text(widget.colName[j - 1]))),
               ],
             ),
           ),
@@ -106,8 +109,8 @@ class _SpoolDataGridWidgetState extends State<SpoolDataGridWidget> {
                 content: Container(
                     width: Get.width,
                     height: Get.height,
-                    child: SpoolDataGridWidget(
-                      height: Get.height-150,
+                    child: DataGridWidget(
+                      height: Get.height - 150,
                       title: widget.title,
                       openDialog: true,
                       dataSource: widget.dataSource,

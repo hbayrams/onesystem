@@ -4,14 +4,10 @@ import 'package:get/get.dart';
 import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
-import 'package:onesystem/models/datasource_spoollist.dart';
-import 'package:onesystem/models/datasource_weldlist.dart';
+import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/mysql_query.dart';
-import 'package:onesystem/models/spoollist_model.dart';
-import 'package:onesystem/models/weldlist_model.dart';
-import 'package:onesystem/views/tablet/widgets/spooldatagrid_widget.dart';
-import 'package:onesystem/views/tablet/widgets/welddatagrid_widget.dart';
+import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class MainPage extends StatefulWidget {
@@ -23,13 +19,17 @@ class _MainPageState extends State<MainPage> {
   DataviewController dvc = Get.put(DataviewController());
   ThemeController tc = Get.put(ThemeController());
   DatabaseOperations dbc = Get.put(DatabaseOperations());
-  List<dynamic> employees1 = <dynamic>[];
-  EmployeeDataSource1 employeeDataSource1;
-  List<WeldListModel> employees2 = <WeldListModel>[];
-  EmployeeDataSource2 employeeDataSource2;
+  EmployeeDataSource employeeDataSource1, employeeDataSource2;
 
   dynamic fileno = '';
   dynamic spoolno = '';
+  int columnqty1;
+  int columnqty2;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,14 +111,6 @@ class _MainPageState extends State<MainPage> {
                                                   ],
                                                   selectedItem: 'Select ISO No',
                                                   onChanged: print,
-                                                  // validator: (String item) {
-                                                  //   if (item == null)
-                                                  //     return "Required field";
-                                                  //   else if (item == "Select File No")
-                                                  //     return "Invalid item";
-                                                  //   else
-                                                  //     return null;
-                                                  // },
                                                 ),
                                               ),
                                             ),
@@ -172,19 +164,23 @@ class _MainPageState extends State<MainPage> {
                                               ],
                                               selectedItem: 'Select File No',
                                               onChanged: (fno) async {
-                                                dbc.listem3.clear();
+                                                dbc.listForWeld.clear();
                                                 fileno = fno;
                                                 await dbc.getSpool(
                                                     fno: fno,
                                                     query: MysqlQuery()
                                                         .queryList['getSpool']);
-                                                employees1 = dbc.listem2;
-                                                print(
-                                                    'Yüklenen db buytu: ${dbc.listem2.length.toString()}');
+                                                print(dbc.listForFields.length
+                                                        .toString() +
+                                                    'Yüklenen db buytu: ${dbc.lisForSpool.length.toString()}');
+                                                columnqty1 =
+                                                    dbc.listForFields.length;
                                                 employeeDataSource1 =
-                                                    EmployeeDataSource1(
+                                                    EmployeeDataSource(
                                                         employeeData:
-                                                            employees1);
+                                                            dbc.lisForSpool,
+                                                        listForFields:
+                                                            dbc.listForFields);
                                               },
                                               // validator: (String item) {
                                               //   if (item == null)
@@ -232,15 +228,17 @@ class _MainPageState extends State<MainPage> {
                         flex: 2,
                         child: Container(
                           height: Get.height,
-                          child: dbc.listem2.isEmpty
+                          child: dbc.lisForSpool.isEmpty
                               ? null
-                              : SpoolDataGridWidget(
+                              : DataGridWidget(
+                                  colName: Global.listsSpool,
+                                  columnqty: columnqty1,
                                   title: 'Spool List',
                                   openDialog: false,
                                   dataSource: employeeDataSource1,
                                   tapFunc: (DataGridCellDoubleTapDetails
                                       details) async {
-                                    spoolno = dbc.listem2[
+                                    spoolno = dbc.lisForSpool[
                                             details.rowColumnIndex.rowIndex - 1]
                                             ['spool']
                                         .toString();
@@ -248,13 +246,17 @@ class _MainPageState extends State<MainPage> {
                                         fileno.toString() +
                                         '-' +
                                         spoolno.toString());
-                                    // await dbc.getWeld(
-                                    //     fno: fileno, sno: spoolno);
-                                    // employees2 = dbc.listem3;
-                                    // print(
-                                    //     'Yüklenen db buytu: ${dbc.listem3.length.toString()}');
-                                    // employeeDataSource2 = EmployeeDataSource2(
-                                    //     employeeData2: employees2);
+                                    await dbc.getWeld(
+                                        fno: fileno,
+                                        sno: spoolno,
+                                        query:
+                                            MysqlQuery().queryList['getWeld']);
+                                    print(
+                                        'Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
+                                    columnqty2 = dbc.listForFields.length;
+                                    employeeDataSource2 = EmployeeDataSource(
+                                        employeeData: dbc.listForWeld,
+                                        listForFields: dbc.listForFields);
                                   },
                                 ),
                         ),
@@ -266,9 +268,11 @@ class _MainPageState extends State<MainPage> {
                   flex: 1,
                   child: Container(
                     width: Get.width,
-                    child: dbc.listem3.isEmpty
+                    child: dbc.listForWeld.isEmpty
                         ? null
-                        : WeldDataGridWidget(
+                        : DataGridWidget(
+                            colName: Global.listsWeld,
+                            columnqty: columnqty2,
                             title: 'Weld List',
                             openDialog: false,
                             dataSource: employeeDataSource2),

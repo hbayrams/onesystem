@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
-import 'package:onesystem/views/tablet/widgets/spooldatagrid_widget.dart';
+import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ReleasePage extends StatefulWidget {
@@ -95,7 +95,7 @@ class _ReleasePageState extends State<ReleasePage> {
                       ),
                       Expanded(
                         flex: 7,
-                        child: SpoolDataGridWidget(
+                        child: DataGridWidget(
                             title: 'Weld Info', openDialog: false),
                       ),
                     ],
