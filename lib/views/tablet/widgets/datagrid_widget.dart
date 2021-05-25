@@ -108,6 +108,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                     width: Get.width,
                     height: Get.height,
                     child: DataGridWidget(
+                      colName:widget.colName,
                       height: Get.height - 150,
                       title: widget.title,
                       openDialog: true,
