@@ -21,14 +21,19 @@ class _MainPageState extends State<MainPage> {
   DatabaseOperations dbc = Get.put(DatabaseOperations());
   EmployeeDataSource employeeDataSource1, employeeDataSource2;
 
-  dynamic fileno = '';
-  dynamic spoolno = '';
-  int columnqty1;
-  int columnqty2;
+  dynamic fileno, spoolno = '';
 
   @override
   void initState() {
+    gettingSpool('');
+    print('MainPage initsate');
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    print('MainPage dispose');
+    super.dispose();
   }
 
   @override
@@ -163,25 +168,8 @@ class _MainPageState extends State<MainPage> {
                                                 'F00004'
                                               ],
                                               selectedItem: 'Select File No',
-                                              onChanged: (fno) async {
-                                                dbc.listForWeld.clear();
-                                                fileno = fno;
-                                                await dbc.getSpool(
-                                                    fno: fno,
-                                                    query: MysqlQuery()
-                                                        .queryList['getSpool']);
-                                                print(dbc.listForFields.length
-                                                        .toString() +
-                                                    'Yüklenen db buytu: ${dbc.lisForSpool.length.toString()}');
-                                                columnqty1 =
-                                                    dbc.listForFields.length;
-                                                employeeDataSource1 =
-                                                    EmployeeDataSource(
-                                                        employeeData:
-                                                            dbc.lisForSpool,
-                                                        listForFields:
-                                                            dbc.listForFields);
-                                              },
+                                              onChanged: (value) =>
+                                                  gettingSpool(value),
                                               // validator: (String item) {
                                               //   if (item == null)
                                               //     return "Required field";
@@ -228,36 +216,14 @@ class _MainPageState extends State<MainPage> {
                         flex: 2,
                         child: Container(
                           height: Get.height,
-                          child: dbc.lisForSpool.isEmpty
+                          child: dbc.listForSpool.isEmpty
                               ? null
                               : DataGridWidget(
                                   colName: Global.listsSpool,
-                                  columnqty: columnqty1,
                                   title: 'Spool List',
                                   openDialog: false,
                                   dataSource: employeeDataSource1,
-                                  tapFunc: (DataGridCellDoubleTapDetails
-                                      details) async {
-                                    spoolno = dbc.lisForSpool[
-                                            details.rowColumnIndex.rowIndex - 1]
-                                            ['spool']
-                                        .toString();
-                                    print('Seçilen file-spool: ' +
-                                        fileno.toString() +
-                                        '-' +
-                                        spoolno.toString());
-                                    await dbc.getWeld(
-                                        fno: fileno,
-                                        sno: spoolno,
-                                        query:
-                                            MysqlQuery().queryList['getWeld']);
-                                    print(
-                                        'Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
-                                    columnqty2 = dbc.listForFields.length;
-                                    employeeDataSource2 = EmployeeDataSource(
-                                        employeeData: dbc.listForWeld,
-                                        listForFields: dbc.listForFields);
-                                  },
+                                  tapFunc: (value) => gettingWeld(value),
                                 ),
                         ),
                       ),
@@ -272,7 +238,6 @@ class _MainPageState extends State<MainPage> {
                         ? null
                         : DataGridWidget(
                             colName: Global.listsWeld,
-                            columnqty: columnqty2,
                             title: 'Weld List',
                             openDialog: false,
                             dataSource: employeeDataSource2),
@@ -284,5 +249,38 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
     );
+  }
+
+  Future<void> gettingSpool(fno) async {
+    {
+      dbc.listForWeld.clear();
+      fileno = fno;
+      if (fno != '') {
+        await dbc.getSpool(fno: fno, query: MysqlQuery().queryList['getSpool']);
+      }else{
+       await null;
+      }
+
+      print(dbc.listForFields.length.toString() +
+          'Yüklenen db buytu: ${dbc.listForSpool.length.toString()}');
+      employeeDataSource1 = EmployeeDataSource(
+          employeeData: dbc.listForSpool, listForFields: dbc.listForFields);
+    }
+  }
+
+  Future<void> gettingWeld(DataGridCellDoubleTapDetails details) async {
+    {
+      spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
+          .toString();
+      print('Seçilen file-spool: ' +
+          fileno.toString() +
+          '-' +
+          spoolno.toString());
+      await dbc.getWeld(
+          fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
+      print('Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
+      employeeDataSource2 = EmployeeDataSource(
+          employeeData: dbc.listForWeld, listForFields: dbc.listForFields);
+    }
   }
 }

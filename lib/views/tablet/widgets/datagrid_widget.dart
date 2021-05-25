@@ -11,7 +11,6 @@ class DataGridWidget extends StatefulWidget {
   final DataGridSource dataSource;
   final Function tapFunc;
   final double height;
-  final int columnqty;
   final List<String> colName;
   // final bool visible;
 
@@ -22,7 +21,6 @@ class DataGridWidget extends StatefulWidget {
       this.dataSource,
       this.tapFunc,
       this.height,
-      this.columnqty,
       this.colName})
       : super(key: key);
 
@@ -73,28 +71,28 @@ class _DataGridWidgetState extends State<DataGridWidget> {
           Container(
             height: widget.height == null ? Get.height / 2.25 : widget.height,
             margin: EdgeInsets.all(0),
-            child: SfDataGrid(
-              frozenColumnsCount: 1,
-              onCellDoubleTap: widget.tapFunc,
-              headerGridLinesVisibility: GridLinesVisibility.both,
-              allowPullToRefresh: true,
-              defaultColumnWidth: 105,
-              source: widget.dataSource,
-              columnWidthMode: ColumnWidthMode.none,
-              gridLinesVisibility: GridLinesVisibility.both,
-              headerRowHeight: 50,
-              rowHeight: 40,
-              columns: <GridColumn>[
-                for (var j = 1; j < widget.columnqty; j++)
-                  GridTextColumn(
-                      width: 150,
-                      columnName: widget.colName[j - 1],
-                      label: Container(
-                          padding: EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: Text(widget.colName[j - 1]))),
-              ],
-            ),
+            child:SfDataGrid(
+                    frozenColumnsCount: 1,
+                    onCellDoubleTap: widget.tapFunc,
+                    headerGridLinesVisibility: GridLinesVisibility.both,
+                    allowPullToRefresh: true,
+                    defaultColumnWidth: 105,
+                    source: widget.dataSource,
+                    columnWidthMode: ColumnWidthMode.none,
+                    gridLinesVisibility: GridLinesVisibility.both,
+                    headerRowHeight: 50,
+                    rowHeight: 40,
+                    columns: <GridColumn>[
+                      for (var j = 0; j < widget.colName.length; j++)
+                        GridTextColumn(
+                            width: 150,
+                            columnName: widget.colName[j],
+                            label: Container(
+                                padding: EdgeInsets.all(8.0),
+                                alignment: Alignment.center,
+                                child: Text(widget.colName[j]))),
+                    ],
+                  ),
           ),
         ],
       ),

@@ -12,8 +12,8 @@ class DatabaseOperations extends GetxController {
   bool get islogin => _islogin.value;
   final List<SigninModel> _listem = <SigninModel>[].obs;
   List<SigninModel> get listem => _listem;
-  List<dynamic> _lisForSpool = <dynamic>[].obs;
-  List<dynamic> get lisForSpool => _lisForSpool;
+  List<dynamic> _listForSpool = <dynamic>[].obs;
+  List<dynamic> get listForSpool => _listForSpool;
   final List<dynamic> _listForWeld = <dynamic>[].obs;
   List<dynamic> get listForWeld => _listForWeld;
   final List<dynamic> _listForFields = <dynamic>[].obs;
@@ -36,10 +36,10 @@ class DatabaseOperations extends GetxController {
       _listem.clear();
       for (var item in result) {
         _listem.add(
-          SigninModel(item[1], item[2], item[5], item[3]),
+          SigninModel(item[1], item[2], item[6], item[3],item[4]),
         );
       }
-      print('Dataop daki listemiz1 : ' + listem.length.toString());
+      print('Dataop daki listemiz1 : ' + listem.length.toString()+ listem[0].photo_String);
 //#endregion
 
 //#region SONUC BOSMU KONTROL
@@ -69,7 +69,7 @@ class DatabaseOperations extends GetxController {
       var result = await connect.query(query, [fno]);
 //#endregion
 
-      _lisForSpool.clear();
+      _listForSpool.clear();
 
       _result.value = result.length;
 
@@ -85,12 +85,12 @@ class DatabaseOperations extends GetxController {
 
 //#endregion
       getfields();
-      result.forEach((v) => _lisForSpool.add(v));
+      result.forEach((v) => _listForSpool.add(v));
 
       // // print('Fields : ' + listForFields.length.toString());
       // // print('Dataop daki listemiz2 : ' + listem2.length.toString());
       await connect.close();
-      return lisForSpool;
+      return listForSpool;
     } catch (e) {
       return null;
     }
