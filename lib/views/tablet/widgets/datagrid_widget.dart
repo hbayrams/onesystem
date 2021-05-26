@@ -46,8 +46,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(border: Border.all(width: 1.5)),
-      height: 1000,
+      height: Get.height - 10,
       child: Column(
         children: [
           Container(
@@ -69,30 +68,30 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             padding: EdgeInsets.only(left: 10),
           ),
           Container(
-            height: widget.height == null ? Get.height / 2.25 : widget.height,
+            height: widget.height == null ? Get.height / 2.35 : widget.height,
             margin: EdgeInsets.all(0),
-            child:SfDataGrid(
-                    frozenColumnsCount: 1,
-                    onCellDoubleTap: widget.tapFunc,
-                    headerGridLinesVisibility: GridLinesVisibility.both,
-                    allowPullToRefresh: true,
-                    defaultColumnWidth: 105,
-                    source: widget.dataSource,
-                    columnWidthMode: ColumnWidthMode.none,
-                    gridLinesVisibility: GridLinesVisibility.both,
-                    headerRowHeight: 50,
-                    rowHeight: 40,
-                    columns: <GridColumn>[
-                      for (var j = 0; j < widget.colName.length; j++)
-                        GridTextColumn(
-                            width: 150,
-                            columnName: widget.colName[j],
-                            label: Container(
-                                padding: EdgeInsets.all(8.0),
-                                alignment: Alignment.center,
-                                child: Text(widget.colName[j]))),
-                    ],
-                  ),
+            child: SfDataGrid(
+              frozenColumnsCount: 1,
+              onCellDoubleTap: widget.tapFunc,
+              headerGridLinesVisibility: GridLinesVisibility.both,
+              allowPullToRefresh: true,
+              defaultColumnWidth: 80,
+              source: widget.dataSource,
+              columnWidthMode: ColumnWidthMode.none,
+              gridLinesVisibility: GridLinesVisibility.both,
+              headerRowHeight: 50,
+              rowHeight: 40,
+              columns: <GridColumn>[
+                for (var j = 0; j < widget.colName.length; j++)
+                  GridTextColumn(
+                      width: 150,
+                      columnName: widget.colName[j],
+                      label: Container(
+                          padding: EdgeInsets.all(8.0),
+                          alignment: Alignment.center,
+                          child: Text(widget.colName[j]))),
+              ],
+            ),
           ),
         ],
       ),
@@ -108,7 +107,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                     width: Get.width,
                     height: Get.height,
                     child: DataGridWidget(
-                      colName:widget.colName,
+                      colName: widget.colName,
                       height: Get.height - 150,
                       title: widget.title,
                       openDialog: true,

@@ -8,6 +8,7 @@ import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
+import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,17 +16,18 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>
+    with AutomaticKeepAliveClientMixin<MainPage> {
   DataviewController dvc = Get.put(DataviewController());
   ThemeController tc = Get.put(ThemeController());
   DatabaseOperations dbc = Get.put(DatabaseOperations());
   EmployeeDataSource employeeDataSource1, employeeDataSource2;
 
-  dynamic fileno, spoolno = '';
+  dynamic fileno, spoolno, isono = '';
 
   @override
   void initState() {
-    gettingSpool('');
+    //gettingSpool('');
     print('MainPage initsate');
     super.initState();
   }
@@ -38,10 +40,11 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: GetX<DataviewController>(
             builder: (_) => Column(
               children: <Widget>[
@@ -57,8 +60,7 @@ class _MainPageState extends State<MainPage> {
                               flex: 1,
                               child: Container(
                                 margin: EdgeInsets.all(2),
-                                decoration:
-                                    BoxDecoration(border: Border.all(width: 1)),
+                                decoration: getBox(tc),
                                 child: Column(
                                   children: [
                                     Expanded(
@@ -76,46 +78,27 @@ class _MainPageState extends State<MainPage> {
                                                   groupValue: dvc.radioValue,
                                                   onChanged: (value) {
                                                     dvc.radioValue = value;
-                                                    print("value: $value");
-                                                    print('value_getx: ' +
-                                                        dvc.radioValue
-                                                            .toString());
                                                   },
                                                 ),
                                               ),
                                             ),
                                             Expanded(
-                                              flex: 3,
+                                              flex: 5,
                                               child: Container(
+                                                padding:
+                                                    EdgeInsets.only(right: 5),
                                                 alignment: Alignment.centerLeft,
-                                                child: DropdownSearch(
-                                                  dropdownSearchDecoration:
-                                                      InputDecoration(
-                                                          isDense: true,
-                                                          isCollapsed: true,
-                                                          border:
-                                                              InputBorder.none,
-                                                          contentPadding:
-                                                              EdgeInsets.all(
-                                                                  1)),
-                                                  popupTitle: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child:
-                                                        Text('Select ISO No'),
-                                                  ),
-                                                  autoValidateMode:
-                                                      AutovalidateMode.always,
-
-                                                  showSearchBox: true,
-                                                  //label: 'Select File No',
-                                                  items: [
-                                                    'YASDJAH',
-                                                    'OPOFDKOGKD'
-                                                  ],
-                                                  selectedItem: 'Select ISO No',
-                                                  onChanged: print,
+                                                child: DropDownWidget(
+                                                  select: fileno,
+                                                  enable: dvc.radioValue == 0
+                                                      ? true
+                                                      : false,
+                                                  title: 'Select Iso NO',
+                                                  changed: (value) {
+                                                    setState(() {
+                                                      isono = value;
+                                                    });
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -136,57 +119,33 @@ class _MainPageState extends State<MainPage> {
                                                 groupValue: dvc.radioValue,
                                                 onChanged: (value) {
                                                   dvc.radioValue = value;
-                                                  print("value: $value");
-                                                  print('value_getx: ' +
-                                                      dvc.radioValue
-                                                          .toString());
                                                 },
                                               ),
                                             ),
                                           ),
                                           Expanded(
-                                            flex: 2,
-                                            child: DropdownSearch(
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
-                                                      border: InputBorder.none,
-                                                      contentPadding:
-                                                          EdgeInsets.all(1)),
-                                              popupTitle: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text('Select File No'),
-                                              ),
-                                              autoValidateMode:
-                                                  AutovalidateMode.always,
-                                              showSearchBox: true,
-                                              //label: 'Select File No',
-                                              items: [
-                                                'F00001',
-                                                'F00002',
-                                                'F00003',
-                                                'F00004'
-                                              ],
-                                              selectedItem: 'Select File No',
-                                              onChanged: (value) =>
-                                                  gettingSpool(value),
-                                              // validator: (String item) {
-                                              //   if (item == null)
-                                              //     return "Required field";
-                                              //   else if (item == "Select File No")
-                                              //     return "Invalid item";
-                                              //   else
-                                              //     return null;
-                                              // },
-                                            ),
+                                            flex: 4,
+                                            child: DropDownWidget(
+                                                select: isono,
+                                                enable: dvc.radioValue == 1
+                                                    ? true
+                                                    : false,
+                                                title: 'Select File NO',
+                                                changed: (value) =>
+                                                    gettingSpool(value)),
                                           ),
                                           Expanded(
                                             flex: 1,
-                                            child: Text(
-                                              'Rev. : 1A',
-                                              style: TextStyle(
-                                                  color: Global.focusedBlue,
-                                                  fontWeight: FontWeight.bold),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5.0),
+                                              child: Text(
+                                                'Rev. : 1A',
+                                                style: TextStyle(
+                                                    color: Global.focusedBlue,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -200,8 +159,7 @@ class _MainPageState extends State<MainPage> {
                               flex: 2,
                               child: Container(
                                 margin: EdgeInsets.all(2),
-                                decoration:
-                                    BoxDecoration(border: Border.all(width: 1)),
+                                decoration: getBox(tc),
                                 child: Container(
                                   width: Get.width,
                                   color: Colors.blueAccent,
@@ -215,6 +173,9 @@ class _MainPageState extends State<MainPage> {
                       Expanded(
                         flex: 2,
                         child: Container(
+                          margin: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(5),
+                          decoration: getBox(tc),
                           height: Get.height,
                           child: dbc.listForSpool.isEmpty
                               ? null
@@ -233,6 +194,9 @@ class _MainPageState extends State<MainPage> {
                 Expanded(
                   flex: 1,
                   child: Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(2),
+                    decoration: getBox(tc),
                     width: Get.width,
                     child: dbc.listForWeld.isEmpty
                         ? null
@@ -251,14 +215,30 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  BoxDecoration getBox(ThemeController tc) {
+    return BoxDecoration(
+      color: tc.isColorChangeDW(),
+      borderRadius: BorderRadius.circular(0),
+      boxShadow: [
+        BoxShadow(
+          spreadRadius: -3,
+          color: Global.extra_light,
+          blurRadius: 5,
+        ),
+      ],
+    );
+  }
+
   Future<void> gettingSpool(fno) async {
     {
       dbc.listForWeld.clear();
-      fileno = fno;
+      setState(() {
+        fileno = fno;
+      });
       if (fno != '') {
         await dbc.getSpool(fno: fno, query: MysqlQuery().queryList['getSpool']);
-      }else{
-       await null;
+      } else {
+        await null;
       }
 
       print(dbc.listForFields.length.toString() +
@@ -283,4 +263,7 @@ class _MainPageState extends State<MainPage> {
           employeeData: dbc.listForWeld, listForFields: dbc.listForFields);
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

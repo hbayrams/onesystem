@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
+import 'package:onesystem/models/datasource.dart';
+import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -16,10 +19,16 @@ class _ReleasePageState extends State<ReleasePage> {
     super.initState();
   }
 
+  DataviewController dvc = Get.put(DataviewController());
+  ThemeController tc = Get.put(ThemeController());
+  DatabaseOperations dbc = Get.put(DatabaseOperations());
+  EmployeeDataSource employeeDataSource1,
+      employeeDataSource2,
+      employeeDataSource3;
+
   @override
   Widget build(BuildContext context) {
     DataviewController dvc = Get.put(DataviewController());
-    ThemeController tc = Get.put(ThemeController());
     return SafeArea(
       child: Scaffold(
         body: GetX<DataviewController>(
@@ -95,8 +104,13 @@ class _ReleasePageState extends State<ReleasePage> {
                       ),
                       Expanded(
                         flex: 7,
-                        child: DataGridWidget(
-                            title: 'Weld Info', openDialog: false),
+                        child: dbc.listForWeld.isEmpty
+                            ? null
+                            : DataGridWidget(
+                                colName: Global.listsWeld,
+                                title: 'Weld List',
+                                openDialog: false,
+                                dataSource: employeeDataSource2),
                       ),
                     ],
                   ),

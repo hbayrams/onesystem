@@ -10,8 +10,8 @@ class DatabaseOperations extends GetxController {
   int get sonuc => _result.value;
   final _islogin = false.obs;
   bool get islogin => _islogin.value;
-  final List<SigninModel> _listem = <SigninModel>[].obs;
-  List<SigninModel> get listem => _listem;
+  final List<SigninModel> _lisForSign = <SigninModel>[].obs;
+  List<SigninModel> get lisForSign => _lisForSign;
   List<dynamic> _listForSpool = <dynamic>[].obs;
   List<dynamic> get listForSpool => _listForSpool;
   final List<dynamic> _listForWeld = <dynamic>[].obs;
@@ -33,13 +33,15 @@ class DatabaseOperations extends GetxController {
 //#endregion
 
 //#region SONUCU LISTEYE AKTAR
-      _listem.clear();
+      _lisForSign.clear();
       for (var item in result) {
-        _listem.add(
-          SigninModel(item[1], item[2], item[6], item[3],item[4]),
+        _lisForSign.add(
+          SigninModel(item[1], item[2], item[6], item[3], item[4]),
         );
       }
-      print('Dataop daki listemiz1 : ' + listem.length.toString()+ listem[0].photo_String);
+      print('Dataop daki listemiz1 : ' +
+          _lisForSign.length.toString() +
+          _lisForSign[0].photo_String);
 //#endregion
 
 //#region SONUC BOSMU KONTROL
@@ -51,7 +53,7 @@ class DatabaseOperations extends GetxController {
 //#endregion
 
       await connect.close();
-      return listem;
+      return lisForSign;
     } catch (e) {
       print(e.toString());
       return null;
@@ -97,12 +99,14 @@ class DatabaseOperations extends GetxController {
   }
 //#endregion
 
+//#region DATABASE-GETWeld KONTROL METHOD
   Future<List<dynamic>> getWeld(
       {@required String fno,
       @required String sno,
       @required String query}) async {
     try {
       var connect = await MysqlConn().getConnection();
+
 //#region SORGU OLUSTUR
       var result = await connect.query(query, [fno, sno]);
 //#endregion
@@ -120,8 +124,8 @@ class DatabaseOperations extends GetxController {
         }
         return listForFields;
       }
-
 //#endregion
+
       getfields();
       result.forEach((v) => _listForWeld.add(v));
       await connect.close();
@@ -130,6 +134,41 @@ class DatabaseOperations extends GetxController {
       return null;
     }
   }
+//#endregion
+
+//#region DATABASE-GETFileNO KONTROL METHOD
+  Future<List<dynamic>> getFileNO({@required String query}) async {
+    try {
+      var connect = await MysqlConn().getConnection();
+
+//#region SORGU OLUSTUR
+      var result = await connect.query(query);
+//#endregion
+
+      _listForWeld.clear();
+
+      _result.value = result.length;
+
+//#region KOLON ISIMLERINI AL
+      List<dynamic> getfields() {
+        _listForFields.clear();
+
+        for (int z = 0; z < 38; z++) {
+          _listForFields.add(result.fields[z].name);
+        }
+        return listForFields;
+      }
+//#endregion
+
+      getfields();
+      result.forEach((v) => _listForWeld.add(v));
+      await connect.close();
+      return listForWeld;
+    } catch (e) {
+      return null;
+    }
+  }
+//#endregion
 
 // SELECT `COLUMN_NAME`
 // FROM `INFORMATION_SCHEMA`.`COLUMNS`

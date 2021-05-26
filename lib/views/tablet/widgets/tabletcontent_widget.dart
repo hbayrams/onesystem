@@ -9,7 +9,7 @@ import 'package:onesystem/views/tablet/release_page.dart';
 import 'package:onesystem/views/tablet/settings_page.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class BodyContentTabletWidget2 extends StatelessWidget {
+class BodyContentTabletWidget extends StatelessWidget {
   final SizingInformation sizingInformation;
   final List<Widget> pages = [
     MainPage(),
@@ -19,13 +19,13 @@ class BodyContentTabletWidget2 extends StatelessWidget {
     ReleasePage(),
     SettingsPage(),
   ];
-  BodyContentTabletWidget2({Key key, this.sizingInformation}) : super(key: key);
+  BodyContentTabletWidget({Key key, this.sizingInformation}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     PagesController pc = Get.put(PagesController());
     return Container(
       width: Get.width / 1.4,
-      height: Get.height,
+      height: Get.height / 1.03,
       child: PageView(
         controller: pc.controller,
         physics: NeverScrollableScrollPhysics(),

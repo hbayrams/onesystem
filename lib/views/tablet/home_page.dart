@@ -21,7 +21,7 @@ class HomePageTablet extends StatelessWidget {
                   TabNavWidget(),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: BodyContentTabletWidget2(
+                      child: BodyContentTabletWidget(
                         sizingInformation: sizingInformation,
                       ),
                     ),
