@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 
 class ISOInfoWidget {
+  ThemeController tc = Get.put(ThemeController());
   Column isoInfo() {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Row(
@@ -76,7 +79,7 @@ class ISOInfoWidget {
                   child: ElevatedButton.icon(
                       icon: Icon(Icons.file_download),
                       style: ElevatedButton.styleFrom(
-                        primary: Global.dark,
+                        primary: tc.isColorChangeWD(),
                       ),
                       onPressed: () {},
                       label: Text('Download Folder',
@@ -95,7 +98,7 @@ class ISOInfoWidget {
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
                     style: ElevatedButton.styleFrom(
-                      primary: Global.dark,
+                      primary: tc.isColorChangeWD(),
                     ),
                     onPressed: () {},
                     label: Text('Original',
@@ -109,7 +112,7 @@ class ISOInfoWidget {
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
                     style: ElevatedButton.styleFrom(
-                      primary: Global.dark,
+                      primary: tc.isColorChangeWD(),
                     ),
                     onPressed: () {},
                     label:
