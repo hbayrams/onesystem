@@ -6,7 +6,7 @@ class ISOInfoWidget {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Row(
         children: [
-          Expanded(flex: 1, child: Text('Condition')),
+          Expanded(flex: 1, child: Text('Condition :')),
           Expanded(
             flex: 1,
             child: Container(
@@ -25,7 +25,7 @@ class ISOInfoWidget {
       ),
       Row(
         children: [
-          Expanded(flex: 1, child: Text('Pipe Class')),
+          Expanded(flex: 1, child: Text('Pipe Class :')),
           Expanded(
             flex: 1,
             child: Container(
@@ -44,7 +44,7 @@ class ISOInfoWidget {
       ),
       Row(
         children: [
-          Expanded(flex: 1, child: Text('PED Category')),
+          Expanded(flex: 1, child: Text('PED Category :')),
           Expanded(
             flex: 3,
             child: Container(
@@ -58,7 +58,7 @@ class ISOInfoWidget {
       ),
       Row(
         children: [
-          Expanded(flex: 1, child: Text('Paint Code')),
+          Expanded(flex: 1, child: Text('Paint Code :')),
           Expanded(
               flex: 1,
               child: Container(
@@ -69,23 +69,29 @@ class ISOInfoWidget {
                       style: TextStyle(fontWeight: FontWeight.bold)))),
           Expanded(
               flex: 2,
-              child: ElevatedButton.icon(
-                  icon: Icon(Icons.file_download),
-                  style: ElevatedButton.styleFrom(
-                    primary: Global.dark,
-                  ),
-                  onPressed: () {},
-                  label: Text('Download Folder',
-                      style: TextStyle(color: Global.white))))
+              child: Container(
+                margin: EdgeInsets.only(right: 5),
+                child: Container(
+                  height: 30,
+                  child: ElevatedButton.icon(
+                      icon: Icon(Icons.file_download),
+                      style: ElevatedButton.styleFrom(
+                        primary: Global.dark,
+                      ),
+                      onPressed: () {},
+                      label: Text('Download Folder',
+                          style: TextStyle(color: Global.white))),
+                ),
+              ))
         ],
       ),
       Row(
         children: [
-          Expanded(flex: 2, child: Text('Paint Code')),
+          Expanded(flex: 2, child: Text('View DWG :')),
           Expanded(
               flex: 3,
               child: Container(
-                margin: EdgeInsets.only(right: 5),
+                height: 30,
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
                     style: ElevatedButton.styleFrom(
@@ -98,6 +104,7 @@ class ISOInfoWidget {
           Expanded(
               flex: 3,
               child: Container(
+                height: 30,
                 margin: EdgeInsets.all(5),
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
