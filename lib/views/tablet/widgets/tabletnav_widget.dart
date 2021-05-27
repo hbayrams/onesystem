@@ -89,6 +89,7 @@ Widget _navLogo(SharedPrefController sc, ThemeController tc) {
       ));
 }
 
+// ignore: unused_element
 Widget _leadingwidget(SharedPrefController sc, ThemeController tc) {
   return Padding(
     padding: const EdgeInsets.only(top: 70, left: 5, right: 5),

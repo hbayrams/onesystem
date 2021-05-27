@@ -14,6 +14,7 @@ import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 import 'package:onesystem/views/tablet/widgets/rbutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/textformfield_widget.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   LoginController lc = Get.put(LoginController());
   SharedPrefController sc = Get.put(SharedPrefController());

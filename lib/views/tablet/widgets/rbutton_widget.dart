@@ -13,13 +13,14 @@ class RButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height* .06,
+      height: Get.height * .06,
       width: Get.width * .3,
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: color,
+        ),
         onPressed: onClick,
-        color: color,
-        child: Text(title,style: TextStyle(color: Global.white,fontSize: 18)),
+        child: Text(title, style: TextStyle(color: Global.white, fontSize: 18)),
       ),
     );
   }

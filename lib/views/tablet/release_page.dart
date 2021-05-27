@@ -6,7 +6,6 @@ import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ReleasePage extends StatefulWidget {
   @override
@@ -77,7 +76,7 @@ class _ReleasePageState extends State<ReleasePage> {
                               ),
                               Expanded(
                                 flex: 2,
-                                child: RaisedButton(
+                                child: ElevatedButton(
                                   onPressed:
                                       dvc.widgetEnabled ? dvc.widgetFunc : null,
                                   child: Text('Select'),
@@ -129,14 +128,14 @@ class _ReleasePageState extends State<ReleasePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RaisedButton(
+                            ElevatedButton(
                               onPressed: null,
                               child: Text('Release'),
                             ),
                             SizedBox(
                               width: 20,
                             ),
-                            RaisedButton(
+                            ElevatedButton(
                               onPressed: null,
                               child: Text('Cancel'),
                             ),

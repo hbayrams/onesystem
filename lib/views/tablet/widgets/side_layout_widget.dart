@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/page_controller.dart';
-import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 
+// ignore: must_be_immutable
 class SideLayout extends StatelessWidget {
   int _selectedIndex = 0;
   bool _extended = false;

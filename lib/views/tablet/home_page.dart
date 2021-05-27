@@ -5,6 +5,7 @@ import 'package:onesystem/views/tablet/widgets/tabletcontent_widget.dart';
 import 'package:onesystem/views/tablet/widgets/tabletnav_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+// ignore: must_be_immutable
 class HomePageTablet extends StatelessWidget {
   NetController nc = Get.put(NetController());
   @override

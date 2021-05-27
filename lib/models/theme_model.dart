@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onesystem/models/globals.dart';
 
 class Themes {
   final lightTheme = ThemeData.light().copyWith(

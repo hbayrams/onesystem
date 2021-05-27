@@ -1,4 +1,3 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/controllers/database_controller.dart';
@@ -9,6 +8,7 @@ import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
+import 'package:onesystem/views/tablet/widgets/isoInfo_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class MainPage extends StatefulWidget {
@@ -23,11 +23,10 @@ class _MainPageState extends State<MainPage>
   DatabaseOperations dbc = Get.put(DatabaseOperations());
   EmployeeDataSource employeeDataSource1, employeeDataSource2;
 
-  dynamic fileno, spoolno, isono = '';
+  dynamic fileno, spoolno = '';
 
   @override
   void initState() {
-    //gettingSpool('');
     print('MainPage initsate');
     super.initState();
   }
@@ -95,9 +94,7 @@ class _MainPageState extends State<MainPage>
                                                       : false,
                                                   title: 'Select Iso NO',
                                                   changed: (value) {
-                                                    setState(() {
-                                                      isono = value;
-                                                    });
+                                                    gettingSpool(value);
                                                   },
                                                 ),
                                               ),
@@ -126,7 +123,7 @@ class _MainPageState extends State<MainPage>
                                           Expanded(
                                             flex: 4,
                                             child: DropDownWidget(
-                                                select: isono,
+                                                select: fileno,
                                                 enable: dvc.radioValue == 1
                                                     ? true
                                                     : false,
@@ -158,14 +155,11 @@ class _MainPageState extends State<MainPage>
                             Expanded(
                               flex: 2,
                               child: Container(
-                                margin: EdgeInsets.all(2),
-                                decoration: getBox(tc),
-                                child: Container(
                                   width: Get.width,
-                                  color: Colors.blueAccent,
-                                  child: Text('üstsol2'),
-                                ),
-                              ),
+                                  margin: EdgeInsets.all(2),
+                                  padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                                  decoration: getBox(tc),
+                                  child: ISOInfoWidget().isoInfo()),
                             ),
                           ],
                         ),

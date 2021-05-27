@@ -1,5 +1,4 @@
 import 'package:mysql1/mysql1.dart';
-import 'package:onesystem/controllers/internet_controller.dart';
 
 class MysqlConn {
   static String host = 'remotemysql.com',

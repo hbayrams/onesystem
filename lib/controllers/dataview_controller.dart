@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
 class DataviewController extends GetxController {
+  // ignore: non_constant_identifier_names
   final fill_data = false.obs;
+  // ignore: non_constant_identifier_names
   final fill_data1 = false.obs;
+  // ignore: non_constant_identifier_names
   final widget_enabled = false.obs;
+  // ignore: non_constant_identifier_names
   final dd_value = '1'.obs;
   final _radioValue = 1.obs;
 
