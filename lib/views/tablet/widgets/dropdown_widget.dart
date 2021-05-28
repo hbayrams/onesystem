@@ -23,7 +23,6 @@ class DropDownWidget extends StatelessWidget {
       autoValidateMode: AutovalidateMode.always,
       showSearchBox: true,
       autoFocusSearchBox: true,
-      //label: 'Select File No',
       items: ['F00001', 'F00002', 'F00003', 'F00004'],
       //['YASDJAH', 'OPOFDKOGKD'],
       selectedItem: select == null ? title : select,
