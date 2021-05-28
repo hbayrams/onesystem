@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 
-class ISOInfoWidget {
-  ThemeController tc = Get.put(ThemeController());
-  Column isoInfo() {
+class ISOInfoWidget extends StatefulWidget {
+  @override
+  _ISOInfoWidgetState createState() => _ISOInfoWidgetState();
+}
+
+class _ISOInfoWidgetState extends State<ISOInfoWidget> {
+  @override
+  Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Row(
         children: [
@@ -13,9 +17,10 @@ class ISOInfoWidget {
           Expanded(
             flex: 1,
             child: Container(
-                padding: EdgeInsets.all(3),
+                padding: EdgeInsets.all(6),
                 margin: EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(border: Border.all(width: 1)),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Global.light)),
                 child: SelectableText('On Going',
                     style: TextStyle(fontWeight: FontWeight.bold))),
           ),
@@ -32,9 +37,10 @@ class ISOInfoWidget {
           Expanded(
             flex: 1,
             child: Container(
-                padding: EdgeInsets.all(3),
+                padding: EdgeInsets.all(6),
                 margin: EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(border: Border.all(width: 1)),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Global.light)),
                 child: SelectableText('AA51N',
                     style: TextStyle(fontWeight: FontWeight.bold))),
           ),
@@ -51,9 +57,10 @@ class ISOInfoWidget {
           Expanded(
             flex: 3,
             child: Container(
-                padding: EdgeInsets.all(3),
+                padding: EdgeInsets.all(6),
                 margin: EdgeInsets.only(right: 197),
-                decoration: BoxDecoration(border: Border.all(width: 1)),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Global.light)),
                 child: SelectableText('1',
                     style: TextStyle(fontWeight: FontWeight.bold))),
           ),
@@ -65,9 +72,10 @@ class ISOInfoWidget {
           Expanded(
               flex: 1,
               child: Container(
-                  padding: EdgeInsets.all(3),
+                  padding: EdgeInsets.all(6),
                   margin: EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(border: Border.all(width: 1)),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Global.light)),
                   child: SelectableText('A.II.B.2-2',
                       style: TextStyle(fontWeight: FontWeight.bold)))),
           Expanded(
@@ -79,11 +87,10 @@ class ISOInfoWidget {
                   child: ElevatedButton.icon(
                       icon: Icon(Icons.file_download),
                       style: ElevatedButton.styleFrom(
-                        primary: tc.isColorChangeWD(),
+                        primary: Global.medium,
                       ),
                       onPressed: () {},
-                      label: Text('Download Folder',
-                          style: TextStyle(color: Global.white))),
+                      label: Text('Download Folder')),
                 ),
               ))
         ],
@@ -98,9 +105,11 @@ class ISOInfoWidget {
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
                     style: ElevatedButton.styleFrom(
-                      primary: tc.isColorChangeWD(),
+                      primary: Global.medium,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed('t/widgets/pdfviewer_widget');
+                    },
                     label: Text('Original',
                         style: TextStyle(color: Global.white))),
               )),
@@ -112,9 +121,9 @@ class ISOInfoWidget {
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
                     style: ElevatedButton.styleFrom(
-                      primary: tc.isColorChangeWD(),
+                      primary: Global.medium,
                     ),
-                    onPressed: () {},
+                    onPressed: null,
                     label:
                         Text('Scanned', style: TextStyle(color: Global.white))),
               ))

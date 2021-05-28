@@ -54,15 +54,11 @@ class _DataGridWidgetState extends State<DataGridWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(widget.title,
-                    style: TextStyle(
-                        color: tc.isSavedDarkMode()
-                            ? Global.dark
-                            : Global.extra_light,
-                        fontSize: 14)),
+                    style: TextStyle(color: Global.white, fontSize: 14)),
                 buildIconButton(),
               ],
             ),
-            color: tc.isColorChangeWD(),
+            color: Global.medium,
             width: double.infinity,
             height: 28,
             padding: EdgeInsets.only(left: 10),
@@ -72,7 +68,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
               frozenColumnsCount: 1,
-              onCellDoubleTap: widget.tapFunc,
+              onCellTap: widget.tapFunc,
               headerGridLinesVisibility: GridLinesVisibility.both,
               allowPullToRefresh: true,
               defaultColumnWidth: 80,

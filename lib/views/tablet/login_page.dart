@@ -245,7 +245,7 @@ TextFormFieldWidget buildTextFormFieldWidgetUsername(LoginController lc) {
 
 TextFormFieldWidget buildTextFormFieldWidgetPass(LoginController lc) {
   return TextFormFieldWidget(
-    action: TextInputAction.done,
+    action: TextInputAction.send,
     hintText: 'Password',
     obscureText: lc.isVisible ? false : true,
     prefixIconData: Icons.lock,

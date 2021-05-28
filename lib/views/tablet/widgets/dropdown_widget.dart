@@ -14,9 +14,8 @@ class DropDownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownSearch(
       enabled: enable,
-      dropdownSearchDecoration: InputDecoration(
-          border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
-          contentPadding: EdgeInsets.fromLTRB(15, 0, 5, 0)),
+      dropdownSearchDecoration:
+          InputDecoration(contentPadding: EdgeInsets.fromLTRB(15, 0, 5, 0)),
       popupTitle: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(title),

@@ -155,12 +155,13 @@ class _MainPageState extends State<MainPage>
                             Expanded(
                               flex: 2,
                               child: Container(
-                                  width: Get.width,
-                                  margin: EdgeInsets.all(2),
-                                  padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
-                                  decoration: getBox(tc),
-                                  child: ISOInfoWidget().isoInfo()),
-                            ),
+                                width: Get.width,
+                                margin: EdgeInsets.all(2),
+                                padding: EdgeInsets.fromLTRB(15, 20, 5, 5),
+                                decoration: getBox(tc),
+                                child: ISOInfoWidget(),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -242,7 +243,7 @@ class _MainPageState extends State<MainPage>
     }
   }
 
-  Future<void> gettingWeld(DataGridCellDoubleTapDetails details) async {
+  Future<void> gettingWeld(DataGridCellTapDetails details) async {
     {
       spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
           .toString();
