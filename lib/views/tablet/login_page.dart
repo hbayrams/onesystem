@@ -11,7 +11,7 @@ import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
-import 'package:onesystem/views/tablet/widgets/rbutton_widget.dart';
+import 'package:onesystem/views/tablet/widgets/ebutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/textformfield_widget.dart';
 
 // ignore: must_be_immutable
@@ -171,44 +171,56 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              RButtonWidget(
+              EButtonWidget(
+                width: Get.width * .3,
+                height: Get.height * .06,
                 color: Global.focusedBlue,
+//#region LOGIN CONTROL
                 onClick: () async {
-                  List<SigninModel> access = await db.loginQuery(
-                      name: lc.uname,
-                      pass: lc.password,
-                      query: MysqlQuery().queryList['login']);
-                  print('Access: ' + db.islogin.toString());
-                  print('Sign ' + lc.uname);
-                  if (lc.formKey.value.currentState.validate()) {
-                    if (db.islogin) {
-                      if (access[0].user_Actual == 1) {
-                        lc.formKey.value.currentState.save();
-                        Get.offNamed('t/homePage'); //with arguments
-                        print('Sign in successfully' +
-                            lc.uname +
-                            db.islogin.toString());
+                  if (!GetPlatform.isWeb) {
+                    if (lc.formKey.value.currentState.validate()) {
+                      List<SigninModel> access = await db.loginQuery(
+                          name: lc.uname,
+                          pass: lc.password,
+                          query: MysqlQuery().queryList['login']);
+                      print('Access: ' + db.islogin.toString());
+                      print('Sign ' + lc.uname);
+
+                      if (db.islogin) {
+                        if (access[0].user_Actual == 1) {
+                          lc.formKey.value.currentState.save();
+                          Get.offNamed('t/homePage'); //with arguments
+                          print('Sign in successfully' +
+                              lc.uname +
+                              db.islogin.toString());
+                        } else {
+                          Get.snackbar('Hata', 'Kullanıcı aktif değil....',
+                              backgroundColor: Global.dark_red,
+                              colorText: Global.light_pink);
+                        }
                       } else {
-                        Get.snackbar('Hata', 'Kullanıcı aktif değil....',
+                        Get.snackbar('Hata', 'Kayıtlı kullanıcı bulunamadı....',
                             backgroundColor: Global.dark_red,
                             colorText: Global.light_pink);
                       }
                     } else {
-                      Get.snackbar('Hata', 'Kayıtlı kullanıcı bulunamadı....',
-                          backgroundColor: Global.dark_red,
-                          colorText: Global.light_pink);
+                      lc.autoValidate = true;
+                      print('Failed to sign in ' + db.islogin.toString());
                     }
                   } else {
-                    lc.autoValidate = true;
-                    print('Failed to sign in ' + db.islogin.toString());
+                    Get.snackbar('Uyarı', 'Demo mod....');
+                    Get.offNamed('t/homePage');
                   }
                 },
+//#endregion
                 title: 'Login',
               ),
               SizedBox(
                 height: 10.0,
               ),
-              RButtonWidget(
+              EButtonWidget(
+                width: Get.width * .3,
+                height: Get.height * .06,
                 color: Global.medium,
                 onClick: () => Get.dialog(
                   ShowDialogWidget(

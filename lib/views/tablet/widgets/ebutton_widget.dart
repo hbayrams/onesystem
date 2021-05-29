@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/models/globals.dart';
 
-class RButtonWidget extends StatelessWidget {
+class EButtonWidget extends StatelessWidget {
   final String title;
   final Color color;
   final Function onClick;
+  final double width;
+  final double height;
 
-  const RButtonWidget({Key key, this.title, this.color, this.onClick})
+  const EButtonWidget(
+      {Key key, this.title, this.color, this.onClick, this.height, this.width})
       : super(key: key);
 
   @override

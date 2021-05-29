@@ -42,6 +42,12 @@ class _MainPageState extends State<MainPage>
     super.build(context);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: tc.isColorChangeDW(),
+            centerTitle: true,
+            title: Text('OneSystem > Main Page',
+                style: TextStyle(color: tc.isColorChangeWD(), fontSize: 16)),
+            toolbarHeight: 25),
         body: Padding(
           padding: const EdgeInsets.all(5.0),
           child: GetX<DataviewController>(
@@ -63,7 +69,17 @@ class _MainPageState extends State<MainPage>
                                 child: Column(
                                   children: [
                                     Expanded(
-                                      flex: 1,
+                                        flex: 1,
+                                        child: Container(
+                                            padding: EdgeInsets.only(left: 10),
+                                            alignment: Alignment.centerLeft,
+                                            child: Text('Search Isometric',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold)))),
+                                    Expanded(
+                                      flex: 2,
                                       child: Container(
                                         width: Get.width,
                                         child: Row(
@@ -82,7 +98,7 @@ class _MainPageState extends State<MainPage>
                                               ),
                                             ),
                                             Expanded(
-                                              flex: 5,
+                                              flex: 9,
                                               child: Container(
                                                 padding:
                                                     EdgeInsets.only(right: 5),
@@ -104,7 +120,7 @@ class _MainPageState extends State<MainPage>
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 1,
+                                      flex: 2,
                                       child: Row(
                                         children: [
                                           Expanded(
@@ -121,7 +137,7 @@ class _MainPageState extends State<MainPage>
                                             ),
                                           ),
                                           Expanded(
-                                            flex: 4,
+                                            flex: 7,
                                             child: DropDownWidget(
                                                 select: fileno,
                                                 enable: dvc.radioValue == 1
@@ -132,7 +148,7 @@ class _MainPageState extends State<MainPage>
                                                     gettingSpool(value)),
                                           ),
                                           Expanded(
-                                            flex: 1,
+                                            flex: 2,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 5.0),
@@ -157,7 +173,7 @@ class _MainPageState extends State<MainPage>
                               child: Container(
                                 width: Get.width,
                                 margin: EdgeInsets.all(2),
-                                padding: EdgeInsets.fromLTRB(15, 20, 5, 5),
+                                padding: EdgeInsets.fromLTRB(10, 20, 5, 5),
                                 decoration: getBox(tc),
                                 child: ISOInfoWidget(),
                               ),

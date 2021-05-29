@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:onesystem/models/globals.dart';
+import 'package:get/get.dart';
+import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 /// Represents Homepage for Navigation
@@ -9,8 +10,10 @@ class PDFViewerWidget extends StatefulWidget {
 }
 
 class _PDFViewerWidget extends State<PDFViewerWidget> {
+  ThemeController tc = Get.put(ThemeController());
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   PdfViewerController _pdfController;
+
   bool _canShowPdf;
   String _error;
 
@@ -25,22 +28,31 @@ class _PDFViewerWidget extends State<PDFViewerWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Global.black,
-        title: const Text('OneSytem PDF Viewer'),
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left,
+            color: tc.isColorChangeWD(),
+          ),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: tc.isColorChangeDW(),
+        centerTitle: true,
+        title: Text('OneSystem > PDFViewer Page',
+            style: TextStyle(color: tc.isColorChangeWD(), fontSize: 16)),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.bookmark,
-              color: Colors.white,
+              color: tc.isColorChangeWD(),
             ),
             onPressed: () {
               _pdfViewerKey.currentState?.openBookmarkView();
             },
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.zoom_in,
-              color: Colors.white,
+              color: tc.isColorChangeWD(),
             ),
             onPressed: () {
               _pdfController.zoomLevel = 3;
@@ -60,17 +72,15 @@ class _PDFViewerWidget extends State<PDFViewerWidget> {
                   key: _pdfViewerKey,
                   controller: _pdfController,
                   onDocumentLoadFailed: (details) {
-                    _error = details.description;
-                    print(details.description);
+                    setState(() {
+                      _error = details.description;
+                    });
+                    print(_error);
                   },
                 ),
               ]);
             } else {
-              return Container(
-                child: Text(_error == null
-                    ? 'File path or Connection error occurred'
-                    : _error),
-              );
+              return Container();
             }
           }),
     );

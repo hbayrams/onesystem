@@ -13,6 +13,14 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Row(
         children: [
+          Container(
+              alignment: Alignment.centerLeft,
+              child: Text('Isometric Information',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))),
+        ],
+      ),
+      Row(
+        children: [
           Expanded(flex: 1, child: Text('Condition :')),
           Expanded(
             flex: 1,
@@ -83,7 +91,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
               child: Container(
                 margin: EdgeInsets.only(right: 5),
                 child: Container(
-                  height: 30,
+                  height: Get.height / 27,
                   child: ElevatedButton.icon(
                       icon: Icon(Icons.file_download),
                       style: ElevatedButton.styleFrom(
@@ -101,7 +109,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
           Expanded(
               flex: 3,
               child: Container(
-                height: 30,
+                height: Get.height / 27,
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),
                     style: ElevatedButton.styleFrom(
@@ -116,7 +124,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
           Expanded(
               flex: 3,
               child: Container(
-                height: 30,
+                height: Get.height / 27,
                 margin: EdgeInsets.all(5),
                 child: ElevatedButton.icon(
                     icon: Icon(Icons.picture_as_pdf),

@@ -64,7 +64,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             padding: EdgeInsets.only(left: 10),
           ),
           Container(
-            height: widget.height == null ? Get.height / 2.38 : widget.height,
+            height: widget.height == null ? Get.height / 2.45 : widget.height,
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
               frozenColumnsCount: 1,

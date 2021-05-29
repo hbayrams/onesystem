@@ -5,151 +5,189 @@ import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
-import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
+import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
 
 class ReleasePage extends StatefulWidget {
   @override
   _ReleasePageState createState() => _ReleasePageState();
 }
 
-class _ReleasePageState extends State<ReleasePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _ReleasePageState extends State<ReleasePage>
+    with AutomaticKeepAliveClientMixin<ReleasePage> {
   DataviewController dvc = Get.put(DataviewController());
   ThemeController tc = Get.put(ThemeController());
   DatabaseOperations dbc = Get.put(DatabaseOperations());
-  EmployeeDataSource employeeDataSource1,
-      employeeDataSource2,
-      employeeDataSource3;
+  EmployeeDataSource employeeDataSource1, employeeDataSource2;
+
+  dynamic fileno, spoolno = '';
+
+  @override
+  void initState() {
+    print('MainPage initsate');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    print('MainPage dispose');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    DataviewController dvc = Get.put(DataviewController());
+    super.build(context);
     return SafeArea(
       child: Scaffold(
-        body: GetX<DataviewController>(
-          builder: (_) => Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: double.infinity,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Row(
+        appBar: AppBar(
+            backgroundColor: tc.isColorChangeDW(),
+            centerTitle: true,
+            title: Text('OneSystem > Release Page',
+                style: TextStyle(color: tc.isColorChangeWD(), fontSize: 16)),
+            toolbarHeight: 25),
+        body: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(children: [
+            //Sol kolon
+            Expanded(
+              flex: 2,
+              child:
+                  //Sol kolonu 2 ye böl...
+                  Column(
+                children: [
+                  //Sol-Ust
+                  Expanded(
+                      flex: 1,
+                      child: getBox(
+                          tc,
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                flex: 3,
-                                child: DropdownButton<String>(
-                                  value: dvc.ddValue,
-                                  hint: Text(
-                                    'Select List... ',
-                                    style: TextStyle(fontSize: 15),
+                                  flex: 2,
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 5),
+                                    child: DropDownWidget(
+                                        enable: true, title: 'Select List'),
+                                  )),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 5),
+                                  height: Get.height / 23,
+                                  child: ElevatedButton(
+                                    child: Text('Select'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Global.medium,
+                                    ),
+                                    onPressed: () {},
                                   ),
-                                  onChanged: (String value) {
-                                    dvc.ddValue = value;
-                                    dvc.widgetEnabled = true;
-                                    print("value: $value");
-                                    print('value_getx: ' + dvc.ddValue);
-                                  },
-                                  items: [
-                                    for (var i = 1; i < 10; i++)
-                                      DropdownMenuItem<String>(
-                                        value: i.toString(),
-                                        child: Text(
-                                          "RL-0000" + i.toString(),
-                                        ),
-                                      ),
-                                  ],
                                 ),
-                              ),
-                              SizedBox(
-                                width: 10,
                               ),
                               Expanded(
-                                flex: 2,
+                                flex: 1,
+                                child: Container(
+                                  height: Get.height / 23,
+                                  child: ElevatedButton(
+                                    child: Text('Cancel'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Global.dark_red,
+                                    ),
+                                    onPressed: null,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ))),
+                  //Sol-Alt
+                  Expanded(flex: 10, child: getBox(tc, Text('Sol-Alt'))),
+                ],
+              ),
+            ),
+            //Orta kolon
+            Expanded(
+              flex: 3,
+              child:
+                  //Orta kolonu 2 ye böl...
+                  Column(
+                children: [
+                  //Orta-Ust
+                  Expanded(flex: 1, child: getBox(tc, Text('Orta-Ust'))),
+                  //Orta-Alt
+                  Expanded(flex: 4, child: getBox(tc, Text('Orta-Alt')))
+                ],
+              ),
+            ),
+            //Sağ kolon
+            Expanded(
+              flex: 2,
+              child:
+                  //Sağ kolonu 2 ye böl...
+                  Column(
+                children: [
+                  //Sağ-Ust
+                  Expanded(flex: 4, child: getBox(tc, Text('Sağ-Ust'))),
+                  //Sağ-Alt
+                  Expanded(
+                      flex: 1,
+                      child: getBox(
+                          tc,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 5),
+                                height: Get.height / 13,
+                                width: Get.width / 10,
                                 child: ElevatedButton(
-                                  onPressed:
-                                      dvc.widgetEnabled ? dvc.widgetFunc : null,
                                   child: Text('Select'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Global.medium,
+                                  ),
+                                  onPressed: () {},
                                 ),
                               ),
+                              Container(
+                                height: Get.height / 13,
+                                width: Get.width / 10,
+                                child: ElevatedButton(
+                                  child: Text('Cancel'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Global.dark_red,
+                                  ),
+                                  onPressed: null,
+                                ),
+                              )
                             ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                          )))
+                ],
               ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  height: double.infinity,
-                  //color: Colors.amber,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Text('Orta 1-1'),
-                      ),
-                      Expanded(
-                        flex: 7,
-                        child: dbc.listForWeld.isEmpty
-                            ? null
-                            : DataGridWidget(
-                                colName: Global.listsWeld,
-                                title: 'Weld List',
-                                openDialog: false,
-                                dataSource: employeeDataSource2),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: double.infinity,
-                  //color: Colors.grey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: null,
-                              child: Text('Release'),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            ElevatedButton(
-                              onPressed: null,
-                              child: Text('Cancel'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            )
+          ]),
         ),
       ),
     );
   }
+
+  Container getBox(ThemeController tc, Widget child) {
+    return Container(
+      width: Get.width,
+      margin: EdgeInsets.all(2),
+      padding: EdgeInsets.all(5),
+      child: child,
+      decoration: BoxDecoration(
+        color: tc.isColorChangeDW(),
+        borderRadius: BorderRadius.circular(0),
+        boxShadow: [
+          BoxShadow(
+            spreadRadius: -3,
+            color: Global.extra_light,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
