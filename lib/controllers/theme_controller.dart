@@ -29,11 +29,11 @@ class ThemeController extends GetxController {
   }
 
   Color isColorChangeWD() {
-    return isSavedDarkMode() ? Global.white : Global.dark;
+    return isSavedDarkMode() ? Global.white : Global.dark_default;
   }
 
   Color isColorChangeDW() {
-    return isSavedDarkMode() ? Global.dark : Global.white;
+    return isSavedDarkMode() ? Global.dark_default : Global.white;
   }
 
   void saveThemeMode(bool isDarkMode) {

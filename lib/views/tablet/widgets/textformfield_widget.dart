@@ -34,12 +34,12 @@ class TextFormFieldWidget extends StatelessWidget {
       obscureText: obscureText,
       cursorColor: Global.focusedBlue,
       style: TextStyle(
-        color: tc.isSavedDarkMode() ? Global.white : Global.dark,
+        color: tc.isSavedDarkMode() ? Global.white : Global.dark_default,
         fontSize: 16.0,
       ),
       decoration: InputDecoration(
         labelStyle: TextStyle(
-            color: tc.isSavedDarkMode() ? Global.white : Global.dark,
+            color: tc.isSavedDarkMode() ? Global.white : Global.dark_default,
             fontSize: 18.0),
         focusColor: Global.focusedBlue,
         filled: true,
@@ -55,7 +55,7 @@ class TextFormFieldWidget extends StatelessWidget {
         prefixIcon: Icon(
           prefixIconData,
           size: 25,
-          color: tc.isSavedDarkMode() ? Global.white : Global.dark,
+          color: tc.isSavedDarkMode() ? Global.white : Global.dark_default,
         ),
         suffixIcon: GestureDetector(
           onTap: () {
@@ -64,7 +64,7 @@ class TextFormFieldWidget extends StatelessWidget {
           child: Icon(
             suffixIconData,
             size: 20,
-            color: lc.isVisible ? Global.dark : Global.light,
+            color: lc.isVisible ? Global.dark_default : Global.light,
           ),
         ),
       ),

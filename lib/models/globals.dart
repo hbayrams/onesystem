@@ -6,7 +6,8 @@ class Global {
   static const Color black = const Color(0xff000000);
   //static const Color focusedBlue = const Color(0xff004c8c);
   static const Color focusedBlue = const Color(0xff1479ff);
-  static const Color dark = const Color(0xff37414A); //*Sidebar top
+  static const Color dark_ = const Color(0xff37414A); //*Sidebar top
+  static const Color dark_default = const Color(0xff424242); //*Sidebar top
   static const Color medium = const Color(0xff4A5864); //*Sidebar main
   static const Color light = const Color(0xff91A0AD); //*Button
   static const Color extra_light = const Color(0xffC7D4E0); //*Sidebar menuItems

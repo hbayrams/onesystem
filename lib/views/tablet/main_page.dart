@@ -63,23 +63,22 @@ class _MainPageState extends State<MainPage>
                           children: [
                             Expanded(
                               flex: 1,
-                              child: Container(
+                              child: Card(
                                 margin: EdgeInsets.all(2),
-                                decoration: getBox(tc),
                                 child: Column(
                                   children: [
                                     Expanded(
-                                        flex: 1,
+                                        flex: 2,
                                         child: Container(
-                                            padding: EdgeInsets.only(left: 10),
+                                            width: double.infinity,
+                                            color: Global.medium,
+                                            padding: EdgeInsets.only(left: 2),
                                             alignment: Alignment.centerLeft,
                                             child: Text('Search Isometric',
                                                 style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold)))),
+                                                    color: Global.white)))),
                                     Expanded(
-                                      flex: 2,
+                                      flex: 3,
                                       child: Container(
                                         width: Get.width,
                                         child: Row(
@@ -120,7 +119,7 @@ class _MainPageState extends State<MainPage>
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 2,
+                                      flex: 3,
                                       child: Row(
                                         children: [
                                           Expanded(
@@ -170,12 +169,26 @@ class _MainPageState extends State<MainPage>
                             ),
                             Expanded(
                               flex: 2,
-                              child: Container(
-                                width: Get.width,
+                              child: Card(
                                 margin: EdgeInsets.all(2),
-                                padding: EdgeInsets.fromLTRB(10, 20, 5, 5),
-                                decoration: getBox(tc),
-                                child: ISOInfoWidget(),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                          width: double.infinity,
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.only(left: 2),
+                                          color: Global.medium,
+                                          child: Text('Isometric Information',
+                                              style: TextStyle(
+                                                  color: Global.white))),
+                                    ),
+                                    Expanded(flex: 7, child: ISOInfoWidget())
+                                  ],
+                                ),
                               ),
                             )
                           ],
@@ -183,20 +196,17 @@ class _MainPageState extends State<MainPage>
                       ),
                       Expanded(
                         flex: 2,
-                        child: Container(
+                        child: Card(
                           margin: EdgeInsets.all(2),
-                          padding: EdgeInsets.all(5),
-                          decoration: getBox(tc),
-                          height: Get.height,
                           child: dbc.listForSpool.isEmpty
                               ? null
                               : DataGridWidget(
-                                  colName: Global.listsSpool,
-                                  title: 'Spool List',
-                                  openDialog: false,
-                                  dataSource: employeeDataSource1,
-                                  tapFunc: (value) => gettingWeld(value),
-                                ),
+                                colName: Global.listsSpool,
+                                title: 'Spool List',
+                                openDialog: false,
+                                dataSource: employeeDataSource1,
+                                tapFunc: (value) => gettingWeld(value),
+                              ),
                         ),
                       ),
                     ],
@@ -204,11 +214,8 @@ class _MainPageState extends State<MainPage>
                 ),
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    padding: EdgeInsets.all(5),
+                  child: Card(
                     margin: EdgeInsets.all(2),
-                    decoration: getBox(tc),
-                    width: Get.width,
                     child: dbc.listForWeld.isEmpty
                         ? null
                         : DataGridWidget(
@@ -223,20 +230,6 @@ class _MainPageState extends State<MainPage>
           ),
         ),
       ),
-    );
-  }
-
-  BoxDecoration getBox(ThemeController tc) {
-    return BoxDecoration(
-      color: tc.isColorChangeDW(),
-      borderRadius: BorderRadius.circular(0),
-      boxShadow: [
-        BoxShadow(
-          spreadRadius: -3,
-          color: Global.extra_light,
-          blurRadius: 5,
-        ),
-      ],
     );
   }
 

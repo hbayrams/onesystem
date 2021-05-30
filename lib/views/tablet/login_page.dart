@@ -49,8 +49,8 @@ class LoginPage extends StatelessWidget {
                         Center(
                           child: Image.asset(
                             tc.isSavedDarkMode()
-                                ? 'assets/images/dark1_lowheight.png'
-                                : 'assets/images/light1_lowheight.png',
+                                ? 'assets/images/dark/dark1_lowheight.png'
+                                : 'assets/images/light/light1_lowheight.png',
                             height: keyboardOpen ? 0 : 50,
                           ),
                         ),
@@ -172,6 +172,7 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               EButtonWidget(
+                tcolor: Global.white,
                 width: Get.width * .3,
                 height: Get.height * .06,
                 color: Global.focusedBlue,
@@ -221,7 +222,8 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
               EButtonWidget(
                 width: Get.width * .3,
                 height: Get.height * .06,
-                color: Global.medium,
+                color: tc.isColorChangeWD(),
+                tcolor: tc.isColorChangeDW(),
                 onClick: () => Get.dialog(
                   ShowDialogWidget(
                     title: 'Exit',

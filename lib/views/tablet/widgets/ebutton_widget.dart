@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onesystem/models/globals.dart';
 
 class EButtonWidget extends StatelessWidget {
   final String title;
   final Color color;
+  final Color tcolor;
   final Function onClick;
   final double width;
   final double height;
 
   const EButtonWidget(
-      {Key key, this.title, this.color, this.onClick, this.height, this.width})
+      {Key key, this.title, this.color, this.onClick, this.height, this.width,this.tcolor})
       : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class EButtonWidget extends StatelessWidget {
           primary: color,
         ),
         onPressed: onClick,
-        child: Text(title, style: TextStyle(color: Global.white, fontSize: 18)),
+        child: Text(title, style: TextStyle(color: tcolor, fontSize: 18)),
       ),
     );
   }

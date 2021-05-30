@@ -64,7 +64,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             padding: EdgeInsets.only(left: 10),
           ),
           Container(
-            height: widget.height == null ? Get.height / 2.45 : widget.height,
+            height: widget.height == null ? Get.height / 2.50 : widget.height,
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
               frozenColumnsCount: 1,
@@ -111,12 +111,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                     )),
               )),
         icon: widget.openDialog
-            ? Icon(Icons.close,
-                size: 14,
-                color: tc.isSavedDarkMode() ? Global.dark : Global.extra_light)
-            : Icon(Icons.open_in_full,
-                size: 14,
-                color:
-                    tc.isSavedDarkMode() ? Global.dark : Global.extra_light));
+            ? Icon(Icons.close, size: 14,color: Global.white)
+            : Icon(Icons.open_in_full, size: 14,color: Global.white));
   }
 }

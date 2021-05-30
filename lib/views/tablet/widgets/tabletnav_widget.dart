@@ -42,10 +42,10 @@ class TabNavWidget extends StatelessWidget {
                 spreadRadius: 2)
           ],
         ),
-        width: 75,
+        width: 80,
         height: Get.height,
         child: NavigationRail(
-          backgroundColor: tc.isColorChangeDW(),
+          //backgroundColor: tc.isColorChangeDW(),
           labelType: NavigationRailLabelType.selected,
           groupAlignment: 0,
           onDestinationSelected: (int index) {
@@ -82,8 +82,8 @@ Widget _navLogo(SharedPrefController sc, ThemeController tc) {
       child: Column(
         children: [
           Image.asset(tc.isSavedDarkMode()
-              ? "assets/images/dark2.png"
-              : "assets/images/light2.png"),
+              ? "assets/images/dark/dark2.png"
+              : "assets/images/light/light2.png"),
           Divider(color: tc.isColorChangeWD())
         ],
       ));
@@ -125,7 +125,7 @@ Widget _logoutButton(SharedPrefController sc) {
                   text2: 'Account preferences will be reset!',
                   onPressed: () {
                     sc.isLogin = false;
-                    Get.offNamed('t/loginPage');
+                    Get.offAllNamed('t/loginPage');
                     print('Çıkış yapıldı: ' + sc.uname);
                   }),
               transitionDuration: Duration(milliseconds: 300),
