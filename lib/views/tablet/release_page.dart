@@ -5,7 +5,10 @@ import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
+import 'package:onesystem/views/tablet/widgets/releaseInfo_widget.dart';
+import 'package:onesystem/views/tablet/widgets/selectRelease_widget.dart';
 
 class ReleasePage extends StatefulWidget {
   @override
@@ -38,6 +41,7 @@ class _ReleasePageState extends State<ReleasePage>
     super.build(context);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
             backgroundColor: tc.isColorChangeDW(),
             centerTitle: true,
@@ -52,56 +56,7 @@ class _ReleasePageState extends State<ReleasePage>
               flex: 2,
               child:
                   //Sol kolonu 2 ye böl...
-                  Column(
-                children: [
-                  //Sol-Ust
-                  Expanded(
-                      flex: 1,
-                      child: getBox(
-                          tc,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    margin: EdgeInsets.only(right: 5),
-                                    child: DropDownWidget(
-                                        enable: true, title: 'Select List'),
-                                  )),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  margin: EdgeInsets.only(right: 5),
-                                  height: Get.height / 23,
-                                  child: ElevatedButton(
-                                    child: Text('Select'),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Global.medium,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  height: Get.height / 23,
-                                  child: ElevatedButton(
-                                    child: Text('Cancel'),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Global.dark_red,
-                                    ),
-                                    onPressed: null,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ))),
-                  //Sol-Alt
-                  Expanded(flex: 10, child: getBox(tc, Text('Sol-Alt'))),
-                ],
-              ),
+                  SelectRelease(),
             ),
             //Orta kolon
             Expanded(
@@ -111,9 +66,22 @@ class _ReleasePageState extends State<ReleasePage>
                   Column(
                 children: [
                   //Orta-Ust
-                  Expanded(flex: 1, child: getBox(tc, Text('Orta-Ust'))),
+                  Expanded(
+                      flex: 1,
+                      child: Card(
+                        margin: EdgeInsets.all(2),
+                        child: ReleaseInfo(),
+                      )),
                   //Orta-Alt
-                  Expanded(flex: 4, child: getBox(tc, Text('Orta-Alt')))
+                  Expanded(
+                      flex: 4,
+                      child: Card(
+                          margin: EdgeInsets.all(2),
+                          child: Expanded(
+                              flex: 1,
+                              child: Container(
+                                  width: double.infinity,
+                                  child: Text('Orta-Alt')))))
                 ],
               ),
             ),
@@ -125,40 +93,65 @@ class _ReleasePageState extends State<ReleasePage>
                   Column(
                 children: [
                   //Sağ-Ust
-                  Expanded(flex: 4, child: getBox(tc, Text('Sağ-Ust'))),
+                  Expanded(
+                      flex: 4,
+                      child: Card(
+                          margin: EdgeInsets.all(2),
+                          child: Expanded(
+                              flex: 1,
+                              child: Container(
+                                  width: double.infinity,
+                                  child: Text('Sağ-Ust'))))),
                   //Sağ-Alt
                   Expanded(
                       flex: 1,
-                      child: getBox(
-                          tc,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 5),
-                                height: Get.height / 13,
-                                width: Get.width / 10,
-                                child: ElevatedButton(
-                                  child: Text('Select'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Global.medium,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ),
-                              Container(
-                                height: Get.height / 13,
-                                width: Get.width / 10,
-                                child: ElevatedButton(
-                                  child: Text('Cancel'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Global.dark_red,
-                                  ),
-                                  onPressed: null,
-                                ),
-                              )
-                            ],
-                          )))
+                      child: Card(
+                        margin: EdgeInsets.all(2),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.only(left: 2),
+                                  color: Global.medium,
+                                  child: Text('Change Released Condition',
+                                      style: TextStyle(color: Global.white))),
+                            ),
+                            Expanded(
+                                flex: 4,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 5),
+                                        height: Get.height / 13,
+                                        width: Get.width / 10,
+                                        child: ElevatedButton(
+                                          child: Text('Release'),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Global.medium,
+                                          ),
+                                          onPressed: () {},
+                                        )),
+                                    Container(
+                                        height: Get.height / 13,
+                                        width: Get.width / 10,
+                                        child: ElevatedButton(
+                                            child: Text('Cancel Release',
+                                                textAlign: TextAlign.center),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Global.dark_red,
+                                            ),
+                                            onPressed: null))
+                                  ],
+                                ))
+                          ],
+                        ),
+                      ))
                 ],
               ),
             )
@@ -190,4 +183,6 @@ class _ReleasePageState extends State<ReleasePage>
 
   @override
   bool get wantKeepAlive => true;
+
+  gettingReleaseList(value) {}
 }

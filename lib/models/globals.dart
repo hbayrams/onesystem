@@ -14,7 +14,7 @@ class Global {
   static const Color full_light =
       const Color(0xffE9EDF5); //*Main background(scaffold...)
   static const Color sky_blue = const Color(0xff6AD1DF); //*Selected color
-  static const Color green = const Color(0xffA3CE78); //*Check color
+  static const Color green = const Color(0xff007f5f); //*Check color
   static const Color pink = const Color(0xffC93F5B); //*Alert color
   static const Color light_pink =
       const Color(0xffFFECEF); //*Alert background top

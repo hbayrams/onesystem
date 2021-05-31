@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/views/tablet/widgets/borderedText_widget.dart';
 
 class ISOInfoWidget extends StatefulWidget {
   @override
@@ -18,15 +19,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
           children: [
             Expanded(flex: 1, child: Text('Condition :')),
             Expanded(
-              flex: 1,
-              child: Container(
-                  padding: EdgeInsets.all(6),
-                  margin: EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Global.light)),
-                  child: SelectableText('On Going',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-            ),
+                flex: 1, child: BordersText(text: 'On Going', leftmargin: 6)),
             Expanded(
                 flex: 2,
                 child: Text('Passive',
@@ -37,16 +30,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
         Row(
           children: [
             Expanded(flex: 1, child: Text('Pipe Class :')),
-            Expanded(
-              flex: 1,
-              child: Container(
-                  padding: EdgeInsets.all(6),
-                  margin: EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Global.light)),
-                  child: SelectableText('AA51N',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-            ),
+            Expanded(flex: 1, child: BordersText(text: 'AA51N', leftmargin: 6)),
             Expanded(
                 flex: 2,
                 child: Text('Mat. - CS',
@@ -57,30 +41,15 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
         Row(
           children: [
             Expanded(flex: 1, child: Text('PED Category :')),
-            Expanded(
-              flex: 3,
-              child: Container(
-                  padding: EdgeInsets.all(6),
-                  margin: EdgeInsets.only(right: 197),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Global.light)),
-                  child: SelectableText('1',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-            ),
+            Expanded(flex: 1, child: BordersText(text: '1', leftmargin: 6)),
+            Expanded(flex: 2, child: Container())
           ],
         ),
         Row(
           children: [
             Expanded(flex: 1, child: Text('Paint Code :')),
             Expanded(
-                flex: 1,
-                child: Container(
-                    padding: EdgeInsets.all(6),
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: Global.light)),
-                    child: SelectableText('A.II.B.2-2',
-                        style: TextStyle(fontWeight: FontWeight.bold)))),
+                flex: 1, child: BordersText(text: 'A.II.B.2-2', leftmargin: 6)),
             Expanded(
                 flex: 2,
                 child: Container(

@@ -39,9 +39,11 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    //final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     super.build(context);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
             backgroundColor: tc.isColorChangeDW(),
             centerTitle: true,
@@ -199,14 +201,22 @@ class _MainPageState extends State<MainPage>
                         child: Card(
                           margin: EdgeInsets.all(2),
                           child: dbc.listForSpool.isEmpty
-                              ? null
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                      Center(
+                                          child: Icon(Icons.view_list_rounded,
+                                              size: 50)),
+                                      Text(
+                                          'To see the list, select a file number from the isometric search field')
+                                    ])
                               : DataGridWidget(
-                                colName: Global.listsSpool,
-                                title: 'Spool List',
-                                openDialog: false,
-                                dataSource: employeeDataSource1,
-                                tapFunc: (value) => gettingWeld(value),
-                              ),
+                                  colName: Global.listsSpool,
+                                  title: 'Spool List',
+                                  openDialog: false,
+                                  dataSource: employeeDataSource1,
+                                  tapFunc: (value) => gettingWeld(value),
+                                ),
                         ),
                       ),
                     ],
@@ -217,7 +227,15 @@ class _MainPageState extends State<MainPage>
                   child: Card(
                     margin: EdgeInsets.all(2),
                     child: dbc.listForWeld.isEmpty
-                        ? null
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                                Center(
+                                    child: Icon(Icons.view_list_rounded,
+                                        size: 50)),
+                                Text(
+                                    'To see the list, select a spool number from the spool list field')
+                              ])
                         : DataGridWidget(
                             colName: Global.listsWeld,
                             title: 'Weld List',

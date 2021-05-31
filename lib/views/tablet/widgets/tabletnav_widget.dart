@@ -45,7 +45,6 @@ class TabNavWidget extends StatelessWidget {
         width: 80,
         height: Get.height,
         child: NavigationRail(
-          //backgroundColor: tc.isColorChangeDW(),
           labelType: NavigationRailLabelType.selected,
           groupAlignment: 0,
           onDestinationSelected: (int index) {
@@ -59,9 +58,10 @@ class TabNavWidget extends StatelessWidget {
                   icon: Icon(navIcon[i], color: tc.isColorChangeWD()),
                   label: Text(
                     navList[i],
-                    style: TextStyle(color: Global.focusedBlue),
+                    style: TextStyle(color: Global.focusedBlue, fontSize: 13),
                   ),
-                  selectedIcon: Icon(navIcon[i], color: Global.focusedBlue)),
+                  selectedIcon:
+                      Icon(navIcon[i], color: Global.focusedBlue, size: 40)),
           ],
           selectedIndex: pc.pindex,
           trailing: Column(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -29,8 +28,6 @@ class DataGridWidget extends StatefulWidget {
 }
 
 class _DataGridWidgetState extends State<DataGridWidget> {
-  ThemeController tc = Get.put(ThemeController());
-
   @override
   void initState() {
     super.initState();
@@ -73,7 +70,6 @@ class _DataGridWidgetState extends State<DataGridWidget> {
               allowPullToRefresh: true,
               defaultColumnWidth: 80,
               source: widget.dataSource,
-              columnWidthMode: ColumnWidthMode.none,
               gridLinesVisibility: GridLinesVisibility.both,
               headerRowHeight: 50,
               rowHeight: 40,
@@ -111,7 +107,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                     )),
               )),
         icon: widget.openDialog
-            ? Icon(Icons.close, size: 14,color: Global.white)
-            : Icon(Icons.open_in_full, size: 14,color: Global.white));
+            ? Icon(Icons.close, size: 14, color: Global.white)
+            : Icon(Icons.open_in_full, size: 14, color: Global.white));
   }
 }
