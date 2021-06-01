@@ -64,6 +64,9 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             height: widget.height == null ? Get.height / 2.50 : widget.height,
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
+              isScrollbarAlwaysShown: true,
+              showSortNumbers: true,
+              allowSorting: true,
               frozenColumnsCount: 1,
               onCellTap: widget.tapFunc,
               headerGridLinesVisibility: GridLinesVisibility.both,

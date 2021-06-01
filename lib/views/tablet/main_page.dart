@@ -69,55 +69,51 @@ class _MainPageState extends State<MainPage>
                                 margin: EdgeInsets.all(2),
                                 child: Column(
                                   children: [
-                                    Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                            width: double.infinity,
-                                            color: Global.medium,
-                                            padding: EdgeInsets.only(left: 2),
-                                            alignment: Alignment.centerLeft,
-                                            child: Text('Search Isometric',
-                                                style: TextStyle(
-                                                    color: Global.white)))),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Container(
-                                        width: Get.width,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                alignment: Alignment.centerLeft,
-                                                child: Radio(
-                                                  value: 0,
-                                                  groupValue: dvc.radioValue,
-                                                  onChanged: (value) {
-                                                    dvc.radioValue = value;
-                                                  },
-                                                ),
+                                    Container(
+                                        height: 28,
+                                        width: double.infinity,
+                                        color: Global.medium,
+                                        padding: EdgeInsets.only(left: 2),
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('Search Isometric',
+                                            style: TextStyle(
+                                                color: Global.white))),
+                                    Container(
+                                      width: Get.width,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Radio(
+                                                value: 0,
+                                                groupValue: dvc.radioValue,
+                                                onChanged: (value) {
+                                                  dvc.radioValue = value;
+                                                },
                                               ),
                                             ),
-                                            Expanded(
-                                              flex: 9,
-                                              child: Container(
-                                                padding:
-                                                    EdgeInsets.only(right: 5),
-                                                alignment: Alignment.centerLeft,
-                                                child: DropDownWidget(
-                                                  select: fileno,
-                                                  enable: dvc.radioValue == 0
-                                                      ? true
-                                                      : false,
-                                                  title: 'Select Iso NO',
-                                                  changed: (value) {
-                                                    gettingSpool(value);
-                                                  },
-                                                ),
+                                          ),
+                                          Expanded(
+                                            flex: 9,
+                                            child: Container(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              alignment: Alignment.centerLeft,
+                                              child: DropDownWidget(
+                                                select: fileno,
+                                                enable: dvc.radioValue == 0
+                                                    ? true
+                                                    : false,
+                                                title: 'Select Iso NO',
+                                                changed: (value) {
+                                                  gettingSpool(value);
+                                                },
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Expanded(
@@ -177,18 +173,16 @@ class _MainPageState extends State<MainPage>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                          width: double.infinity,
-                                          alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.only(left: 2),
-                                          color: Global.medium,
-                                          child: Text('Isometric Information',
-                                              style: TextStyle(
-                                                  color: Global.white))),
-                                    ),
-                                    Expanded(flex: 7, child: ISOInfoWidget())
+                                    Container(
+                                        height: 28,
+                                        width: double.infinity,
+                                        alignment: Alignment.centerLeft,
+                                        padding: EdgeInsets.only(left: 2),
+                                        color: Global.medium,
+                                        child: Text('Isometric Information',
+                                            style: TextStyle(
+                                                color: Global.white))),
+                                    ISOInfoWidget()
                                   ],
                                 ),
                               ),
@@ -274,6 +268,7 @@ class _MainPageState extends State<MainPage>
     {
       spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
           .toString();
+
       print('Seçilen file-spool: ' +
           fileno.toString() +
           '-' +

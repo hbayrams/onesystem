@@ -5,8 +5,6 @@ import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
-import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
-import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
 import 'package:onesystem/views/tablet/widgets/releaseInfo_widget.dart';
 import 'package:onesystem/views/tablet/widgets/selectRelease_widget.dart';
 
@@ -157,26 +155,6 @@ class _ReleasePageState extends State<ReleasePage>
             )
           ]),
         ),
-      ),
-    );
-  }
-
-  Container getBox(ThemeController tc, Widget child) {
-    return Container(
-      width: Get.width,
-      margin: EdgeInsets.all(2),
-      padding: EdgeInsets.all(5),
-      child: child,
-      decoration: BoxDecoration(
-        color: tc.isColorChangeDW(),
-        borderRadius: BorderRadius.circular(0),
-        boxShadow: [
-          BoxShadow(
-            spreadRadius: -3,
-            color: Global.extra_light,
-            blurRadius: 5,
-          ),
-        ],
       ),
     );
   }

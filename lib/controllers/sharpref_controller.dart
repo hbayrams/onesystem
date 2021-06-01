@@ -6,7 +6,7 @@ class SharedPrefController extends GetxController {
   final box = GetStorage();
   final _uname = ''.obs;
   final _password = ''.obs;
-  final _isLogin = false.obs;
+  final _isRemember = false.obs;
 
   LoginController _controller = Get.put(LoginController());
 
@@ -18,11 +18,11 @@ class SharedPrefController extends GetxController {
       await _loadFromPrefs();
       print('İlk gelen Uname: ' + box.read('name'));
       print('İlk gelen Pass: ' + _password.value);
-      print('İlk gelen Login: ' + _isLogin.value.toString());
+      print('İlk gelen Login: ' + _isRemember.value.toString());
     }
   }
 
-  bool get isLogin => _isLogin.value;
+  bool get isRemember => _isRemember.value;
   String get uname => _uname.value;
   String get password => _password.value;
 
@@ -45,7 +45,7 @@ class SharedPrefController extends GetxController {
     if (_controller.uname != null || _controller.password != null) {
       box.write('name', _controller.uname);
       box.write('pass', _controller.password);
-      box.write('login', _isLogin.value);
+      box.write('login', _isRemember.value);
     }
 
     //print(_isLogin.value);
@@ -55,7 +55,7 @@ class SharedPrefController extends GetxController {
     await _initPrefs();
     _uname.value = box.read('name');
     _password.value = box.read('pass');
-    _isLogin.value = box.read('login');
+    _isRemember.value = box.read('login');
     // print(_isLogin.value);
   }
 
@@ -66,9 +66,9 @@ class SharedPrefController extends GetxController {
     box.remove('login');
   }
 
-  set isLogin(bool value) {
-    _isLogin.value = value;
-    if (_isLogin.value) {
+  set isRemember(bool value) {
+    _isRemember.value = value;
+    if (_isRemember.value) {
       _saveToPrefs();
       //print('Remember: isLogin=>' + _isLogin.toString());
     } else {

@@ -124,7 +124,7 @@ Widget _logoutButton(SharedPrefController sc) {
                   text1: 'Do you check out the account?',
                   text2: 'Account preferences will be reset!',
                   onPressed: () {
-                    sc.isLogin = false;
+                    sc.isRemember = false;
                     Get.offAllNamed('t/loginPage');
                     print('Çıkış yapıldı: ' + sc.uname);
                   }),

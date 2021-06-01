@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                       pagination: SwiperPagination(
                         margin: EdgeInsets.only(bottom: 30),
                         builder: DotSwiperPaginationBuilder(
-                            activeColor: Global.dark_red, activeSize: 15.0),
+                            activeColor: Global.focusedBlue, activeSize: 15.0),
                       ),
                     ),
                   ),
@@ -135,9 +135,9 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
                             value: lc.checkVal,
                             onChanged: (bool value) {
                               lc.checkVal = !lc.checkVal;
-                              sc.isLogin = lc.checkVal;
+                              sc.isRemember = lc.checkVal;
                               print('Remember: Login Value: ' +
-                                  sc.isLogin.toString());
+                                  sc.isRemember.toString());
                             },
                           ),
                         ),
@@ -251,7 +251,7 @@ TextFormFieldWidget buildTextFormFieldWidgetUsername(LoginController lc) {
     hintText: 'Username',
     obscureText: false,
     prefixIconData: Icons.person,
-    //*suffixIconData: model.isValid ? Icons.check : null,
+    //suffixIconData: model.isValid ? Icons.check : null,
     validator: lc.validateUname,
     onChanged: (value) => lc.onSavedUname(value),
   );

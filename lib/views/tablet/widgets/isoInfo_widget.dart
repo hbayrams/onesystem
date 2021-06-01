@@ -74,6 +74,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
                 flex: 3,
                 child: Container(
                   height: Get.height / 27,
+                  margin: EdgeInsets.fromLTRB(6, 0, 3, 3),
                   child: ElevatedButton.icon(
                       icon: Icon(Icons.picture_as_pdf),
                       style: ElevatedButton.styleFrom(
@@ -89,7 +90,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
                 flex: 3,
                 child: Container(
                   height: Get.height / 27,
-                  margin: EdgeInsets.all(5),
+                  margin: EdgeInsets.fromLTRB(6, 0, 6, 3),
                   child: ElevatedButton.icon(
                       icon: Icon(Icons.picture_as_pdf),
                       style: ElevatedButton.styleFrom(

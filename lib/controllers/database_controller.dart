@@ -33,20 +33,17 @@ class DatabaseOperations extends GetxController {
       var result = await connect.query(query, [name, pass]);
 //#endregion
 
-//#region SONUCU LISTEYE AKTAR
       _lisForSign.clear();
-      for (var item in result) {
-        _lisForSign.add(
-          SigninModel(item[1], item[2], item[6], item[3], item[4]),
-        );
-      }
-      print('Dataop daki listemiz1 : ' +
-          _lisForSign.length.toString() +
-          _lisForSign[0].photo_String);
-//#endregion
 
 //#region SONUC BOSMU KONTROL
       if (result.isNotEmpty) {
+//#region SONUCU LISTEYE AKTAR
+        for (var item in result) {
+          _lisForSign.add(
+            SigninModel(item[1], item[2], item[6], item[3], item[4]),
+          );
+        }
+//#endregion
         _islogin.value = true;
       } else {
         _islogin.value = false;
