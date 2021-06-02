@@ -6,9 +6,10 @@ class DropDownWidget extends StatelessWidget {
   final String title, select;
   final Function changed;
   final bool enable;
+  final List<String> items;
 
   const DropDownWidget(
-      {Key key, this.title, this.select, this.changed, this.enable})
+      {Key key, this.title, this.select, this.changed, this.enable, this.items})
       : super(key: key);
 
   @override
@@ -26,7 +27,8 @@ class DropDownWidget extends StatelessWidget {
         autoValidateMode: AutovalidateMode.always,
         showSearchBox: true,
         autoFocusSearchBox: true,
-        items: ['F00001', 'F00002', 'F00003', 'F00004'],
+        items: items,
+        //['F00001', 'F00002', 'F00003', 'F00004'],
         //['YASDJAH', 'OPOFDKOGKD'],
         selectedItem: select == null ? title : select,
         onChanged: changed,

@@ -11,10 +11,12 @@ class DataGridWidget extends StatefulWidget {
   final Function tapFunc;
   final double height;
   final List<String> colName;
+  final DataGridController controller;
   // final bool visible;
 
   const DataGridWidget(
       {Key key,
+      this.controller,
       this.title,
       this.openDialog,
       this.dataSource,
@@ -64,8 +66,9 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             height: widget.height == null ? Get.height / 2.50 : widget.height,
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
+              controller: widget.controller,
               isScrollbarAlwaysShown: true,
-              showSortNumbers: true,
+              selectionMode: SelectionMode.single,
               allowSorting: true,
               frozenColumnsCount: 1,
               onCellTap: widget.tapFunc,

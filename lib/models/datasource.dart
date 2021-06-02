@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 class EmployeeDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
   EmployeeDataSource(
-      {List<dynamic> employeeData, List<dynamic> listForFields}) {
+      {List<dynamic> employeeData, List<dynamic> listForFields, int detail}) {
     print(employeeData.length.toString());
 
     _employeeData = employeeData

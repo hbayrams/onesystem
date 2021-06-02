@@ -22,11 +22,13 @@ class _MainPageState extends State<MainPage>
   ThemeController tc = Get.put(ThemeController());
   DatabaseOperations dbc = Get.put(DatabaseOperations());
   EmployeeDataSource employeeDataSource1, employeeDataSource2;
+  final DataGridController _dataGridController = DataGridController();
 
   dynamic fileno, spoolno = '';
 
   @override
   void initState() {
+    gettingFile();
     print('MainPage initsate');
     super.initState();
   }
@@ -136,6 +138,7 @@ class _MainPageState extends State<MainPage>
                                           Expanded(
                                             flex: 7,
                                             child: DropDownWidget(
+                                                items: dbc.listForFile.cast(),
                                                 select: fileno,
                                                 enable: dvc.radioValue == 1
                                                     ? true
@@ -205,6 +208,7 @@ class _MainPageState extends State<MainPage>
                                           'To see the list, select a file number from the isometric search field')
                                     ])
                               : DataGridWidget(
+                                  controller: _dataGridController,
                                   colName: Global.listsSpool,
                                   title: 'Spool List',
                                   openDialog: false,
@@ -231,6 +235,7 @@ class _MainPageState extends State<MainPage>
                                     'To see the list, select a spool number from the spool list field')
                               ])
                         : DataGridWidget(
+                            controller: _dataGridController,
                             colName: Global.listsWeld,
                             title: 'Weld List',
                             openDialog: false,
@@ -245,40 +250,39 @@ class _MainPageState extends State<MainPage>
     );
   }
 
-  Future<void> gettingSpool(fno) async {
-    {
-      dbc.listForWeld.clear();
-      setState(() {
-        fileno = fno;
-      });
-      if (fno != '') {
-        await dbc.getSpool(fno: fno, query: MysqlQuery().queryList['getSpool']);
-      } else {
-        await null;
-      }
+  Future<void> gettingFile() async {
+    await dbc.getFileNO(query: MysqlQuery().queryList['getFileNO']);
+  }
 
-      print(dbc.listForFields.length.toString() +
-          'Yüklenen db buytu: ${dbc.listForSpool.length.toString()}');
-      employeeDataSource1 = EmployeeDataSource(
-          employeeData: dbc.listForSpool, listForFields: dbc.listForFields);
+  Future<void> gettingSpool(fno) async {
+    dbc.listForWeld.clear();
+    setState(() {
+      fileno = fno;
+    });
+    if (fno != '') {
+      await dbc.getSpool(fno: fno, query: MysqlQuery().queryList['getSpool']);
+    } else {
+      await null;
     }
+
+    print(dbc.listForFields.length.toString() +
+        'Yüklenen db buytu: ${dbc.listForSpool.length.toString()}');
+    employeeDataSource1 = EmployeeDataSource(
+        employeeData: dbc.listForSpool, listForFields: dbc.listForFields);
   }
 
   Future<void> gettingWeld(DataGridCellTapDetails details) async {
-    {
-      spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
-          .toString();
-
-      print('Seçilen file-spool: ' +
-          fileno.toString() +
-          '-' +
-          spoolno.toString());
-      await dbc.getWeld(
-          fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
-      print('Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
-      employeeDataSource2 = EmployeeDataSource(
-          employeeData: dbc.listForWeld, listForFields: dbc.listForFields);
-    }
+    spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
+        .toString();
+    print(
+        'Seçilen file-spool: ' + fileno.toString() + '-' + spoolno.toString());
+    await dbc.getWeld(
+        fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
+    print('Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
+    employeeDataSource2 = EmployeeDataSource(
+      employeeData: dbc.listForWeld,
+      listForFields: dbc.listForFields,
+    );
   }
 
   @override
