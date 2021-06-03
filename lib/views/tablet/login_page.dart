@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: keyboardOpen ? 0 : Get.height * .03),
-                        buildFormLogin2(sc, lc, tc, db, context),
+                        buildFormLogin(sc, lc, tc, db, context),
                       ],
                     ),
                   ),
@@ -95,7 +95,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-Form buildFormLogin2(SharedPrefController sc, LoginController lc,
+Form buildFormLogin(SharedPrefController sc, LoginController lc,
     ThemeController tc, DatabaseOperations db, BuildContext context) {
   return Form(
     key: lc.formKey.value,
@@ -141,12 +141,20 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
                             },
                           ),
                         ),
-                        Text(
-                          'Remember Me?',
-                          style: TextStyle(
-                              color: tc.isColorChangeWD(),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
+                        InkWell(
+                          onTap: () {
+                            lc.checkVal = !lc.checkVal;
+                            sc.isRemember = lc.checkVal;
+                            print('Remember: Login Value: ' +
+                                sc.isRemember.toString());
+                          },
+                          child: Text(
+                            'Remember Me?',
+                            style: TextStyle(
+                                color: tc.isColorChangeWD(),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
@@ -191,6 +199,7 @@ Form buildFormLogin2(SharedPrefController sc, LoginController lc,
                         if (access[0].user_Actual == 1) {
                           lc.formKey.value.currentState.save();
                           Get.offNamed('t/homePage'); //with arguments
+                          sc.saveToPrefsPhoto();
                           print('Sign in successfully' +
                               lc.uname +
                               db.islogin.toString());

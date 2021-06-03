@@ -28,8 +28,6 @@ class DropDownWidget extends StatelessWidget {
         showSearchBox: true,
         autoFocusSearchBox: true,
         items: items,
-        //['F00001', 'F00002', 'F00003', 'F00004'],
-        //['YASDJAH', 'OPOFDKOGKD'],
         selectedItem: select == null ? title : select,
         onChanged: changed,
         mode: Mode.MENU,

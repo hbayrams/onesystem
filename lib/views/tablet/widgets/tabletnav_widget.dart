@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/page_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
@@ -30,6 +31,8 @@ class TabNavWidget extends StatelessWidget {
     SharedPrefController sc = Get.put(SharedPrefController());
     PagesController pc = Get.put(PagesController());
     ThemeController tc = Get.put(ThemeController());
+    DatabaseOperations dbc = Get.put(DatabaseOperations());
+
     return Obx(
       () => Container(
         decoration: BoxDecoration(
@@ -66,7 +69,7 @@ class TabNavWidget extends StatelessWidget {
           selectedIndex: pc.pindex,
           trailing: Column(
             children: [
-              //_leadingwidget(sc, tc),
+              _leadingwidget(sc, tc, dbc),
               _logoutButton(sc),
             ],
           ),
@@ -90,20 +93,24 @@ Widget _navLogo(SharedPrefController sc, ThemeController tc) {
 }
 
 // ignore: unused_element
-Widget _leadingwidget(SharedPrefController sc, ThemeController tc) {
+Widget _leadingwidget(
+    SharedPrefController sc, ThemeController tc, DatabaseOperations dbc) {
   return Padding(
     padding: const EdgeInsets.only(top: 70, left: 5, right: 5),
     child: Column(
       children: [
-        Divider(color: tc.isColorChangeWD()),
-        CircleAvatar(
-            backgroundColor: Global.focusedBlue,
-            radius: 20,
-            child: Icon(Icons.people, size: 30, color: Global.white)),
-        // SizedBox(
-        //   height: 10,
-        // ),
-        // Text(sc.uname, style: TextStyle(fontWeight: FontWeight.bold))
+        Container(
+            padding: EdgeInsets.all(2),
+            decoration: BoxDecoration(
+                color: Global.focusedBlue, shape: BoxShape.circle),
+            child: CircleAvatar(
+                backgroundColor: Global.trnsp,
+                backgroundImage:
+                    NetworkImage(sc.photoString == '' ? '' : sc.photoString))),
+        SizedBox(
+          height: 10,
+        ),
+        Text('oguzkaba', style: TextStyle(fontWeight: FontWeight.bold)),
       ],
     ),
   );

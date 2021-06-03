@@ -1,12 +1,16 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'login_controller.dart';
 
 class SharedPrefController extends GetxController {
+  DatabaseOperations dbc = Get.put(DatabaseOperations());
+
   final box = GetStorage();
   final _uname = ''.obs;
   final _password = ''.obs;
   final _isRemember = false.obs;
+  final _photoString = ''.obs;
 
   LoginController _controller = Get.put(LoginController());
 
@@ -18,10 +22,12 @@ class SharedPrefController extends GetxController {
       await _loadFromPrefs();
       print('İlk gelen Uname: ' + box.read('name'));
       print('İlk gelen Pass: ' + _password.value);
+      print('İlk gelen Photo: ' + _photoString.value.toString());
       print('İlk gelen Login: ' + _isRemember.value.toString());
     }
   }
 
+  String get photoString => _photoString.value;
   bool get isRemember => _isRemember.value;
   String get uname => _uname.value;
   String get password => _password.value;
@@ -46,9 +52,15 @@ class SharedPrefController extends GetxController {
       box.write('name', _controller.uname);
       box.write('pass', _controller.password);
       box.write('login', _isRemember.value);
-    }
+      // box.write('photo', dbc.lisForSign.first.photo_String);
+    } //print(_isLogin.value);
+  }
 
-    //print(_isLogin.value);
+  saveToPrefsPhoto() async {
+    await _initPrefs();
+    if (dbc.lisForSign.first.photo_String.isNotEmpty) {
+      box.write('photo', dbc.lisForSign.first.photo_String);
+    }
   }
 
   _loadFromPrefs() async {
@@ -56,6 +68,7 @@ class SharedPrefController extends GetxController {
     _uname.value = box.read('name');
     _password.value = box.read('pass');
     _isRemember.value = box.read('login');
+    _photoString.value = box.read('photo');
     // print(_isLogin.value);
   }
 
@@ -64,6 +77,7 @@ class SharedPrefController extends GetxController {
     box.remove('name');
     box.remove('pass');
     box.remove('login');
+    box.remove('photo');
   }
 
   set isRemember(bool value) {

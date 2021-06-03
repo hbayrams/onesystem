@@ -272,17 +272,21 @@ class _MainPageState extends State<MainPage>
   }
 
   Future<void> gettingWeld(DataGridCellTapDetails details) async {
-    spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
-        .toString();
-    print(
-        'Seçilen file-spool: ' + fileno.toString() + '-' + spoolno.toString());
-    await dbc.getWeld(
-        fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
-    print('Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
-    employeeDataSource2 = EmployeeDataSource(
-      employeeData: dbc.listForWeld,
-      listForFields: dbc.listForFields,
-    );
+    if (details.rowColumnIndex.rowIndex != 0) {
+      spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
+          .toString();
+      print('Seçilen file-spool: ' +
+          fileno.toString() +
+          '-' +
+          spoolno.toString());
+      await dbc.getWeld(
+          fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
+      print('Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
+      employeeDataSource2 = EmployeeDataSource(
+        employeeData: dbc.listForWeld,
+        listForFields: dbc.listForFields,
+      );
+    }
   }
 
   @override
