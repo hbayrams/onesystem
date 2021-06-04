@@ -72,9 +72,13 @@ class _MainPageState extends State<MainPage>
                                 child: Column(
                                   children: [
                                     Container(
+                                        decoration: BoxDecoration(
+                                            color: Global.medium,
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(3),
+                                                topRight: Radius.circular(3))),
                                         height: 28,
                                         width: double.infinity,
-                                        color: Global.medium,
                                         padding: EdgeInsets.only(left: 2),
                                         alignment: Alignment.centerLeft,
                                         child: Text('Search Isometric',
@@ -177,11 +181,15 @@ class _MainPageState extends State<MainPage>
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
+                                        decoration: BoxDecoration(
+                                            color: Global.medium,
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(3),
+                                                topRight: Radius.circular(3))),
                                         height: 28,
                                         width: double.infinity,
                                         alignment: Alignment.centerLeft,
                                         padding: EdgeInsets.only(left: 2),
-                                        color: Global.medium,
                                         child: Text('Isometric Information',
                                             style: TextStyle(
                                                 color: Global.white))),

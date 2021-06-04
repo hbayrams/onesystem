@@ -49,6 +49,10 @@ class _DataGridWidgetState extends State<DataGridWidget> {
       child: Column(
         children: [
           Container(
+            decoration: BoxDecoration(
+                color: Global.medium,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(3), topRight: Radius.circular(3))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,7 +61,6 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                 buildIconButton(),
               ],
             ),
-            color: Global.medium,
             width: double.infinity,
             height: 28,
             padding: EdgeInsets.only(left: 10),

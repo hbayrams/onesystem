@@ -5,6 +5,8 @@ import 'package:onesystem/controllers/page_controller.dart';
 import 'package:onesystem/controllers/sharpref_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/models/mysql_query.dart';
+import 'package:onesystem/views/tablet/profile_page.dart';
 import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 
 class TabNavWidget extends StatelessWidget {
@@ -70,12 +72,21 @@ class TabNavWidget extends StatelessWidget {
           trailing: Column(
             children: [
               _leadingwidget(sc, tc, dbc),
-              _logoutButton(sc),
+              //_logoutButton(sc),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+getSignProfile(SharedPrefController sc, DatabaseOperations dbc) async {
+  if (dbc.lisForSign.isEmpty) {
+    await dbc.loginQuery(
+        name: sc.uname,
+        pass: sc.password,
+        query: MysqlQuery().queryList['login']);
   }
 }
 
@@ -95,22 +106,50 @@ Widget _navLogo(SharedPrefController sc, ThemeController tc) {
 // ignore: unused_element
 Widget _leadingwidget(
     SharedPrefController sc, ThemeController tc, DatabaseOperations dbc) {
+  String pString, unameString;
+
+  getSignProfile(sc, dbc);
+
+  if (dbc.lisForSign.isNotEmpty) {
+    pString = dbc.lisForSign.first.photo_String;
+  } else if (sc.photoString == null || sc.photoString == '') {
+    pString = 'https://img.icons8.com/dusk/64/000000/engineer.png';
+  } else {
+    pString = sc.photoString;
+  }
+
+  if (sc.uname == null || sc.uname == '') {
+    unameString = dbc.lisForSign.first.user_Name;
+  } else {
+    unameString = sc.uname;
+  }
+
   return Padding(
-    padding: const EdgeInsets.only(top: 70, left: 5, right: 5),
+    padding: const EdgeInsets.only(top: 35, left: 5, right: 5),
     child: Column(
       children: [
-        Container(
-            padding: EdgeInsets.all(2),
-            decoration: BoxDecoration(
-                color: Global.focusedBlue, shape: BoxShape.circle),
-            child: CircleAvatar(
-                backgroundColor: Global.trnsp,
-                backgroundImage:
-                    NetworkImage(sc.photoString == '' ? '' : sc.photoString))),
+        Divider(color: tc.isColorChangeWD()),
         SizedBox(
           height: 10,
         ),
-        Text('oguzkaba', style: TextStyle(fontWeight: FontWeight.bold)),
+        InkWell(
+          onTap: () => Get.bottomSheet(ProfilePage(
+              widgetLogout: _logoutButton(sc),
+              pString: pString,
+              unameString: unameString)),
+          child: Container(
+              padding: EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                  color: Global.focusedBlue, shape: BoxShape.circle),
+              child: CircleAvatar(
+                  backgroundColor: Global.trnsp,
+                  backgroundImage: NetworkImage(pString))),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(unameString,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
       ],
     ),
   );

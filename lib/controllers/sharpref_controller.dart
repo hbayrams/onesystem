@@ -64,11 +64,11 @@ class SharedPrefController extends GetxController {
   }
 
   _loadFromPrefs() async {
-    await _initPrefs();
     _uname.value = box.read('name');
     _password.value = box.read('pass');
     _isRemember.value = box.read('login');
     _photoString.value = box.read('photo');
+    await _initPrefs();
     // print(_isLogin.value);
   }
 
