@@ -110,9 +110,9 @@ Widget _leadingwidget(
 
   getSignProfile(sc, dbc);
 
-  if (dbc.lisForSign.isNotEmpty) {
+  if (dbc.lisForSign.first.photo_String.isNotEmpty) {
     pString = dbc.lisForSign.first.photo_String;
-  } else if (sc.photoString == null || sc.photoString == '') {
+  } else if (sc.photoString == null || sc.photoString == '' ) {
     pString = 'https://img.icons8.com/dusk/64/000000/engineer.png';
   } else {
     pString = sc.photoString;
@@ -134,7 +134,7 @@ Widget _leadingwidget(
         ),
         InkWell(
           onTap: () => Get.bottomSheet(ProfilePage(
-              widgetLogout: _logoutButton(sc),
+              widgetLogout: _logoutButton(sc,dbc),
               pString: pString,
               unameString: unameString)),
           child: Container(
@@ -155,7 +155,7 @@ Widget _leadingwidget(
   );
 }
 
-Widget _logoutButton(SharedPrefController sc) {
+Widget _logoutButton(SharedPrefController sc,DatabaseOperations dbc) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Column(
@@ -171,6 +171,8 @@ Widget _logoutButton(SharedPrefController sc) {
                   text2: 'Account preferences will be reset!',
                   onPressed: () {
                     sc.isRemember = false;
+                    dbc.listForWeld.clear();
+                    dbc.listForSpool.clear();
                     Get.offAllNamed('t/loginPage');
                     print('Çıkış yapıldı: ' + sc.uname);
                   }),
