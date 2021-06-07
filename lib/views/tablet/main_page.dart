@@ -267,7 +267,7 @@ class _MainPageState extends State<MainPage>
     setState(() {
       fileno = fno;
     });
-    if (fileno != '' || fileno!=null) {
+    if (fileno != '' || fileno != null) {
       await dbc.getSpool(fno: fno, query: MysqlQuery().queryList['getSpool']);
     } else {
       await null;

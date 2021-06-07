@@ -67,8 +67,8 @@ class _PDFViewerWidget extends State<PDFViewerWidget> {
           builder: (context, snapshot) {
             if (_canShowPdf) {
               return Stack(children: [
-                SfPdfViewer.network(
-                  'https://dart.dev/guides/language/specifications/DartLangSpec-v2.2.pdf',
+                SfPdfViewer.asset(
+                  'assets/9100-3-57-H1NL-010-YA1-4A.pdf',
                   key: _pdfViewerKey,
                   controller: _pdfController,
                   onDocumentLoadFailed: (details) {

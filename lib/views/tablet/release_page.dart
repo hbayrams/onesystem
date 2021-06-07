@@ -58,21 +58,21 @@ class _ReleasePageState extends State<ReleasePage>
             ),
             //Orta kolon
             Expanded(
-              flex: 3,
+              flex: 4,
               child:
                   //Orta kolonu 2 ye böl...
                   Column(
                 children: [
                   //Orta-Ust
                   Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Card(
                         margin: EdgeInsets.all(2),
                         child: ReleaseInfo(),
                       )),
                   //Orta-Alt
                   Expanded(
-                      flex: 4,
+                      flex: 7,
                       child: Card(
                           margin: EdgeInsets.all(2),
                           child: Expanded(

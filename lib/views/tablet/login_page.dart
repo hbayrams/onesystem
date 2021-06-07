@@ -198,7 +198,7 @@ Form buildFormLogin(SharedPrefController sc, LoginController lc,
                       if (db.islogin) {
                         if (access[0].user_Actual == 1) {
                           lc.formKey.value.currentState.save();
-                          sc.saveToPrefsPhoto();
+                          sc.saveToPrefsPhotoLevel();
                           Get.offNamed('t/homePage'); //with arguments
                           print('Sign in successfully' +
                               lc.uname +

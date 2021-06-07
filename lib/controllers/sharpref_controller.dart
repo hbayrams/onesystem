@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:onesystem/controllers/database_controller.dart';
-import 'login_controller.dart';
+import 'package:onesystem/controllers/login_controller.dart';
 
 class SharedPrefController extends GetxController {
   DatabaseOperations dbc = Get.put(DatabaseOperations());
@@ -11,6 +11,7 @@ class SharedPrefController extends GetxController {
   final _password = ''.obs;
   final _isRemember = false.obs;
   final _photoString = ''.obs;
+  final _level = 1.obs;
 
   LoginController _controller = Get.put(LoginController());
 
@@ -23,10 +24,12 @@ class SharedPrefController extends GetxController {
       print('İlk gelen Uname: ' + box.read('name'));
       print('İlk gelen Pass: ' + _password.value);
       print('İlk gelen Photo: ' + _photoString.value.toString());
+      print('İlk gelen Level: ' + _level.value.toString());
       print('İlk gelen Login: ' + _isRemember.value.toString());
     }
   }
 
+  int get level => _level.value;
   String get photoString => _photoString.value;
   bool get isRemember => _isRemember.value;
   String get uname => _uname.value;
@@ -56,10 +59,11 @@ class SharedPrefController extends GetxController {
     } //print(_isLogin.value);
   }
 
-  saveToPrefsPhoto() async {
+  saveToPrefsPhotoLevel() async {
     await _initPrefs();
-    if (dbc.lisForSign.first.photo_String.isNotEmpty) {
+    if (dbc.lisForSign.isNotEmpty) {
       box.write('photo', dbc.lisForSign.first.photo_String);
+      box.write('level', dbc.lisForSign.first.levels_id);
     }
   }
 
@@ -68,6 +72,7 @@ class SharedPrefController extends GetxController {
     _password.value = box.read('pass');
     _isRemember.value = box.read('login');
     _photoString.value = box.read('photo');
+    _level.value = box.read('level');
     await _initPrefs();
     // print(_isLogin.value);
   }
@@ -78,6 +83,7 @@ class SharedPrefController extends GetxController {
     box.remove('pass');
     box.remove('login');
     box.remove('photo');
+    box.remove('level');
   }
 
   set isRemember(bool value) {

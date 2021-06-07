@@ -51,10 +51,10 @@ class ReleaseInfo extends StatelessWidget {
                                 height: Get.height * .04,
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: Global.medium,
+                                      primary: Global.dark_red,
                                     ),
-                                    onPressed: () {},
-                                    child: Text('Inform Weld',
+                                    onPressed: null,
+                                    child: Text('Add Problem',
                                         maxLines: 2,
                                         textAlign: TextAlign.center)))
                           ]),
@@ -111,5 +111,13 @@ class ReleaseInfo extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  addProblem() {
+    Get.defaultDialog(
+        barrierDismissible: false,
+        title: 'Adding Problem Dialog',
+        cancel: ElevatedButton(
+            onPressed: () => Get.back(), child: Text('Close Dialog')));
   }
 }

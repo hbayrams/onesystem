@@ -48,27 +48,27 @@ class SelectRelease extends StatelessWidget {
                               margin: EdgeInsets.only(right: 5),
                               height: Get.height / 23,
                               child: ElevatedButton(
-                                child: Text('Select'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Global.medium,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              height: Get.height / 23,
-                              child: ElevatedButton(
                                 child: Text('Cancel'),
                                 style: ElevatedButton.styleFrom(
-                                  primary: Global.dark_red,
+                                  primary: Global.medium,
                                 ),
                                 onPressed: null,
                               ),
                             ),
-                          )
+                          ),
+                          // Expanded(
+                          //   flex: 1,
+                          //   child: Container(
+                          //     height: Get.height / 23,
+                          //     child: ElevatedButton(
+                          //       child: Text('Cancel'),
+                          //       style: ElevatedButton.styleFrom(
+                          //         primary: Global.dark_red,
+                          //       ),
+                          //       onPressed: null,
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                     ),

@@ -9,6 +9,7 @@ import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/views/tablet/profile_page.dart';
 import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
 
+// ignore: must_be_immutable
 class TabNavWidget extends StatelessWidget {
   final navList = [
     'Main',
@@ -19,10 +20,16 @@ class TabNavWidget extends StatelessWidget {
     //'Shipping',
     'Settings'
   ];
+
+  Map<int, List<int>> userLevelFilter = {
+    1: [0, 1, 2, 3, 4, 5],
+    2: [0, 1, 3]
+  };
+
   final List<IconData> navIcon = [
     Icons.widgets,
     Icons.layers,
-    Icons.design_services,
+    Icons.fact_check,
     Icons.warning,
     Icons.assignment,
     //Icons.swap_horiz,
@@ -58,15 +65,26 @@ class TabNavWidget extends StatelessWidget {
           },
           leading: _navLogo(sc, tc),
           destinations: [
-            for (var i = 0; i < navIcon.length; i++)
-              NavigationRailDestination(
-                  icon: Icon(navIcon[i], color: tc.isColorChangeWD()),
-                  label: Text(
-                    navList[i],
-                    style: TextStyle(color: Global.focusedBlue, fontSize: 13),
-                  ),
-                  selectedIcon:
-                      Icon(navIcon[i], color: Global.focusedBlue, size: 40)),
+            if (userLevelFilter[sc.level].isNotEmpty)
+              for (var i = 0; i < userLevelFilter[sc.level].length; i++)
+                NavigationRailDestination(
+                    padding: EdgeInsets.zero,
+                    icon: Icon(navIcon[userLevelFilter[sc.level][i]],
+                        color: tc.isColorChangeWD()),
+                    label: Text(
+                      navList[i],
+                      style: TextStyle(color: Global.focusedBlue, fontSize: 13),
+                    ),
+                    selectedIcon: Container(
+                        width: 80,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            //color: Colors.grey[100],
+                            border: Border(
+                                right: BorderSide(
+                                    color: Global.focusedBlue, width: 3))),
+                        child: Icon(navIcon[userLevelFilter[sc.level][i]],
+                            color: Global.focusedBlue, size: 40))),
           ],
           selectedIndex: pc.pindex,
           trailing: Column(
@@ -90,6 +108,8 @@ getSignProfile(SharedPrefController sc, DatabaseOperations dbc) async {
   }
 }
 
+getLevelFilter() {}
+
 Widget _navLogo(SharedPrefController sc, ThemeController tc) {
   return Padding(
       padding: const EdgeInsets.all(5),
@@ -103,25 +123,34 @@ Widget _navLogo(SharedPrefController sc, ThemeController tc) {
       ));
 }
 
-// ignore: unused_element
 Widget _leadingwidget(
     SharedPrefController sc, ThemeController tc, DatabaseOperations dbc) {
+  // ignore: unused_local_variable
+  int userLevel;
   String pString, unameString;
 
   getSignProfile(sc, dbc);
 
-  if (dbc.lisForSign.first.photo_String.isNotEmpty) {
-    pString = dbc.lisForSign.first.photo_String;
-  } else if (sc.photoString == null || sc.photoString == '' ) {
-    pString = 'https://img.icons8.com/dusk/64/000000/engineer.png';
+  if (sc.isRemember) {
+    if (sc.photoString.isNotEmpty) {
+      pString = sc.photoString;
+    } else {
+      pString = 'https://img.icons8.com/dusk/64/000000/engineer.png';
+    }
   } else {
-    pString = sc.photoString;
+    if (dbc.lisForSign.first.photo_String.isNotEmpty) {
+      pString = dbc.lisForSign.first.photo_String;
+    } else {
+      pString = 'https://img.icons8.com/dusk/64/000000/engineer.png';
+    }
   }
 
   if (sc.uname == null || sc.uname == '') {
     unameString = dbc.lisForSign.first.user_Name;
+    userLevel = dbc.lisForSign.first.levels_id;
   } else {
     unameString = sc.uname;
+    userLevel = sc.level;
   }
 
   return Padding(
@@ -134,7 +163,7 @@ Widget _leadingwidget(
         ),
         InkWell(
           onTap: () => Get.bottomSheet(ProfilePage(
-              widgetLogout: _logoutButton(sc,dbc),
+              widgetLogout: _logoutButton(sc, dbc),
               pString: pString,
               unameString: unameString)),
           child: Container(
@@ -155,7 +184,7 @@ Widget _leadingwidget(
   );
 }
 
-Widget _logoutButton(SharedPrefController sc,DatabaseOperations dbc) {
+Widget _logoutButton(SharedPrefController sc, DatabaseOperations dbc) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Column(
