@@ -1,6 +1,6 @@
 # onesystem
 
-A new Flutter project.
+Responsive welding tracking system software for web/desktop/tablet/mobile phone.
 
 ## Getting Started
 
