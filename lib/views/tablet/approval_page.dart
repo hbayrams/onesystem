@@ -30,37 +30,39 @@ class ApprovalPage extends StatelessWidget {
               ],
             ),
             centerTitle: true,
-            toolbarHeight: 40,
-            bottom: TabBar(
-                isScrollable: false,
-                indicatorColor: Global.focusedBlue,
-                indicatorWeight: 3,
-                tabs: [
-                  Tab(
-                      height: 50,
-                      icon: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.design_services,
-                                color: tc.isColorChangeWD(), size: 40),
-                            SizedBox(width: 10),
-                            Text('Fit-UP Approval',
-                                style: TextStyle(
-                                    color: tc.isColorChangeWD(), fontSize: 14))
-                          ])),
-                  Tab(
-                      height: 50,
-                      icon: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.upcoming,
-                                color: tc.isColorChangeWD(), size: 40),
-                            SizedBox(width: 10),
-                            Text('Weld Approval',
-                                style: TextStyle(
-                                    color: tc.isColorChangeWD(), fontSize: 14))
-                          ]))
-                ]),
+            toolbarHeight: 95,
+            bottom: PreferredSize(
+              preferredSize: Size(Get.width, 50),
+              child: TabBar(
+                  isScrollable: false,
+                  indicatorColor: Global.focusedBlue,
+                  indicatorWeight: 3,
+                  tabs: [
+                    Tab(
+                        icon: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                          Icon(Icons.design_services,
+                              color: tc.isColorChangeWD(), size: 40),
+                          SizedBox(width: 10),
+                          Text('Fit-UP Approval',
+                              style: TextStyle(
+                                  color: tc.isColorChangeWD(), fontSize: 14))
+                        ])),
+                    Tab(
+                        //height: 50,
+                        icon: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                          Icon(Icons.upcoming,
+                              color: tc.isColorChangeWD(), size: 40),
+                          SizedBox(width: 10),
+                          Text('Weld Approval',
+                              style: TextStyle(
+                                  color: tc.isColorChangeWD(), fontSize: 14))
+                        ]))
+                  ]),
+            ),
           ),
           body: TabBarView(
               physics: NeverScrollableScrollPhysics(),
