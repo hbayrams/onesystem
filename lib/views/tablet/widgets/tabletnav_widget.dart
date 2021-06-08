@@ -17,8 +17,8 @@ class TabNavWidget extends StatelessWidget {
     'Approval',
     'NDT',
     'Release',
-    //'Shipping',
-    'Settings'
+    'Shipping'
+    //'Settings'
   ];
 
   Map<int, List<int>> userLevelFilter = {
@@ -32,8 +32,8 @@ class TabNavWidget extends StatelessWidget {
     Icons.fact_check,
     Icons.warning,
     Icons.assignment,
-    //Icons.swap_horiz,
-    Icons.settings
+    Icons.airplane_ticket
+    //Icons.settings
   ];
   @override
   Widget build(BuildContext context) {
@@ -208,7 +208,7 @@ Widget _logoutButton(SharedPrefController sc, DatabaseOperations dbc) {
               transitionDuration: Duration(milliseconds: 300),
               barrierDismissible: false),
           child: Icon(
-            Icons.exit_to_app,
+            Icons.logout,
             color: Global.dark_red,
           ),
         ),

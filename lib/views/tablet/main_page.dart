@@ -49,8 +49,8 @@ class _MainPageState extends State<MainPage>
         appBar: AppBar(
             backgroundColor: tc.isColorChangeDW(),
             centerTitle: true,
-            title: Text('OneSystem > Main Page',
-                style: TextStyle(color: tc.isColorChangeWD(), fontSize: 16)),
+            title:
+                Text('OneSystem > Main Page', style: TextStyle(fontSize: 16)),
             toolbarHeight: 25),
         body: Padding(
           padding: const EdgeInsets.all(5.0),

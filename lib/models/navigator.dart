@@ -3,7 +3,7 @@ import 'package:onesystem/views/home_page.dart';
 import 'package:onesystem/views/tablet/about_page.dart';
 import 'package:onesystem/views/tablet/login_help_page.dart';
 import 'package:onesystem/views/tablet/login_page.dart';
-import 'package:onesystem/views/tablet/settings_page.dart';
+import 'package:onesystem/views/tablet/widgets/settingsPage_widget.dart';
 import 'package:onesystem/views/tablet/release_page.dart';
 import 'package:onesystem/views/tablet/widgets/pdfviewer_widget.dart';
 

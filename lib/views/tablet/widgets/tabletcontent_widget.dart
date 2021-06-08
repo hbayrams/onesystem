@@ -6,7 +6,7 @@ import 'package:onesystem/views/tablet/approval_page.dart';
 import 'package:onesystem/views/tablet/main_page.dart';
 import 'package:onesystem/views/tablet/material_page.dart';
 import 'package:onesystem/views/tablet/release_page.dart';
-import 'package:onesystem/views/tablet/settings_page.dart';
+import 'package:onesystem/views/tablet/shipping_page.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class BodyContentTabletWidget extends StatelessWidget {
@@ -17,7 +17,8 @@ class BodyContentTabletWidget extends StatelessWidget {
     ApprovalPage(),
     NDTPage(),
     ReleasePage(),
-    SettingsPage(),
+    ShippingPage()
+    //SettingsPage(),
   ];
   BodyContentTabletWidget({Key key, this.sizingInformation}) : super(key: key);
   @override

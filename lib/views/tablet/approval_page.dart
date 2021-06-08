@@ -6,10 +6,18 @@ import 'package:onesystem/views/tablet/widgets/fitupApproval_widget.dart';
 import 'package:onesystem/views/tablet/widgets/weldApproval_widget.dart';
 
 // ignore: must_be_immutable
-class ApprovalPage extends StatelessWidget {
+class ApprovalPage extends StatefulWidget {
+  @override
+  _ApprovalPageState createState() => _ApprovalPageState();
+}
+
+class _ApprovalPageState extends State<ApprovalPage>
+    with AutomaticKeepAliveClientMixin<ApprovalPage> {
   ThemeController tc = Get.put(ThemeController());
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return DefaultTabController(
       initialIndex: 1,
       length: 2,
@@ -30,7 +38,7 @@ class ApprovalPage extends StatelessWidget {
               ],
             ),
             centerTitle: true,
-            toolbarHeight: 95,
+            toolbarHeight: 93,
             bottom: PreferredSize(
               preferredSize: Size(Get.width, 50),
               child: TabBar(
@@ -71,4 +79,7 @@ class ApprovalPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
