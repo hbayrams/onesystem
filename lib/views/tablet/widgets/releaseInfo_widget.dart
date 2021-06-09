@@ -35,7 +35,7 @@ class ReleaseInfo extends StatelessWidget {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            BordersText(
+                            BorderedText(
                                 text: '9100-3-57-CL-032-AA1-TA2',
                                 leftmargin: 0),
                             Container(
@@ -62,11 +62,11 @@ class ReleaseInfo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Rev.No : '),
-                            BordersText(text: '2A', leftmargin: 1),
+                            BorderedText(text: '2A', leftmargin: 1),
                             Text('PED Category : '),
-                            BordersText(text: '1', leftmargin: 1),
+                            BorderedText(text: '1', leftmargin: 1),
                             Text('Paint Code : '),
-                            BordersText(text: 'A.II.B.2-2', leftmargin: 1)
+                            BorderedText(text: 'A.II.B.2-2', leftmargin: 1)
                           ]),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

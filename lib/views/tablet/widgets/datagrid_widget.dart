@@ -70,9 +70,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             margin: EdgeInsets.all(0),
             child: SfDataGrid(
               controller: widget.controller,
-              //isScrollbarAlwaysShown: true,
               selectionMode: SelectionMode.single,
-              //allowSorting: true,
               frozenColumnsCount: 1,
               onCellTap: widget.tapFunc,
               headerGridLinesVisibility: GridLinesVisibility.both,
@@ -108,6 +106,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                     width: Get.width,
                     height: Get.height,
                     child: DataGridWidget(
+                      tapFunc: widget.tapFunc,
                       colName: widget.colName,
                       height: Get.height - 150,
                       title: widget.title,

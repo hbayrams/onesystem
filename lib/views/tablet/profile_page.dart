@@ -4,7 +4,7 @@ import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   final Widget widgetLogout;
   final String pString, unameString;
 
@@ -12,19 +12,16 @@ class ProfilePage extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
   Widget build(BuildContext context) {
     ThemeController tc = Get.put(ThemeController());
     DatabaseOperations dbc = Get.put(DatabaseOperations());
 
-    return Obx(() => Container(
-          color: tc.isColorChangeDW(),
+    return SafeArea(
+        child: Scaffold(
+      body: Obx(
+        () => Container(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(50, 8, 50, 8),
+            padding: const EdgeInsets.all(50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -37,11 +34,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         Expanded(flex: 1, child: getUserSettings(tc))
                       ]),
                 ),
-                Expanded(flex: 1, child: widget.widgetLogout),
+                Expanded(flex: 1, child: widgetLogout),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    ));
   }
 
   Widget getUserSettings(ThemeController tc) {
@@ -50,11 +49,8 @@ class _ProfilePageState extends State<ProfilePage> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text('Settings',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: tc.isColorChangeWD())),
-        Icon(Icons.settings, size: 90, color: tc.isColorChangeWD()),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Icon(Icons.settings, size: 90),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -85,9 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       fontSize: 16,
                       fontWeight: FontWeight.w600)),
               onChanged: (String value) {
-                setState(() {
-                  _chosenValue = value;
-                });
+                _chosenValue = value;
               },
             ),
             Switch(
@@ -97,15 +91,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   print('theme son durumu: ' + x.toString());
                   tc.darkTheme = !tc.darkTheme;
                 }),
-            Text(
-              tc.darkTheme ? 'Dark Theme Enabled' : 'Light Theme Enabled',
-              style: TextStyle(color: tc.isColorChangeWD()),
-            ),
+            Text(tc.darkTheme ? 'Dark Theme Enabled' : 'Light Theme Enabled'),
           ],
         ),
         ElevatedButton(
-          child: Text('Test'),
-          onPressed: () {},
+          child: Text('Close'),
+          onPressed: () => Get.back(),
         )
       ],
     );
@@ -116,10 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text('Profile Details',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: tc.isColorChangeWD())),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         Stack(alignment: Alignment.bottomRight, children: [
           Container(
               padding: EdgeInsets.all(2),
@@ -128,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: CircleAvatar(
                   radius: 40,
                   backgroundColor: Global.trnsp,
-                  backgroundImage: NetworkImage(widget.pString))),
+                  backgroundImage: NetworkImage(pString))),
           Positioned(
             top: 45,
             left: 45,
@@ -149,27 +137,21 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(children: [
               ListTile(
                 leading: Icon(Icons.person),
-                title: Text('User Name:  ' + widget.unameString.toUpperCase(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: tc.isColorChangeWD())),
+                title: Text('User Name:  ' + unameString.toUpperCase(),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               ListTile(
                 leading: Icon(Icons.leaderboard),
                 title: Text(
                     'User Level:  ' + dbc.lisForSign.first.levels_id.toString(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: tc.isColorChangeWD())),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               ListTile(
                 leading: Icon(Icons.help),
                 title: Text(
                     'User Actual : ' +
                         dbc.lisForSign.first.user_Actual.toString(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: tc.isColorChangeWD())),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               )
             ]))
       ],

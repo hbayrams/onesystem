@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/views/tablet/widgets/ebutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 
 class FitupApprovalWidget extends StatelessWidget {
@@ -32,15 +34,37 @@ class FitupApprovalWidget extends StatelessWidget {
                             flex: 1,
                             child: Card(
                                 margin: EdgeInsets.all(2),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      HeadBoxWidget(
-                                          title:
-                                              'ISO / Spool Info'), //count eklenecek
-                                      Container()
-                                    ]))),
+                                child: Column(children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: HeadBoxWidget(
+                                          title: 'ISO / Spool Info')),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                            flex: 6,
+                                            child: Row(children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                    color: Global.black),
+                                              ),
+                                              Expanded(
+                                                flex: 5,
+                                                child: Container(
+                                                    color: Global.dark_default),
+                                              )
+                                            ])),
+                                        Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                                color: Global.focusedBlue))
+                                      ],
+                                    ),
+                                  )
+                                ]))),
                         Expanded(
                             flex: 4,
                             child: Card(
@@ -49,8 +73,7 @@ class FitupApprovalWidget extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      HeadBoxWidget(
-                                          title: 'Weld List'), //count eklenecek
+                                      HeadBoxWidget(title: 'Weld List'),
                                       Container()
                                     ])))
                       ],

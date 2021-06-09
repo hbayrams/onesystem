@@ -3,12 +3,7 @@ import 'package:get/get.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/borderedText_widget.dart';
 
-class ISOInfoWidget extends StatefulWidget {
-  @override
-  _ISOInfoWidgetState createState() => _ISOInfoWidgetState();
-}
-
-class _ISOInfoWidgetState extends State<ISOInfoWidget> {
+class ISOInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +14,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
           children: [
             Expanded(flex: 1, child: Text('Condition :')),
             Expanded(
-                flex: 1, child: BordersText(text: 'On Going', leftmargin: 6)),
+                flex: 1, child: BorderedText(text: 'On Going', leftmargin: 6)),
             Expanded(
                 flex: 2,
                 child: Text('Passive',
@@ -30,7 +25,8 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
         Row(
           children: [
             Expanded(flex: 1, child: Text('Pipe Class :')),
-            Expanded(flex: 1, child: BordersText(text: 'AA51N', leftmargin: 6)),
+            Expanded(
+                flex: 1, child: BorderedText(text: 'AA51N', leftmargin: 6)),
             Expanded(
                 flex: 2,
                 child: Text('Mat. - CS',
@@ -41,7 +37,7 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
         Row(
           children: [
             Expanded(flex: 1, child: Text('PED Category :')),
-            Expanded(flex: 1, child: BordersText(text: '1', leftmargin: 6)),
+            Expanded(flex: 1, child: BorderedText(text: '1', leftmargin: 6)),
             Expanded(flex: 2, child: Container())
           ],
         ),
@@ -49,7 +45,8 @@ class _ISOInfoWidgetState extends State<ISOInfoWidget> {
           children: [
             Expanded(flex: 1, child: Text('Paint Code :')),
             Expanded(
-                flex: 1, child: BordersText(text: 'A.II.B.2-2', leftmargin: 6)),
+                flex: 1,
+                child: BorderedText(text: 'A.II.B.2-2', leftmargin: 6)),
             Expanded(
                 flex: 2,
                 child: Container(

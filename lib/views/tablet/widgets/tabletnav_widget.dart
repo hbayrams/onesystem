@@ -162,8 +162,8 @@ Widget _leadingwidget(
           height: 10,
         ),
         InkWell(
-          onTap: () => Get.bottomSheet(ProfilePage(
-              widgetLogout: _logoutButton(sc, dbc),
+          onTap: () => Get.to(ProfilePage(
+              widgetLogout: _logoutButton(sc, dbc, tc),
               pString: pString,
               unameString: unameString)),
           child: Container(
@@ -184,7 +184,8 @@ Widget _leadingwidget(
   );
 }
 
-Widget _logoutButton(SharedPrefController sc, DatabaseOperations dbc) {
+Widget _logoutButton(
+    SharedPrefController sc, DatabaseOperations dbc, ThemeController tc) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Column(

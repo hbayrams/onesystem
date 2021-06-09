@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:onesystem/models/globals.dart';
 
-class BordersText extends StatelessWidget {
+class BorderedText extends StatelessWidget {
   final String text;
   final double leftmargin;
-  const BordersText({
+  const BorderedText({
     this.text,
     this.leftmargin,
     Key key,
