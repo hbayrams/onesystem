@@ -5,6 +5,7 @@ import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/datasource.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 import 'package:onesystem/views/tablet/widgets/releaseInfo_widget.dart';
 import 'package:onesystem/views/tablet/widgets/selectRelease_widget.dart';
 
@@ -110,13 +111,8 @@ class _ReleasePageState extends State<ReleasePage>
                           children: [
                             Expanded(
                               flex: 1,
-                              child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.centerLeft,
-                                  padding: EdgeInsets.only(left: 2),
-                                  color: Global.medium,
-                                  child: Text('Change Released Condition',
-                                      style: TextStyle(color: Global.white))),
+                              child: HeadBoxWidget(
+                                  title: 'Change Released Condition'),
                             ),
                             Expanded(
                                 flex: 4,

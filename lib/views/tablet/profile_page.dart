@@ -43,65 +43,6 @@ class ProfilePage extends StatelessWidget {
     ));
   }
 
-  Widget getUserSettings(ThemeController tc) {
-    String _chosenValue;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text('Settings',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        Icon(Icons.settings, size: 90),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DropdownButton<String>(
-              value: _chosenValue,
-              //elevation: 5,
-              style: TextStyle(color: Colors.black),
-
-              items: <String>[
-                'Light Mode',
-                'Dark Mode',
-                'System',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Row(
-                    children: [
-                      Icon(Icons.dark_mode),
-                      SizedBox(width: 10),
-                      Text(value),
-                    ],
-                  ),
-                );
-              }).toList(),
-              hint: Text("Change Theme",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600)),
-              onChanged: (String value) {
-                _chosenValue = value;
-              },
-            ),
-            Switch(
-                value: tc.darkTheme,
-                onChanged: (x) {
-                  tc.changeThemeMode();
-                  print('theme son durumu: ' + x.toString());
-                  tc.darkTheme = !tc.darkTheme;
-                }),
-            Text(tc.darkTheme ? 'Dark Theme Enabled' : 'Light Theme Enabled'),
-          ],
-        ),
-        ElevatedButton(
-          child: Text('Close'),
-          onPressed: () => Get.back(),
-        )
-      ],
-    );
-  }
-
   Widget getUserInfo(DatabaseOperations dbc, ThemeController tc) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,9 +93,73 @@ class ProfilePage extends StatelessWidget {
                     'User Actual : ' +
                         dbc.lisForSign.first.user_Actual.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+              ListTile(
+                leading: Icon(Icons.home_work),
+                title: Text('Department : ' + 'Quality',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               )
             ]))
       ],
     );
   }
+}
+
+Widget getUserSettings(ThemeController tc) {
+  String _chosenValue;
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: [
+      Text('Settings',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      Icon(Icons.settings, size: 90),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DropdownButton<String>(
+            value: _chosenValue,
+            //elevation: 5,
+            style: TextStyle(color: Colors.black),
+
+            items: <String>[
+              'Light Mode',
+              'Dark Mode',
+              'System',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Row(
+                  children: [
+                    Icon(Icons.dark_mode),
+                    SizedBox(width: 10),
+                    Text(value),
+                  ],
+                ),
+              );
+            }).toList(),
+            hint: Text("Change Theme",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600)),
+            onChanged: (String value) {
+              _chosenValue = value;
+            },
+          ),
+          Switch(
+              value: tc.darkTheme,
+              onChanged: (x) {
+                tc.changeThemeMode();
+                print('theme son durumu: ' + x.toString());
+                tc.darkTheme = !tc.darkTheme;
+              }),
+          Text(tc.darkTheme ? 'Dark Theme Enabled' : 'Light Theme Enabled'),
+        ],
+      ),
+      ElevatedButton(
+        child: Text('Close'),
+        onPressed: () => Get.back(),
+      )
+    ],
+  );
 }

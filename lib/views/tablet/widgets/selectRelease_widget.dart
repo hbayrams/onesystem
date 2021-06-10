@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
+import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 
 class SelectRelease extends StatelessWidget {
   const SelectRelease({
@@ -20,16 +21,11 @@ class SelectRelease extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 1,
-                    child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 2),
-                        color: Global.medium,
-                        child: Text('Select Release',
-                            style: TextStyle(color: Global.white))),
+                    flex: 2,
+                    child: HeadBoxWidget(title: 'Select Release'),
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Padding(
                       padding: const EdgeInsets.all(5),
                       child: Row(

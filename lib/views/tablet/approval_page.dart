@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/fitupApproval_widget.dart';
@@ -14,6 +15,7 @@ class ApprovalPage extends StatefulWidget {
 class _ApprovalPageState extends State<ApprovalPage>
     with AutomaticKeepAliveClientMixin<ApprovalPage> {
   ThemeController tc = Get.put(ThemeController());
+  DataviewController dvc = Get.put(DataviewController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,8 @@ class _ApprovalPageState extends State<ApprovalPage>
             bottom: PreferredSize(
               preferredSize: Size(Get.width, 50),
               child: TabBar(
+                  labelColor: Global.focusedBlue,
+                  unselectedLabelColor: Colors.black26,
                   isScrollable: false,
                   indicatorColor: Global.focusedBlue,
                   indicatorWeight: 3,
@@ -50,24 +54,19 @@ class _ApprovalPageState extends State<ApprovalPage>
                         icon: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                          Icon(Icons.design_services,
-                              color: tc.isColorChangeWD(), size: 40),
+                          Icon(Icons.design_services, size: 30),
                           SizedBox(width: 10),
                           Text('Fit-UP Approval',
-                              style: TextStyle(
-                                  color: tc.isColorChangeWD(), fontSize: 14))
+                              style: TextStyle(fontSize: 14))
                         ])),
                     Tab(
                         //height: 50,
                         icon: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                          Icon(Icons.upcoming,
-                              color: tc.isColorChangeWD(), size: 40),
+                          Icon(Icons.upcoming, size: 30),
                           SizedBox(width: 10),
-                          Text('Weld Approval',
-                              style: TextStyle(
-                                  color: tc.isColorChangeWD(), fontSize: 14))
+                          Text('Weld Approval', style: TextStyle(fontSize: 14))
                         ]))
                   ]),
             ),

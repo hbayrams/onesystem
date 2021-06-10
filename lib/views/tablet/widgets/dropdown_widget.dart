@@ -5,11 +5,19 @@ import 'package:get/get.dart';
 class DropDownWidget extends StatelessWidget {
   final String title, select;
   final Function changed;
-  final bool enable;
+  final bool enable, search;
   final List<String> items;
+  final Mode mode;
 
   const DropDownWidget(
-      {Key key, this.title, this.select, this.changed, this.enable, this.items})
+      {Key key,
+      this.title,
+      this.select,
+      this.changed,
+      this.enable,
+      this.items,
+      this.mode,
+      this.search})
       : super(key: key);
 
   @override
@@ -17,6 +25,7 @@ class DropDownWidget extends StatelessWidget {
     return SizedBox(
       height: Get.height / 22,
       child: DropdownSearch(
+        maxHeight: Get.height * .6,
         enabled: enable,
         dropdownSearchDecoration: InputDecoration(
             contentPadding: EdgeInsets.fromLTRB(10, 0, 5, 0), isDense: true),
@@ -25,12 +34,12 @@ class DropDownWidget extends StatelessWidget {
           child: Text(title),
         ),
         autoValidateMode: AutovalidateMode.always,
-        showSearchBox: true,
+        showSearchBox: search ?? true,
         autoFocusSearchBox: true,
         items: items,
-        selectedItem: select == null ? title : select,
+        selectedItem: select ?? title,
         onChanged: changed,
-        mode: Mode.MENU,
+        mode: mode ?? Mode.MENU,
       ),
     );
   }

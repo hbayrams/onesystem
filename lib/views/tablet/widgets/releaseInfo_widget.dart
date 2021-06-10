@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/borderedText_widget.dart';
+import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 
 class ReleaseInfo extends StatelessWidget {
   const ReleaseInfo({
@@ -15,13 +16,7 @@ class ReleaseInfo extends StatelessWidget {
       children: [
         Expanded(
           flex: 1,
-          child: Container(
-              width: double.infinity,
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 2),
-              color: Global.medium,
-              child: Text('Spool Release Info',
-                  style: TextStyle(color: Global.white))),
+          child: HeadBoxWidget(title: 'Spool Release Info'),
         ),
         Expanded(
           flex: 4,
@@ -35,16 +30,14 @@ class ReleaseInfo extends StatelessWidget {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Text('ISO No: '),
                             BorderedText(
                                 text: '9100-3-57-CL-032-AA1-TA2',
-                                leftmargin: 0),
-                            Container(
-                              //margin: EdgeInsets.only(right: 30),
-                              child: Text('Active',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Global.green)),
-                            ),
+                                leftmargin: 5),
+                            Text('Active',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Global.green)),
                             Container(
                                 margin: EdgeInsets.only(right: 6),
                                 //width: 80,
@@ -101,6 +94,9 @@ class ReleaseInfo extends StatelessWidget {
                       margin: EdgeInsets.all(5),
                       height: Get.height / 10,
                       child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Global.green,
+                          ),
                           onPressed: () {},
                           child: Text('Release Spool',
                               maxLines: 2, textAlign: TextAlign.center)),
