@@ -10,7 +10,8 @@ class DataviewController extends GetxController {
   // ignore: non_constant_identifier_names
   final dd_value = '1'.obs;
   final _radioValue = 1.obs;
-  final Rx<DateTime> selectedDate = DateTime.now().obs;
+  final Rx<DateTime> selectedDate1 = DateTime.now().obs;
+  final Rx<DateTime> selectedDate2 = DateTime.now().obs;
   final dropSelect1 = 'Oğuz KABA'.obs;
   final dropSelect2 = 'Oğuz KABA'.obs;
 

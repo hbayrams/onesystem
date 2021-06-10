@@ -76,11 +76,9 @@ class _ReleasePageState extends State<ReleasePage>
                       flex: 7,
                       child: Card(
                           margin: EdgeInsets.all(2),
-                          child: Expanded(
-                              flex: 1,
-                              child: Container(
-                                  width: double.infinity,
-                                  child: Text('Orta-Alt')))))
+                          child: Container(
+                              width: double.infinity,
+                              child: Text('Orta-Alt'))))
                 ],
               ),
             ),
@@ -96,11 +94,9 @@ class _ReleasePageState extends State<ReleasePage>
                       flex: 4,
                       child: Card(
                           margin: EdgeInsets.all(2),
-                          child: Expanded(
-                              flex: 1,
-                              child: Container(
-                                  width: double.infinity,
-                                  child: Text('Sağ-Ust'))))),
+                          child: Container(
+                              width: double.infinity,
+                              child: Text('Sağ-Ust')))),
                   //Sağ-Alt
                   Expanded(
                       flex: 1,

@@ -93,10 +93,17 @@ class IsoSpoolInfoWidget extends StatelessWidget {
                                             ),
                                             Text('Date: '),
                                             Obx(() => BorderedText(
-                                                text: DateFormat("dd-MM-yyyy")
-                                                    .format(DateTime.parse(dvc
-                                                        .selectedDate.value
-                                                        .toString())),
+                                                text: selectWF == 'fitup'
+                                                    ? DateFormat("dd-MM-yyyy")
+                                                        .format(DateTime.parse(
+                                                            dvc.selectedDate1
+                                                                .value
+                                                                .toString()))
+                                                    : DateFormat("dd-MM-yyyy")
+                                                        .format(DateTime.parse(
+                                                            dvc.selectedDate2
+                                                                .value
+                                                                .toString())),
                                                 leftmargin: 8)),
                                             IconButton(
                                                 onPressed: () =>
@@ -119,7 +126,7 @@ class IsoSpoolInfoWidget extends StatelessWidget {
                                               items:
                                                   dropdownItems.keys.toList(),
                                               changed: (value) {
-                                                if (this.selectWF == 'fitup') {
+                                                if (selectWF == 'fitup') {
                                                   dvc.dropSelect1.value =
                                                       dropdownItems[value];
                                                 } else {
@@ -173,10 +180,15 @@ class IsoSpoolInfoWidget extends StatelessWidget {
   Future<void> _selectDate(BuildContext context, DataviewController dvc) async {
     final DateTime picked = await showDatePicker(
         context: context,
-        initialDate: dvc.selectedDate.value,
+        initialDate: selectWF == 'fitup'
+            ? dvc.selectedDate1.value
+            : dvc.selectedDate2.value,
         firstDate: DateTime(2020),
         lastDate: DateTime(2030));
-    if (picked != null && picked != dvc.selectedDate.value)
-      dvc.selectedDate.value = picked;
+    if (picked != null) if (selectWF == 'fitup') {
+      dvc.selectedDate1.value = picked;
+    } else {
+      dvc.selectedDate2.value = picked;
+    }
   }
 }
