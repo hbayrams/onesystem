@@ -14,12 +14,8 @@ class ReleaseInfo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        HeadBoxWidget(title: 'Spool Release Info'),
         Expanded(
-          flex: 1,
-          child: HeadBoxWidget(title: 'Spool Release Info'),
-        ),
-        Expanded(
-          flex: 4,
           child: Padding(
             padding: const EdgeInsets.only(left: 6),
             child: Row(
@@ -33,7 +29,7 @@ class ReleaseInfo extends StatelessWidget {
                             Text('ISO No: '),
                             BorderedText(
                                 text: '9100-3-57-CL-032-AA1-TA2',
-                                leftmargin: 5),
+                                leftmargin: 4),
                             Text('Active',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -55,11 +51,11 @@ class ReleaseInfo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Rev.No : '),
-                            BorderedText(text: '2A', leftmargin: 1),
+                            BorderedText(text: '2A'),
                             Text('PED Category : '),
-                            BorderedText(text: '1', leftmargin: 1),
+                            BorderedText(text: '1'),
                             Text('Paint Code : '),
-                            BorderedText(text: 'A.II.B.2-2', leftmargin: 1)
+                            BorderedText(text: 'A.II.B.2-2')
                           ]),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

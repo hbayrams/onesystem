@@ -5,9 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/borderedText_widget.dart';
-import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
-import 'package:onesystem/views/tablet/widgets/ebutton_widget.dart';
+import 'package:onesystem/views/tablet/widgets/dropDown_widget.dart';
+import 'package:onesystem/views/tablet/widgets/eButton_widget.dart';
+import 'package:onesystem/views/tablet/widgets/fitupEntry_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
+import 'package:onesystem/views/tablet/widgets/weldEntry_widget.dart';
 
 class IsoSpoolInfoWidget extends StatelessWidget {
   final String selectWF;
@@ -37,10 +39,8 @@ class IsoSpoolInfoWidget extends StatelessWidget {
             child: Card(
                 margin: EdgeInsets.all(2),
                 child: Column(children: [
+                  HeadBoxWidget(title: 'ISO / Spool Info'),
                   Expanded(
-                      flex: 1, child: HeadBoxWidget(title: 'ISO / Spool Info')),
-                  Expanded(
-                    flex: 4,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Row(
@@ -52,100 +52,87 @@ class IsoSpoolInfoWidget extends StatelessWidget {
                                     flex: 1,
                                     child: Column(children: [
                                       Expanded(
-                                          flex: 1,
                                           child: Row(children: [
-                                            Text('ISO No: '),
-                                            BorderedText(
-                                                text:
-                                                    '9100-3-57-CL-032-AA1-TA2',
-                                                leftmargin: 0)
-                                          ])),
+                                        Text('ISO No: '),
+                                        BorderedText(
+                                            text: '9100-3-57-CL-032-AA1-TA2')
+                                      ])),
                                       Expanded(
-                                          flex: 1,
                                           child: Row(children: [
-                                            Text('Spool: '),
-                                            BorderedText(
-                                                text: 'S1', leftmargin: 8),
-                                            Text('Active',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Global.green))
-                                          ]))
+                                        Text('Spool: '),
+                                        BorderedText(text: 'S1', leftmargin: 8),
+                                        Text('Active',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Global.green))
+                                      ]))
                                     ])),
                                 Expanded(
                                   flex: 2,
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20),
                                     child: Column(children: [
-                                      Expanded(
-                                          flex: 1,
-                                          child: Row(children: [
-                                            Text('ISO Rev.: '),
-                                            BorderedText(
-                                                text: '1A', leftmargin: 8),
-                                            Text('Active',
+                                      Row(children: [
+                                        Text('ISO Rev.: '),
+                                        BorderedText(text: '1A', leftmargin: 8),
+                                        Text('Active',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Global.green)),
+                                        Checkbox(
+                                          value: true,
+                                          onChanged: (value) {},
+                                        ),
+                                        Text('Date: '),
+                                        Obx(() => BorderedText(
+                                            text: selectWF == 'fitup'
+                                                ? DateFormat("dd-MM-yyyy")
+                                                    .format(DateTime.parse(dvc
+                                                        .selectedDate1.value
+                                                        .toString()))
+                                                : DateFormat("dd-MM-yyyy")
+                                                    .format(DateTime.parse(dvc
+                                                        .selectedDate2.value
+                                                        .toString())),
+                                            leftmargin: 8)),
+                                        IconButton(
+                                            onPressed: () =>
+                                                _selectDate(context, dvc),
+                                            icon: Icon(Icons.date_range))
+                                      ]),
+                                      Row(children: [
+                                        Text('GQC No: '),
+                                        BorderedText(
+                                            text: 'GQC-31', leftmargin: 8),
+                                        Expanded(
+                                            child: DropDownWidget(
+                                          title: 'Select Personnel',
+                                          enable: true,
+                                          mode: Mode.MENU,
+                                          select: 'GQC-31',
+                                          search: false,
+                                          items: dropdownItems.keys.toList(),
+                                          changed: (value) {
+                                            if (selectWF == 'fitup') {
+                                              dvc.dropSelectQ1.value =
+                                                  dropdownItems[value];
+                                            } else {
+                                              dvc.dropSelectQ2.value =
+                                                  dropdownItems[value];
+                                            }
+                                          },
+                                        )),
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 20, right: 50),
+                                            child: Obx(() => Text(
+                                                selectWF == 'fitup'
+                                                    ? dvc.dropSelectQ1.value
+                                                    : dvc.dropSelectQ2.value,
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Global.green)),
-                                            Checkbox(
-                                              value: true,
-                                              onChanged: (value) {},
-                                            ),
-                                            Text('Date: '),
-                                            Obx(() => BorderedText(
-                                                text: selectWF == 'fitup'
-                                                    ? DateFormat("dd-MM-yyyy")
-                                                        .format(DateTime.parse(
-                                                            dvc.selectedDate1
-                                                                .value
-                                                                .toString()))
-                                                    : DateFormat("dd-MM-yyyy")
-                                                        .format(DateTime.parse(
-                                                            dvc.selectedDate2
-                                                                .value
-                                                                .toString())),
-                                                leftmargin: 8)),
-                                            IconButton(
-                                                onPressed: () =>
-                                                    _selectDate(context, dvc),
-                                                icon: Icon(Icons.date_range))
-                                          ])),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Row(children: [
-                                            Text('GQC No: '),
-                                            BorderedText(
-                                                text: 'GQC-31', leftmargin: 8),
-                                            Expanded(
-                                                child: DropDownWidget(
-                                              title: 'Select Personnel',
-                                              enable: true,
-                                              mode: Mode.MENU,
-                                              select: 'GQC-31',
-                                              search: false,
-                                              items:
-                                                  dropdownItems.keys.toList(),
-                                              changed: (value) {
-                                                if (selectWF == 'fitup') {
-                                                  dvc.dropSelect1.value =
-                                                      dropdownItems[value];
-                                                } else {
-                                                  dvc.dropSelect2.value =
-                                                      dropdownItems[value];
-                                                }
-                                              },
-                                            )),
-                                            Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 20, right: 50),
-                                                child: Obx(() => Text(
-                                                    selectWF == 'fitup'
-                                                        ? dvc.dropSelect1.value
-                                                        : dvc.dropSelect2.value,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold))))
-                                          ]))
+                                                    fontWeight:
+                                                        FontWeight.bold))))
+                                      ])
                                     ]),
                                   ),
                                 )
@@ -157,22 +144,16 @@ class IsoSpoolInfoWidget extends StatelessWidget {
                                   child: EButtonWidget(
                                       color: Global.green,
                                       title: 'Approve',
-                                      onClick: () {})))
+                                      onClick: () {
+                                        Get.to(selectWF == 'fitup'
+                                            ? FitupEntryWidget()
+                                            : WeldEntryWidget());
+                                      })))
                         ],
                       ),
                     ),
                   )
-                ]))),
-        Expanded(
-            flex: 4,
-            child: Card(
-                margin: EdgeInsets.all(2),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      HeadBoxWidget(title: 'Weld List'),
-                      Container()
-                    ])))
+                ])))
       ],
     );
   }

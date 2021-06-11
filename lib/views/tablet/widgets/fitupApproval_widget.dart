@@ -26,8 +26,23 @@ class FitupApprovalWidget extends StatelessWidget {
                             ]))),
                 Expanded(
                     flex: 7,
-                    child:
-                        Container(child: IsoSpoolInfoWidget(selectWF: 'fitup')))
+                    child: Container(
+                        child: Column(
+                      children: [
+                        Expanded(child: IsoSpoolInfoWidget(selectWF: 'fitup')),
+                        Expanded(
+                            flex: 4,
+                            child: Card(
+                                margin: EdgeInsets.all(2),
+                                child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      HeadBoxWidget(title: 'Weld List'),
+                                      Container()
+                                    ])))
+                      ],
+                    )))
               ],
             )));
   }

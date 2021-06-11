@@ -11,8 +11,8 @@ import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/models/signin_model.dart';
 import 'package:onesystem/views/tablet/widgets/dialog_widget.dart';
-import 'package:onesystem/views/tablet/widgets/ebutton_widget.dart';
-import 'package:onesystem/views/tablet/widgets/textformfield_widget.dart';
+import 'package:onesystem/views/tablet/widgets/eButton_widget.dart';
+import 'package:onesystem/views/tablet/widgets/textFormField_widget.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatelessWidget {

@@ -65,31 +65,33 @@ class _DataGridWidgetState extends State<DataGridWidget> {
             height: 28,
             padding: EdgeInsets.only(left: 10),
           ),
-          Container(
-            height: widget.height == null ? Get.height / 2.50 : widget.height,
-            margin: EdgeInsets.all(0),
-            child: SfDataGrid(
-              controller: widget.controller,
-              selectionMode: SelectionMode.single,
-              frozenColumnsCount: 1,
-              onCellTap: widget.tapFunc,
-              headerGridLinesVisibility: GridLinesVisibility.both,
-              allowPullToRefresh: true,
-              defaultColumnWidth: 80,
-              source: widget.dataSource,
-              gridLinesVisibility: GridLinesVisibility.both,
-              headerRowHeight: 50,
-              rowHeight: 40,
-              columns: <GridColumn>[
-                for (var j = 0; j < widget.colName.length; j++)
-                  GridTextColumn(
-                      width: 150,
-                      columnName: widget.colName[j],
-                      label: Container(
-                          padding: EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: Text(widget.colName[j]))),
-              ],
+          Expanded(
+            child: Container(
+              //height: widget.height == null ? Get.height / 2.50 : widget.height,
+              margin: EdgeInsets.all(0),
+              child: SfDataGrid(
+                controller: widget.controller,
+                selectionMode: SelectionMode.single,
+                frozenColumnsCount: 1,
+                onCellTap: widget.tapFunc,
+                headerGridLinesVisibility: GridLinesVisibility.both,
+                allowPullToRefresh: true,
+                defaultColumnWidth: 80,
+                source: widget.dataSource,
+                gridLinesVisibility: GridLinesVisibility.both,
+                headerRowHeight: 50,
+                rowHeight: 40,
+                columns: <GridColumn>[
+                  for (var j = 0; j < widget.colName.length; j++)
+                    GridTextColumn(
+                        width: 150,
+                        columnName: widget.colName[j],
+                        label: Container(
+                            padding: EdgeInsets.all(8.0),
+                            alignment: Alignment.center,
+                            child: Text(widget.colName[j]))),
+                ],
+              ),
             ),
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesystem/models/globals.dart';
-import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
+import 'package:onesystem/views/tablet/widgets/dropDown_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 
 class SelectRelease extends StatelessWidget {
@@ -20,12 +20,8 @@ class SelectRelease extends StatelessWidget {
               margin: EdgeInsets.all(2),
               child: Column(
                 children: [
+                  HeadBoxWidget(title: 'Select Release'),
                   Expanded(
-                    flex: 2,
-                    child: HeadBoxWidget(title: 'Select Release'),
-                  ),
-                  Expanded(
-                    flex: 3,
                     child: Padding(
                       padding: const EdgeInsets.all(5),
                       child: Row(

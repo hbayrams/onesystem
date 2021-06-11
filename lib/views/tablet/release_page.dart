@@ -77,8 +77,7 @@ class _ReleasePageState extends State<ReleasePage>
                       child: Card(
                           margin: EdgeInsets.all(2),
                           child: Container(
-                              width: double.infinity,
-                              child: Text('Orta-Alt'))))
+                              width: double.infinity, child: Text('Orta-Alt'))))
                 ],
               ),
             ),
@@ -95,8 +94,7 @@ class _ReleasePageState extends State<ReleasePage>
                       child: Card(
                           margin: EdgeInsets.all(2),
                           child: Container(
-                              width: double.infinity,
-                              child: Text('Sağ-Ust')))),
+                              width: double.infinity, child: Text('Sağ-Ust')))),
                   //Sağ-Alt
                   Expanded(
                       flex: 1,
@@ -105,40 +103,34 @@ class _ReleasePageState extends State<ReleasePage>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            HeadBoxWidget(title: 'Change Released Condition'),
                             Expanded(
-                              flex: 1,
-                              child: HeadBoxWidget(
-                                  title: 'Change Released Condition'),
-                            ),
-                            Expanded(
-                                flex: 4,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.only(right: 5),
-                                        height: Get.height / 13,
-                                        width: Get.width / 10,
-                                        child: ElevatedButton(
-                                          child: Text('Release'),
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Global.medium,
-                                          ),
-                                          onPressed: () {},
-                                        )),
-                                    Container(
-                                        height: Get.height / 13,
-                                        width: Get.width / 10,
-                                        child: ElevatedButton(
-                                            child: Text('Cancel Release',
-                                                textAlign: TextAlign.center),
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Global.dark_red,
-                                            ),
-                                            onPressed: null))
-                                  ],
-                                ))
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.only(right: 5),
+                                    height: Get.height / 13,
+                                    width: Get.width / 10,
+                                    child: ElevatedButton(
+                                      child: Text('Release'),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Global.medium,
+                                      ),
+                                      onPressed: () {},
+                                    )),
+                                Container(
+                                    height: Get.height / 13,
+                                    width: Get.width / 10,
+                                    child: ElevatedButton(
+                                        child: Text('Cancel Release',
+                                            textAlign: TextAlign.center),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Global.dark_red,
+                                        ),
+                                        onPressed: null))
+                              ],
+                            ))
                           ],
                         ),
                       ))

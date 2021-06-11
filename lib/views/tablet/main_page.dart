@@ -8,6 +8,7 @@ import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
+import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 import 'package:onesystem/views/tablet/widgets/isoInfo_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -71,19 +72,7 @@ class _MainPageState extends State<MainPage>
                                 margin: EdgeInsets.all(2),
                                 child: Column(
                                   children: [
-                                    Container(
-                                        decoration: BoxDecoration(
-                                            color: Global.medium,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(3),
-                                                topRight: Radius.circular(3))),
-                                        height: 28,
-                                        width: double.infinity,
-                                        padding: EdgeInsets.only(left: 2),
-                                        alignment: Alignment.centerLeft,
-                                        child: Text('Search Isometric',
-                                            style: TextStyle(
-                                                color: Global.white))),
+                                    HeadBoxWidget(title: 'Search Isometric'),
                                     Container(
                                       width: Get.width,
                                       child: Row(
@@ -94,9 +83,10 @@ class _MainPageState extends State<MainPage>
                                               alignment: Alignment.centerLeft,
                                               child: Radio(
                                                 value: 0,
-                                                groupValue: dvc.radioValue,
+                                                groupValue:
+                                                    dvc.radioValue.value,
                                                 onChanged: (value) {
-                                                  dvc.radioValue = value;
+                                                  dvc.radioValue.value = value;
                                                 },
                                               ),
                                             ),
@@ -109,9 +99,10 @@ class _MainPageState extends State<MainPage>
                                               alignment: Alignment.centerLeft,
                                               child: DropDownWidget(
                                                 select: fileno,
-                                                enable: dvc.radioValue == 0
-                                                    ? true
-                                                    : false,
+                                                enable:
+                                                    dvc.radioValue.value == 0
+                                                        ? true
+                                                        : false,
                                                 title: 'Select Iso NO',
                                                 changed: (value) {
                                                   gettingSpool(value);
@@ -132,9 +123,10 @@ class _MainPageState extends State<MainPage>
                                               alignment: Alignment.centerLeft,
                                               child: Radio(
                                                 value: 1,
-                                                groupValue: dvc.radioValue,
+                                                groupValue:
+                                                    dvc.radioValue.value,
                                                 onChanged: (value) {
-                                                  dvc.radioValue = value;
+                                                  dvc.radioValue.value = value;
                                                 },
                                               ),
                                             ),
@@ -144,9 +136,10 @@ class _MainPageState extends State<MainPage>
                                             child: DropDownWidget(
                                                 items: dbc.listForFile.cast(),
                                                 select: fileno,
-                                                enable: dvc.radioValue == 1
-                                                    ? true
-                                                    : false,
+                                                enable:
+                                                    dvc.radioValue.value == 1
+                                                        ? true
+                                                        : false,
                                                 title: 'Select File NO',
                                                 changed: (value) =>
                                                     gettingSpool(value)),
@@ -180,19 +173,8 @@ class _MainPageState extends State<MainPage>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                        decoration: BoxDecoration(
-                                            color: Global.medium,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(3),
-                                                topRight: Radius.circular(3))),
-                                        height: 28,
-                                        width: double.infinity,
-                                        alignment: Alignment.centerLeft,
-                                        padding: EdgeInsets.only(left: 2),
-                                        child: Text('Isometric Information',
-                                            style: TextStyle(
-                                                color: Global.white))),
+                                    HeadBoxWidget(
+                                        title: 'Isometric Information'),
                                     ISOInfoWidget()
                                   ],
                                 ),

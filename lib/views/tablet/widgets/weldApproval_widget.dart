@@ -26,8 +26,23 @@ class WeldApprovalWidget extends StatelessWidget {
                             ]))),
                 Expanded(
                     flex: 7,
-                    child:
-                        Container(child: IsoSpoolInfoWidget(selectWF: 'weld')))
+                    child: Container(
+                        child: Column(
+                      children: [
+                        Expanded(child: IsoSpoolInfoWidget(selectWF: 'weld')),
+                        Expanded(
+                            flex: 4,
+                            child: Card(
+                                margin: EdgeInsets.all(2),
+                                child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      HeadBoxWidget(title: 'Weld List'),
+                                      Container()
+                                    ])))
+                      ],
+                    )))
               ],
             )));
   }

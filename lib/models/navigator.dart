@@ -5,7 +5,7 @@ import 'package:onesystem/views/tablet/login_help_page.dart';
 import 'package:onesystem/views/tablet/login_page.dart';
 import 'package:onesystem/views/tablet/shipping_page.dart';
 import 'package:onesystem/views/tablet/release_page.dart';
-import 'package:onesystem/views/tablet/widgets/pdfviewer_widget.dart';
+import 'package:onesystem/views/tablet/widgets/pdfViewer_widget.dart';
 
 class MyNavigator {
   static final route = [

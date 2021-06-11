@@ -3,7 +3,8 @@ import 'package:onesystem/models/globals.dart';
 
 class HeadBoxWidget extends StatelessWidget {
   final String title;
-  const HeadBoxWidget({Key key, this.title}) : super(key: key);
+  final int height;
+  const HeadBoxWidget({Key key, this.title, this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class HeadBoxWidget extends StatelessWidget {
             color: Global.medium,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(3), topRight: Radius.circular(3))),
-        height: 28,
+        height: height ?? 28,
         width: double.infinity,
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: 2),
