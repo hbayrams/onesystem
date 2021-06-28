@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:onesystem/models/globals.dart';
 
-class BorderedText extends StatelessWidget {
+class BorderedContainer extends StatelessWidget {
   final String text;
   final double leftmargin, height;
   final Color color;
-  const BorderedText({
+  const BorderedContainer({
     @required this.text,
     this.leftmargin,
     this.height,
@@ -21,7 +21,7 @@ class BorderedText extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(leftmargin ?? 0, 6, 6, 6),
         decoration: BoxDecoration(
             border: Border.all(width: 1, color: Global.light), color: color),
-        child: SelectableText(text,
-            style: TextStyle(fontWeight: FontWeight.bold)));
+        child: Center(
+            child: Text(text, style: TextStyle(fontWeight: FontWeight.bold))));
   }
 }

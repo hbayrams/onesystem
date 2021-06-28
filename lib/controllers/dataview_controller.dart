@@ -16,4 +16,13 @@ class DataviewController extends GetxController {
 
   final dropSelectT1 = 'E-050'.obs; //FitupEntry > SelectTeam Observable
   final dropSelectT2 = 'E-050'.obs; //WeldEntry > SelectTeam Observable
+
+  final selectHeat = true.obs; //FitupEntry > SelectHeat Observable
+  final selectWelderR1 = false.obs; //WeldEntry > SelectWelder Root-1 Observable
+  final selectWelderR2 = false.obs; //WeldEntry > SelectWelder Root-1 Observable
+  final selectWelderC1 = false.obs; //WeldEntry > SelectWelder Cap-1 Observable
+  final selectWelderC2 = false.obs; //WeldEntry > SelectWelder Cap-2 Observable
+
+  final selectWPS = true.obs; //WeldEntry > SelectWPS Observable
+
 }
