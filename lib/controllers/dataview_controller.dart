@@ -25,4 +25,7 @@ class DataviewController extends GetxController {
 
   final selectWPS = true.obs; //WeldEntry > SelectWPS Observable
 
+  final dragText = ''.obs; //WeldEntry > DragText Observable
+
+  final refreshData = false.obs;
 }

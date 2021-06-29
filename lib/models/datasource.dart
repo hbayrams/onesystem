@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class EmployeeDataSource extends DataGridSource {
+  DataviewController dvc = DataviewController();
+
   /// Creates the employee data source class with required details.
+  int _count = 1;
+  List<dynamic> _reEmployeData = [];
   EmployeeDataSource(
       {List<dynamic> employeeData, List<dynamic> listForFields, int detail}) {
     print(employeeData.length.toString());
+    _count = listForFields.length;
+    _reEmployeData = employeeData;
+    getEmployees(employeeData, _count);
+  }
 
+  void getEmployees(List<dynamic> employeeData, int count) {
     _employeeData = employeeData
         .map<DataGridRow>((e) => DataGridRow(cells: [
               //for (var z = 0; z < 3; z++)
-              for (var f = 1; f < listForFields.length; f++)
+              for (var f = 1; f < count; f++)
                 DataGridCell(columnName: e[f].toString(), value: e[f]),
             ]))
         .toList();
@@ -31,5 +41,15 @@ class EmployeeDataSource extends DataGridSource {
         child: Text(e.value.toString()),
       );
     }).toList());
+  }
+
+//Refresh Method
+  @override
+  Future<void> handleRefresh() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    dvc.refreshData.value = true;
+    getEmployees(_reEmployeData, _count);
+    print('Refreshing...' + _reEmployeData.length.toString());
+    notifyListeners();
   }
 }

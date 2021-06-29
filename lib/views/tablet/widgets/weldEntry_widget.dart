@@ -32,7 +32,7 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
 
     ThemeController tc = Get.put(ThemeController());
     DataviewController dvc = Get.put(DataviewController());
-    String dragText = '';
+    //String dragText = '';
 
     return WillPopScope(
       onWillPop: () async {
@@ -40,6 +40,7 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
         dvc.selectWelderC2.value = false;
         dvc.selectWelderR1.value = false;
         dvc.selectWelderR2.value = false;
+        dvc.dragText.value = '';
         return true;
       },
       child: Scaffold(
@@ -67,47 +68,82 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                             child: Column(children: [
                           HeadBoxWidget(title: 'Weld Info'),
                           Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Row(children: [
-                              Text('Spool No :'),
-                              BorderedText(text: '2  ', leftmargin: 8),
-                              Checkbox(value: true, onChanged: (value) {}),
-                              Text('Date'),
-                              Obx(() => BorderedText(
-                                  leftmargin: 8,
-                                  text: DateFormat("dd-MM-yyyy").format(
-                                      DateTime.parse(dvc.selectedDate4.value
-                                          .toString())))),
-                              IconButton(
-                                  onPressed: () => _selectDate(context, dvc),
-                                  icon: Icon(Icons.date_range)),
-                              SizedBox(
-                                width: 120,
-                                child: DropDownWidget(
-                                  title: 'Select Team',
-                                  enable: true,
-                                  mode: Mode.MENU,
-                                  select: 'E-050',
-                                  search: false,
-                                  items: dropdownItems,
-                                  changed: (value) {
-                                    dvc.dropSelectT2.value = value;
-                                  },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(children: [
+                                          Text('Spool No :'),
+                                          BorderedText(
+                                              text: '2  ', leftmargin: 8),
+                                          Checkbox(
+                                              value: true,
+                                              onChanged: (value) {}),
+                                          Text('Date'),
+                                          Obx(() => BorderedText(
+                                              leftmargin: 8,
+                                              text: DateFormat("dd-MM-yyyy")
+                                                  .format(DateTime.parse(dvc
+                                                      .selectedDate4.value
+                                                      .toString())))),
+                                          IconButton(
+                                              onPressed: () =>
+                                                  _selectDate(context, dvc),
+                                              icon: Icon(Icons.date_range)),
+                                          SizedBox(
+                                            width: 120,
+                                            child: DropDownWidget(
+                                              title: 'Select Team',
+                                              enable: true,
+                                              mode: Mode.MENU,
+                                              select: 'E-050',
+                                              search: false,
+                                              items: dropdownItems,
+                                              changed: (value) {
+                                                dvc.dropSelectT2.value = value;
+                                              },
+                                            ),
+                                          ),
+                                        ]),
+                                      )),
+                                      Expanded(
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Row(children: [
+                                                Text('Weld No :'),
+                                                BorderedText(
+                                                    text: '1  ', leftmargin: 8),
+                                                Text('Weld Type :'),
+                                                BorderedText(
+                                                    text: 'SW  ', leftmargin: 8)
+                                              ]))),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ]),
-                          )),
-                          Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Row(children: [
-                              Text('Weld No :'),
-                              BorderedText(text: '1  ', leftmargin: 8),
-                              Text('Weld Type :'),
-                              BorderedText(text: 'SW  ', leftmargin: 8)
-                            ]),
-                          ))
+                                Expanded(
+                                  child: DragTarget(builder: (context,
+                                      List<String> candidateData,
+                                      rejectedData) {
+                                    print(candidateData);
+                                    return BorderedContainer(
+                                        text:
+                                            'If all welders are the same, drag them here');
+                                  }, onWillAccept: (data) {
+                                    return true;
+                                  }, onAccept: (data) {
+                                    dvc.dragText.value = data;
+                                  }),
+                                )
+                              ],
+                            ),
+                          )
                         ])),
                       ),
                       Expanded(
@@ -153,7 +189,7 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                                   .light_green
                                                               : Colors
                                                                   .transparent,
-                                                          text: ' ',
+                                                          text: 'GT-P010',
                                                           height:
                                                               double.infinity),
                                                     )),
@@ -201,7 +237,8 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                                     .light_green
                                                                 : Colors
                                                                     .transparent,
-                                                            text: ' ',
+                                                            text: dvc
+                                                                .dragText.value,
                                                             height: double
                                                                 .infinity),
                                                       )),
@@ -228,7 +265,8 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                                     .light_green
                                                                 : Colors
                                                                     .transparent,
-                                                            text: ' ',
+                                                            text: dvc
+                                                                .dragText.value,
                                                             height: double
                                                                 .infinity),
                                                       ))
@@ -269,32 +307,27 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                                     .light_green
                                                                 : Colors
                                                                     .transparent,
-                                                            text: ' ',
+                                                            text: dvc
+                                                                .dragText.value,
                                                             height: double
                                                                 .infinity)),
                                                   ),
                                                   Expanded(
                                                       flex: 3,
                                                       child: InkWell(
-                                                        onTap: () {
-                                                          dvc.selectWelderC2
-                                                              .value = true;
-                                                          dvc.selectWelderC1
-                                                              .value = false;
-                                                          dvc.selectWPS.value =
-                                                              false;
-                                                          dvc.selectWelderR1
-                                                              .value = false;
-                                                          dvc.selectWelderR2
-                                                              .value = false;
-                                                        },
-                                                        child: DragTarget(
-                                                            builder: (context,
-                                                                List<String>
-                                                                    candidateData,
-                                                                rejectedData) {
-                                                          print(candidateData);
-                                                          return BorderedContainer(
+                                                          onTap: () {
+                                                            dvc.selectWelderC2
+                                                                .value = true;
+                                                            dvc.selectWelderC1
+                                                                .value = false;
+                                                            dvc.selectWPS
+                                                                .value = false;
+                                                            dvc.selectWelderR1
+                                                                .value = false;
+                                                            dvc.selectWelderR2
+                                                                .value = false;
+                                                          },
+                                                          child: BorderedContainer(
                                                               color: dvc
                                                                       .selectWelderC2
                                                                       .value
@@ -302,16 +335,10 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                                       .light_green
                                                                   : Colors
                                                                       .transparent,
-                                                              text: dragText,
+                                                              text: dvc.dragText
+                                                                  .value,
                                                               height: double
-                                                                  .infinity);
-                                                        }, onWillAccept:
-                                                                (data) {
-                                                          return true;
-                                                        }, onAccept: (data) {
-                                                          dragText = 'data';
-                                                        }),
-                                                      ))
+                                                                  .infinity)))
                                                 ]))),
                                         Expanded(
                                             flex: 1,
@@ -335,6 +362,9 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                         horizontal: 8),
                                                     child: EButtonWidget(
                                                         onClick: () {
+                                                          //Veriyi kaydettikten sonra değisken icindeki bilgiyi sil...
+                                                          dvc.dragText.value =
+                                                              '';
                                                           Get.back();
                                                         },
                                                         color: Global.medium,
@@ -355,11 +385,7 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                           child: Column(
                             children: [
                               HeadBoxWidget(title: 'WPS'),
-                              Expanded(
-                                  child: Draggable(
-                                      data: 'data',
-                                      feedback: Text('data'),
-                                      child: Text('data'))),
+                              Expanded(child: Text('WPS Data')),
                             ],
                           )))),
               Expanded(
@@ -370,7 +396,13 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                           child: Column(
                             children: [
                               HeadBoxWidget(title: 'Welder'),
-                              Expanded(child: Text('data')),
+                              Expanded(
+                                  child: Draggable(
+                                      data: 'GMT-001',
+                                      feedback: Text('GMT-001',
+                                          style: TextStyle(
+                                              color: Global.focusedBlue)),
+                                      child: Text('GMT-001'))),
                             ],
                           ))))
             ],
