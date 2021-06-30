@@ -40,7 +40,7 @@ class TabNavWidget extends StatelessWidget {
     SharedPrefController sc = Get.put(SharedPrefController());
     PagesController pc = Get.put(PagesController());
     ThemeController tc = Get.put(ThemeController());
-    DatabaseOperations dbc = Get.put(DatabaseOperations());
+    DatabaseController dbc = Get.put(DatabaseController());
 
     return Obx(
       () => Container(
@@ -99,7 +99,7 @@ class TabNavWidget extends StatelessWidget {
   }
 }
 
-getSignProfile(SharedPrefController sc, DatabaseOperations dbc) async {
+getSignProfile(SharedPrefController sc, DatabaseController dbc) async {
   if (dbc.lisForSign.isEmpty) {
     await dbc.loginQuery(
         name: sc.uname,
@@ -124,7 +124,7 @@ Widget _navLogo(SharedPrefController sc, ThemeController tc) {
 }
 
 Widget _leadingwidget(
-    SharedPrefController sc, ThemeController tc, DatabaseOperations dbc) {
+    SharedPrefController sc, ThemeController tc, DatabaseController dbc) {
   // ignore: unused_local_variable
   int userLevel;
   String pString, unameString;
@@ -185,7 +185,7 @@ Widget _leadingwidget(
 }
 
 Widget _logoutButton(
-    SharedPrefController sc, DatabaseOperations dbc, ThemeController tc) {
+    SharedPrefController sc, DatabaseController dbc, ThemeController tc) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Column(

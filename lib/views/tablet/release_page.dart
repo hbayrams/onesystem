@@ -18,7 +18,7 @@ class _ReleasePageState extends State<ReleasePage>
     with AutomaticKeepAliveClientMixin<ReleasePage> {
   DataviewController dvc = Get.put(DataviewController());
   ThemeController tc = Get.put(ThemeController());
-  DatabaseOperations dbc = Get.put(DatabaseOperations());
+  DatabaseController dbc = Get.put(DatabaseController());
   EmployeeDataSource employeeDataSource1, employeeDataSource2;
 
   dynamic fileno, spoolno = '';

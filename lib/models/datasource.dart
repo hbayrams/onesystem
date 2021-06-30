@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
+import 'package:onesystem/views/tablet/main_page.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class EmployeeDataSource extends DataGridSource {
   DataviewController dvc = DataviewController();
+  MainPage mp = MainPage();
 
   /// Creates the employee data source class with required details.
   int _count = 1;

@@ -5,7 +5,7 @@ import 'package:mysql1/mysql1.dart';
 import 'package:onesystem/models/mysql_conn.dart';
 import 'package:onesystem/models/signin_model.dart';
 
-class DatabaseOperations extends GetxController {
+class DatabaseController extends GetxController {
   //OBS GetStateManagement variables
   final _result = 0.obs;
   int get sonuc => _result.value;
@@ -17,8 +17,12 @@ class DatabaseOperations extends GetxController {
   List<dynamic> get listForSpool => _listForSpool;
   final List<dynamic> _listForWeld = <dynamic>[].obs;
   List<dynamic> get listForWeld => _listForWeld;
+  final List<dynamic> _listForWeldCopy = <dynamic>[].obs;
+  List<dynamic> get listForWeldCopy => _listForWeldCopy;
   final List<dynamic> _listForFile = <dynamic>[].obs;
   List<dynamic> get listForFile => _listForFile;
+  final List<dynamic> _listForFileSpool = <dynamic>[].obs;
+  List<dynamic> get listForFileSpool => _listForFileSpool;
   final List<dynamic> _listForFields = <dynamic>[].obs;
   List<dynamic> get listForFields => _listForFields;
 
@@ -136,6 +140,43 @@ class DatabaseOperations extends GetxController {
   }
 //#endregion
 
+//#region DATABASE-GETWeldCopy KONTROL METHOD
+  Future<List<dynamic>> getWeldCopy(
+      {@required String fno,
+      @required String sno,
+      @required String query}) async {
+    try {
+      var connect = await MysqlConn().getConnection();
+
+//#region SORGU OLUSTUR
+      var result = await connect.query(query, [fno, sno]);
+//#endregion
+
+      _listForWeldCopy.clear();
+
+      _result.value = result.length;
+
+//#region KOLON ISIMLERINI AL
+      List<dynamic> getfields() {
+        _listForFields.clear();
+
+        for (int z = 0; z < 38; z++) {
+          _listForFields.add(result.fields[z].name);
+        }
+        return listForFields;
+      }
+//#endregion
+
+      getfields();
+      result.forEach((v) => _listForWeldCopy.add(v));
+      await connect.close();
+      return listForWeldCopy;
+    } catch (e) {
+      return null;
+    }
+  }
+//#endregion
+
 //#region DATABASE-GETFileNO KONTROL METHOD
   Future<List<dynamic>> getFileNO({@required String query}) async {
     try {
@@ -145,13 +186,36 @@ class DatabaseOperations extends GetxController {
       var result = await connect.query(query);
 //#endregion
 
-      _listForWeld.clear();
+      _listForFile.clear();
 
       _result.value = result.length;
 
       result.forEach((v) => _listForFile.add(v[1].toString()));
       await connect.close();
       return listForFile;
+    } catch (e) {
+      return null;
+    }
+  }
+//#endregion
+
+//#region DATABASE-GETFileNOandSpool KONTROL METHOD
+  Future<List<dynamic>> getFileNoSpool({@required String query}) async {
+    try {
+      var connect = await MysqlConn().getConnection();
+
+//#region SORGU OLUSTUR
+      var result = await connect.query(query, ['Fabrication']);
+//#endregion
+
+      _listForFileSpool.clear();
+
+      _result.value = result.length;
+
+      result.forEach((v) =>
+          _listForFileSpool.add(v[0].toString() + '-' + v[1].toString()));
+      await connect.close();
+      return listForFileSpool;
     } catch (e) {
       return null;
     }

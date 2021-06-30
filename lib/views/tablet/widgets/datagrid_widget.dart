@@ -8,7 +8,7 @@ class DataGridWidget extends StatefulWidget {
   final String title;
   final bool openDialog;
   final DataGridSource dataSource;
-  final Function tapFunc;
+  final Function tapFunc, doubleTapFunc;
   final double height;
   final List<String> colName;
   final DataGridController controller;
@@ -21,6 +21,7 @@ class DataGridWidget extends StatefulWidget {
       this.openDialog,
       this.dataSource,
       this.tapFunc,
+      this.doubleTapFunc,
       this.height,
       this.colName})
       : super(key: key);
@@ -74,6 +75,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                 selectionMode: SelectionMode.single,
                 frozenColumnsCount: 1,
                 onCellTap: widget.tapFunc,
+                onCellDoubleTap: widget.doubleTapFunc,
                 headerGridLinesVisibility: GridLinesVisibility.both,
                 allowPullToRefresh: true,
                 defaultColumnWidth: 80,

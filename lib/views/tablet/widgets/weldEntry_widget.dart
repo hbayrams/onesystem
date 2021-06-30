@@ -12,7 +12,8 @@ import 'package:onesystem/views/tablet/widgets/eButton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 
 class WeldEntryWidget extends StatefulWidget {
-  const WeldEntryWidget({Key key}) : super(key: key);
+  final String sno, wno, type;
+  WeldEntryWidget({Key key, this.sno, this.wno, this.type}) : super(key: key);
 
   @override
   _WeldEntryWidgetState createState() => _WeldEntryWidgetState();
@@ -81,7 +82,7 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                         child: Row(children: [
                                           Text('Spool No :'),
                                           BorderedText(
-                                              text: '2  ', leftmargin: 8),
+                                              text: widget.sno, leftmargin: 8),
                                           Checkbox(
                                               value: true,
                                               onChanged: (value) {}),
@@ -119,10 +120,12 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                               child: Row(children: [
                                                 Text('Weld No :'),
                                                 BorderedText(
-                                                    text: '1  ', leftmargin: 8),
+                                                    text: widget.wno,
+                                                    leftmargin: 8),
                                                 Text('Weld Type :'),
                                                 BorderedText(
-                                                    text: 'SW  ', leftmargin: 8)
+                                                    text: widget.type,
+                                                    leftmargin: 8)
                                               ]))),
                                     ],
                                   ),
@@ -349,7 +352,9 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 8),
                                                 child: EButtonWidget(
-                                                    onClick: () {},
+                                                    onClick: () {
+                                                      dvc.dragText.value = '';
+                                                    },
                                                     color: Global.dark_red,
                                                     title: 'Clean',
                                                     tcolor: Global.white),

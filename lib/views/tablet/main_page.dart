@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage>
     with AutomaticKeepAliveClientMixin<MainPage> {
   DataviewController dvc = Get.put(DataviewController());
   ThemeController tc = Get.put(ThemeController());
-  DatabaseOperations dbc = Get.put(DatabaseOperations());
+  DatabaseController dbc = Get.put(DatabaseController());
   EmployeeDataSource employeeDataSource1, employeeDataSource2;
   final DataGridController _dataGridController = DataGridController();
 

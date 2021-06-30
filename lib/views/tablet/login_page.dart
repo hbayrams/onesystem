@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
   SharedPrefController sc = Get.put(SharedPrefController());
   ThemeController tc = Get.put(ThemeController());
   NetController nc = Get.put(NetController());
-  DatabaseOperations db = Get.put(DatabaseOperations());
+  DatabaseController db = Get.put(DatabaseController());
   List images = [
     'assets/images/intro1_crossplatform.png',
     'assets/images/intro2_qc.png',
@@ -96,7 +96,7 @@ class LoginPage extends StatelessWidget {
 }
 
 Form buildFormLogin(SharedPrefController sc, LoginController lc,
-    ThemeController tc, DatabaseOperations db, BuildContext context) {
+    ThemeController tc, DatabaseController db, BuildContext context) {
   return Form(
     key: lc.formKey.value,
     // ignore: deprecated_member_use

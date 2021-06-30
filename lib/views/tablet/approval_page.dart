@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/dataview_controller.dart';
 import 'package:onesystem/controllers/theme_controller.dart';
 import 'package:onesystem/models/globals.dart';
+import 'package:onesystem/models/mysql_query.dart';
 import 'package:onesystem/views/tablet/widgets/fitupApproval_widget.dart';
 import 'package:onesystem/views/tablet/widgets/weldApproval_widget.dart';
 
@@ -16,6 +18,14 @@ class _ApprovalPageState extends State<ApprovalPage>
     with AutomaticKeepAliveClientMixin<ApprovalPage> {
   ThemeController tc = Get.put(ThemeController());
   DataviewController dvc = Get.put(DataviewController());
+  DatabaseController dbc = Get.put(DatabaseController());
+
+  @override
+  void initState() {
+    gettingFileSpool();
+    print('ApprovalPage initsate');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +87,10 @@ class _ApprovalPageState extends State<ApprovalPage>
         ),
       ),
     );
+  }
+
+  Future<void> gettingFileSpool() async {
+    await dbc.getFileNoSpool(query: MysqlQuery().queryList['getFileNoSpool']);
   }
 
   @override

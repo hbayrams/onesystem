@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeController tc = Get.put(ThemeController());
-    DatabaseOperations dbc = Get.put(DatabaseOperations());
+    DatabaseController dbc = Get.put(DatabaseController());
 
     return SafeArea(
         child: Scaffold(
@@ -43,7 +43,7 @@ class ProfilePage extends StatelessWidget {
     ));
   }
 
-  Widget getUserInfo(DatabaseOperations dbc, ThemeController tc) {
+  Widget getUserInfo(DatabaseController dbc, ThemeController tc) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

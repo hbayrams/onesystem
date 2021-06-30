@@ -7,9 +7,7 @@ import 'package:onesystem/models/globals.dart';
 import 'package:onesystem/views/tablet/widgets/borderedText_widget.dart';
 import 'package:onesystem/views/tablet/widgets/dropDown_widget.dart';
 import 'package:onesystem/views/tablet/widgets/eButton_widget.dart';
-import 'package:onesystem/views/tablet/widgets/fitupEntry_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
-import 'package:onesystem/views/tablet/widgets/weldEntry_widget.dart';
 
 class IsoSpoolInfoWidget extends StatelessWidget {
   final String selectWF;
@@ -145,9 +143,7 @@ class IsoSpoolInfoWidget extends StatelessWidget {
                                       color: Global.green,
                                       title: 'Approve',
                                       onClick: () {
-                                        Get.to(selectWF == 'fitup'
-                                            ? FitupEntryWidget()
-                                            : WeldEntryWidget());
+                                        print('Kaydediliyor...');
                                       })))
                         ],
                       ),

@@ -4,7 +4,7 @@ import 'package:onesystem/controllers/database_controller.dart';
 import 'package:onesystem/controllers/login_controller.dart';
 
 class SharedPrefController extends GetxController {
-  DatabaseOperations dbc = Get.put(DatabaseOperations());
+  DatabaseController dbc = Get.put(DatabaseController());
 
   final box = GetStorage();
   final _uname = ''.obs;
