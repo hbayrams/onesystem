@@ -141,17 +141,6 @@ class _WeldApprovalWidgetState extends State<WeldApprovalWidget>
           .toString();
       print(spoolno + weldno + type);
       Get.to(WeldEntryWidget(sno: spoolno, wno: weldno, type: type));
-      // print('Seçilen file-spool: ' +
-      //     fileno.toString() +
-      //     '-' +
-      //     spoolno.toString());
-      // await dbc.getWeld(
-      //     fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
-      // print('Yüklenen db buytu: ${dbc.listForWeld.length.toString()}');
-      // employeeDataSource2 = EmployeeDataSource(
-      //   employeeData: dbc.listForWeld,
-      //   listForFields: dbc.listForFields,
-      // );
     }
   }
 

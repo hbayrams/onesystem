@@ -74,20 +74,30 @@ Future netErrorDialog() async {
   print('d= ' + d.toString());
   if (NetController().isOnline == false && d == 1) {
     await Get.defaultDialog(
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.wifi_off_rounded),
+              Icon(Icons.mobiledata_off),
+              Icon(Icons.airplanemode_active)
+            ],
+          ),
+          SizedBox(height: 10),
+          Text(
+              'You are not connected to the internet.\n Make sure Wi-Fi is or Mobile Data on, Airplane Mode is Off and try again.',
+              textAlign: TextAlign.center)
+        ],
+      ),
       onWillPop: () async => false,
       titleStyle: TextStyle(color: Global.dark_red),
-      title: 'Connection Error..!',
-      middleText:
-          'You are not connected to the internet.\n Make sure Wi-Fi is or Mobile Data on, Airplane Mode is Off and try again.',
+      title: 'Connection Error',
       barrierDismissible: false,
-      // confirm: ElevatedButton(
-      //     onPressed: () => Get.back(),
-      //     child: Text('OK'),
-      //     style: ElevatedButton.styleFrom(primary: Global.dark_red)),
     );
     d = 0;
   } else {
-    print('patladı AQ');
+    //print('patladı ');
   }
 
   print('dson= ' + d.toString());

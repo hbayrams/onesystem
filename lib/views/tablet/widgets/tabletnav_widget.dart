@@ -134,6 +134,8 @@ Widget _leadingwidget(
   if (sc.isRemember) {
     if (sc.photoString.isNotEmpty) {
       pString = sc.photoString;
+    } else if (dbc.lisForSign.first.photo_String.isNotEmpty) {
+      pString = dbc.lisForSign.first.photo_String;
     } else {
       pString = 'https://img.icons8.com/dusk/64/000000/engineer.png';
     }
