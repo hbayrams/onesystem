@@ -66,13 +66,15 @@ class _FitupApprovalWidgetState extends State<FitupApprovalWidget>
                                                 dbc, fileno, spoolno);
                                           },
                                           tileColor: selectedIndex == index
-                                              ? Global.sky_blue
+                                              ? Global.focusedBlue
                                               : null,
-                                          selectedTileColor: Global.sky_blue,
+                                          selectedTileColor: Global.focusedBlue,
                                           title: Center(
                                               child: Text(dbc
                                                   .listForFileSpool[index]
-                                                  .toString())),
+                                                  .toString(),style: TextStyle(color:selectedIndex == index
+                                              ? Global.white
+                                              : null ))),
                                         );
                                       },
                                       separatorBuilder: (context, index) {
