@@ -11,9 +11,16 @@ import 'package:onesystem/views/tablet/widgets/dropDown_widget.dart';
 import 'package:onesystem/views/tablet/widgets/ebutton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 
-class FitupEntryWidget extends StatelessWidget {
-  const FitupEntryWidget({Key key}) : super(key: key);
+class FitupEntryWidget extends StatefulWidget {
+  final String sno, wno, type;
+  FitupEntryWidget({Key key, this.sno, this.wno, this.type}) : super(key: key);
 
+  @override
+  _FitupEntryWidgetState createState() => _FitupEntryWidgetState();
+}
+
+class _FitupEntryWidgetState extends State<FitupEntryWidget>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     List<String> dropdownItems = [];
@@ -61,7 +68,7 @@ class FitupEntryWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 10),
                               child: Row(children: [
                                 Text('Spool No :'),
-                                BorderedText(text: '2  ', leftmargin: 8),
+                                BorderedText(text: widget.sno, leftmargin: 8),
                                 Checkbox(value: true, onChanged: (value) {}),
                                 Text('Date'),
                                 Obx(() => BorderedText(
@@ -93,9 +100,9 @@ class FitupEntryWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 10),
                               child: Row(children: [
                                 Text('Weld No :'),
-                                BorderedText(text: '1  ', leftmargin: 8),
+                                BorderedText(text: widget.wno, leftmargin: 8),
                                 Text('Weld Type :'),
-                                BorderedText(text: 'SW  ', leftmargin: 8)
+                                BorderedText(text: widget.type, leftmargin: 8)
                               ]),
                             ))
                           ]))),

@@ -10,6 +10,7 @@ import 'package:onesystem/views/tablet/widgets/datagrid_widget.dart';
 import 'package:onesystem/views/tablet/widgets/dropdown_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
 import 'package:onesystem/views/tablet/widgets/isoInfo_widget.dart';
+import 'package:onesystem/views/tablet/widgets/popupMenu_widget.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class MainPage extends StatefulWidget {
@@ -204,6 +205,8 @@ class _MainPageState extends State<MainPage>
                                   openDialog: false,
                                   dataSource: employeeDataSource1,
                                   tapFunc: (value) => gettingWeld(value),
+                                  longPressFunc: (value) =>
+                                      gettingContextMenu(value),
                                 ),
                         ),
                       ),
@@ -277,6 +280,64 @@ class _MainPageState extends State<MainPage>
         listForFields: dbc.listForFields,
       );
     }
+  }
+
+  Future<void> gettingContextMenu(DataGridCellLongPressDetails details) async {
+    var position = details.globalPosition;
+    var _count = 0;
+    if (details.rowColumnIndex.rowIndex != 0) {
+      spoolno = dbc.listForSpool[details.rowColumnIndex.rowIndex - 1]['spool']
+          .toString();
+      final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+
+      showMenu(
+              context: context,
+              items: <PopupMenuEntry<int>>[ContextMenuAction()],
+              position: RelativeRect.fromRect(
+                  position & const Size(40, 40), // smaller rect, the touch area
+                  Offset.zero & overlay.size // Bigger rect, the entire screen
+                  ))
+          // This is how you handle user selection
+          .then<void>((int delta) {
+        // delta would be null if user taps on outside the popup menu
+        // (causing it to close without making selection)
+        if (delta != null) {
+          gettingContextSubMenu(details, delta);
+        } else
+          return;
+
+        setState(() {
+          _count = _count + delta;
+        });
+      });
+    }
+  }
+
+  Future<void> gettingContextSubMenu(
+      DataGridCellLongPressDetails details, int select) async {
+    var position = details.globalPosition;
+    var _count = 0;
+
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+
+    showMenu(
+            context: context,
+            items: select == 1
+                ? <PopupMenuEntry<int>>[ContextSubMenuAction()]
+                : <PopupMenuEntry<int>>[ContextSubMenuAction1()],
+            position: RelativeRect.fromRect(
+                position & const Size(240, 240), // smaller rect, the touch area
+                Offset.zero & overlay.size // Bigger rect, the entire screen
+                ))
+        // This is how you handle user selection
+        .then<void>((int delta) {
+      // delta would be null if user taps on outside the popup menu
+      // (causing it to close without making selection)
+      if (delta == null) return;
+      setState(() {
+        _count = _count + delta;
+      });
+    });
   }
 
   @override

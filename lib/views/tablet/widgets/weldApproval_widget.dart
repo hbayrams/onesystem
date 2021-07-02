@@ -125,7 +125,10 @@ class _WeldApprovalWidgetState extends State<WeldApprovalWidget>
 
   Future<void> gettingWeldCopy(dbc, fileno, spoolno) async {
     await dbc.getWeldCopy(
-        fno: fileno, sno: spoolno, query: MysqlQuery().queryList['getWeld']);
+        selectWF: 'weld',
+        fno: fileno,
+        sno: spoolno,
+        query: MysqlQuery().queryList['getWeld']);
     print('Yüklenen db buytu: ${dbc.listForWeldCopy.length.toString()}');
     employeeDataSource = EmployeeDataSource(
       employeeData: dbc.listForWeldCopy,

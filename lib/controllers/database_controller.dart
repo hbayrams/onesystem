@@ -19,6 +19,8 @@ class DatabaseController extends GetxController {
   List<dynamic> get listForWeld => _listForWeld;
   final List<dynamic> _listForWeldCopy = <dynamic>[].obs;
   List<dynamic> get listForWeldCopy => _listForWeldCopy;
+  final List<dynamic> _listForWeldCopy1 = <dynamic>[].obs;
+  List<dynamic> get listForWeldCopy1 => _listForWeldCopy1;
   final List<dynamic> _listForFile = <dynamic>[].obs;
   List<dynamic> get listForFile => _listForFile;
   final List<dynamic> _listForFileSpool = <dynamic>[].obs;
@@ -140,9 +142,10 @@ class DatabaseController extends GetxController {
   }
 //#endregion
 
-//#region DATABASE-GETWeldCopy KONTROL METHOD
+//#region DATABASE-GETWeldCopy-Copy1 KONTROL METHOD
   Future<List<dynamic>> getWeldCopy(
       {@required String fno,
+      @required String selectWF,
       @required String sno,
       @required String query}) async {
     try {
@@ -151,8 +154,6 @@ class DatabaseController extends GetxController {
 //#region SORGU OLUSTUR
       var result = await connect.query(query, [fno, sno]);
 //#endregion
-
-      _listForWeldCopy.clear();
 
       _result.value = result.length;
 
@@ -168,9 +169,18 @@ class DatabaseController extends GetxController {
 //#endregion
 
       getfields();
-      result.forEach((v) => _listForWeldCopy.add(v));
-      await connect.close();
-      return listForWeldCopy;
+
+      if (selectWF == 'weld') {
+        _listForWeldCopy.clear();
+        result.forEach((v) => _listForWeldCopy.add(v));
+        await connect.close();
+        return listForWeldCopy;
+      } else {
+        _listForWeldCopy1.clear();
+        result.forEach((v) => _listForWeldCopy1.add(v));
+        await connect.close();
+        return listForWeldCopy1;
+      }
     } catch (e) {
       return null;
     }
