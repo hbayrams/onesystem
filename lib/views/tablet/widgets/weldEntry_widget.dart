@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,7 @@ import 'package:onesystem/views/tablet/widgets/borderedText_widget.dart';
 import 'package:onesystem/views/tablet/widgets/dropDown_widget.dart';
 import 'package:onesystem/views/tablet/widgets/eButton_widget.dart';
 import 'package:onesystem/views/tablet/widgets/headBox_widget.dart';
+import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 
 class WeldEntryWidget extends StatefulWidget {
   final String sno, wno, type;
@@ -23,6 +25,22 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    List<String> welderList = [];
+    for (var i = 1; i < 100; i++)
+      if (i < 10) {
+        welderList.add('GMT-00$i');
+      } else {
+        welderList.add('GMT-0$i');
+      }
+
+    List<String> wpsList = [];
+    for (var i = 1; i < 50; i++)
+      if (i < 10) {
+        wpsList.add('GT-P00$i');
+      } else {
+        wpsList.add('GT-P0$i');
+      }
+
     List<String> dropdownItems = [];
     for (var i = 0; i < 100; i++)
       if (i < 10) {
@@ -33,10 +51,14 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
 
     ThemeController tc = Get.put(ThemeController());
     DataviewController dvc = Get.put(DataviewController());
-    //String dragText = '';
+    ScrollController _scrollController = ScrollController();
+    ScrollController _scrollController1 = ScrollController();
+
+    int selectedIndex = 0;
 
     return WillPopScope(
       onWillPop: () async {
+        dvc.selectWPS.value = true;
         dvc.selectWelderC1.value = false;
         dvc.selectWelderC2.value = false;
         dvc.selectWelderR1.value = false;
@@ -130,20 +152,24 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: DragTarget(builder: (context,
-                                      List<String> candidateData,
-                                      rejectedData) {
-                                    print(candidateData);
-                                    return BorderedContainer(
-                                        text:
-                                            'If all welders are the same, drag them here');
-                                  }, onWillAccept: (data) {
-                                    return true;
-                                  }, onAccept: (data) {
-                                    dvc.dragText.value = data;
-                                  }),
-                                )
+                                Obx(() => Expanded(
+                                        child: IgnorePointer(
+                                      ignoring: dvc.selectWPS.value,
+                                      child: DragTarget(builder: (context,
+                                          List<String> candidateData,
+                                          rejectedData) {
+                                        print(candidateData);
+                                        return dvc.selectWPS.value
+                                            ? Container()
+                                            : BorderedContainer(
+                                                text:
+                                                    'If all welders are the same, drag them here');
+                                      }, onWillAccept: (data) {
+                                        return true;
+                                      }, onAccept: (data) {
+                                        dvc.dragText.value = data;
+                                      }),
+                                    ))),
                               ],
                             ),
                           )
@@ -192,7 +218,8 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                                   .light_green
                                                               : Colors
                                                                   .transparent,
-                                                          text: 'GT-P010',
+                                                          text:
+                                                              dvc.wpsData.value,
                                                           height:
                                                               double.infinity),
                                                     )),
@@ -368,6 +395,16 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                                                     child: EButtonWidget(
                                                         onClick: () {
                                                           //Veriyi kaydettikten sonra değisken icindeki bilgiyi sil...
+                                                          dvc.selectWPS.value =
+                                                              true;
+                                                          dvc.selectWelderC1
+                                                              .value = false;
+                                                          dvc.selectWelderC2
+                                                              .value = false;
+                                                          dvc.selectWelderR1
+                                                              .value = false;
+                                                          dvc.selectWelderR2
+                                                              .value = false;
                                                           dvc.dragText.value =
                                                               '';
                                                           Get.back();
@@ -387,12 +424,54 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                   child: Card(
                       child: Container(
                           height: Get.height,
-                          child: Column(
-                            children: [
-                              HeadBoxWidget(title: 'WPS'),
-                              Expanded(child: Text('WPS Data')),
-                            ],
-                          )))),
+                          child: Obx(() => Column(
+                                children: [
+                                  HeadBoxWidget(title: 'WPS'),
+                                  Expanded(
+                                      child: IgnorePointer(
+                                    ignoring: !dvc.selectWPS.value,
+                                    child: DraggableScrollbar.rrect(
+                                      backgroundColor: Colors.blueGrey[100],
+                                      heightScrollThumb: 100,
+                                      padding: EdgeInsets.all(2),
+                                      controller: _scrollController,
+                                      alwaysVisibleScrollThumb:
+                                          dvc.selectWPS.value,
+                                      child: ListView.separated(
+                                        physics: BouncingScrollPhysics(),
+                                        controller: _scrollController,
+                                        padding: EdgeInsets.all(2),
+                                        itemCount: dvc.selectWPS.value
+                                            ? wpsList.length
+                                            : 0,
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  dvc.wpsData.value =
+                                                      wpsList[index];
+                                                });
+                                              },
+                                              title: Center(
+                                                  child: Draggable(
+                                                      data: wpsList[index],
+                                                      feedback: Text(
+                                                          wpsList[index],
+                                                          style: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none)),
+                                                      child: Text(
+                                                          wpsList[index]))));
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return Divider(height: 1);
+                                        },
+                                      ),
+                                    ),
+                                  )),
+                                ],
+                              ))))),
               Expanded(
                   flex: 1,
                   child: Card(
@@ -402,12 +481,48 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
                             children: [
                               HeadBoxWidget(title: 'Welder'),
                               Expanded(
-                                  child: Draggable(
-                                      data: 'GMT-001',
-                                      feedback: Text('GMT-001',
-                                          style: TextStyle(
-                                              color: Global.focusedBlue)),
-                                      child: Text('GMT-001'))),
+                                  child: Obx(() => IgnorePointer(
+                                        ignoring: dvc.selectWPS.value,
+                                        child: DraggableScrollbar.rrect(
+                                          alwaysVisibleScrollThumb:
+                                              !dvc.selectWPS.value,
+                                          controller: _scrollController1,
+                                          backgroundColor: Colors.blueGrey[100],
+                                          heightScrollThumb: 100,
+                                          padding: EdgeInsets.all(2),
+                                          child: ListView.separated(
+                                            controller: _scrollController1,
+                                            padding: EdgeInsets.all(2),
+                                            itemCount: dvc.selectWPS.value
+                                                ? 0
+                                                : welderList.length,
+                                            itemBuilder: (context, index) {
+                                              return ListTile(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      selectedIndex = index;
+                                                    });
+                                                  },
+                                                  title: Center(
+                                                      child: Draggable(
+                                                          data:
+                                                              welderList[index],
+                                                          feedback: Text(
+                                                              welderList[index],
+                                                              style: TextStyle(
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .none)),
+                                                          child: Text(
+                                                              welderList[
+                                                                  index]))));
+                                            },
+                                            separatorBuilder: (context, index) {
+                                              return Divider(height: 1);
+                                            },
+                                          ),
+                                        ),
+                                      )))
                             ],
                           ))))
             ],
