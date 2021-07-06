@@ -54,6 +54,7 @@ class _WeldEntryWidgetState extends State<WeldEntryWidget>
     ScrollController _scrollController = ScrollController();
     ScrollController _scrollController1 = ScrollController();
 
+    // ignore: unused_local_variable
     int selectedIndex = 0;
 
     return WillPopScope(

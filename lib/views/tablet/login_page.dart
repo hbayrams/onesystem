@@ -204,12 +204,14 @@ Form buildFormLogin(SharedPrefController sc, LoginController lc,
                               lc.uname +
                               db.islogin.toString());
                         } else {
-                          Get.snackbar('Hata', 'Kullanıcı aktif değil....',
+                          Get.snackbar('Warning..!',
+                              'User is inactive, contact your administrator', //'Kullanıcı aktif değil....',
                               backgroundColor: Global.dark_red,
                               colorText: Global.light_pink);
                         }
                       } else {
-                        Get.snackbar('Hata', 'Kayıtlı kullanıcı bulunamadı....',
+                        Get.snackbar('Warning..!',
+                            'No such user found in the system', //'Kayıtlı kullanıcı bulunamadı....',
                             backgroundColor: Global.dark_red,
                             colorText: Global.light_pink);
                       }
