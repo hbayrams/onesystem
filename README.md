@@ -2,7 +2,7 @@
 
 Responsive welding tracking system software for web/desktop/tablet/mobile phone.
 
-<img src="assets/storepic/appleicon.png">   <img src="assets/storepic/androidicon.png">    <img src="assets/storepic/webicon.png">   <img src="assets/storepic/windowsicon.png">
+<img src="assets/images/storepic/appleicon.png">   <img src="assets/images/storepic/androidicon.png">   <img src="assets/images/storepic/windowsicon.jpg">    <img src="assets/images/storepic/webicon.png">
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ Responsive welding tracking system software for web/desktop/tablet/mobile phone.
 <img src="assets/screenShot/pdfviewer.png">
 
 ## Get The Demo Application
-<img src="assets/storepic/appstore.png">   <img src="assets/storepic/googleplay.png">   <img src="assets/storepic/webdemo.png">
+<img src="assets/images/storepic/appstore.png">   <img src="assets/images/storepic/googleplay.png">   <img src="assets/images/storepic/webdemo.png">
 
 ## Support And Feedback
 For support and feedback, you can contact us via email. Thank you.
