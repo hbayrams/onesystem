@@ -1,8 +1,22 @@
-# ONESystem
+<p align="center"><img src="assets/images/light/light1_lowheight.png"></p>
 
-Responsive welding tracking system software for web/desktop/tablet/mobile phone.
 
-<img src="assets/images/storepic/appleicon.png">   <img src="assets/images/storepic/androidicon.png">   <img src="assets/images/storepic/windowsicon.jpg">    <img src="assets/images/storepic/webicon.png">
+Welding tracking system software with adaptable, dynamic, easy, fast and multi-platform support for welded manufacturing companies.
+
+For a more detailed introduction, please visit our website.
+
+Website: [onesytem.app](https://onesytem.app)
+
+#### Dependencies
+- Flutter/Dart
+- Kotlin
+- Swift
+- Javascript
+- Python/Django
+- MySQL
+
+<img src="assets/images/storepic/appleicon.png" width=25>   <img src="assets/images/storepic/androidicon.png" width=25>   <img src="assets/images/storepic/windowsicon.png" width=25>    <img src="assets/images/storepic/webicon.png" width=25>
+
 
 ## Getting Started
 
